@@ -1,0 +1,8 @@
+1. What are my past attempts?
+  User.find(x).useranswers
+
+2. What are the wrongchoices to this question?
+  Question.find(x).wrongchoices
+
+3. What are the questions in this quiz?
+  Quiz.find(x).questions
