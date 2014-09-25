@@ -45,14 +45,27 @@ $(document).ready(function(){
             songList.push(response['results'][i]);
           }
         }
+        $('#artistsection').hide()
+        $('#songsection').show()
+        for(var i = 0; i < 5; i++){
+          $('#songlist').append('<li>' + songList[i].trackName + addTrack(songList[i].previewUrl)+' </li>')
+        }
       },
        failure: function(response){
         console.log('Fail');
-
       }
-
     });
-
   });
 
+  // Adding the songs to the song list
+  if(songList.length > 0){
+
+  }
 });
+
+function addTrack(songUrl){
+  embedString = '<audio controls preload="auto"><source src="'+songUrl+'" type="audio/mp4"></audio>'
+  return embedString;
+}
+
+
