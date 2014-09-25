@@ -5,6 +5,7 @@ var testResponse;
 var artistName;
 var artistId;
 var songList = [];
+var numOfQuestions = 5;
 
 var test;
 
@@ -47,8 +48,8 @@ $(document).ready(function(){
         }
         $('#artistsection').hide()
         $('#songsection').show()
-        for(var i = 0; i < 5; i++){
-          $('#songlist').append('<li>' + songList[i].trackName + addTrack(songList[i].previewUrl)+' </li>')
+        for(var i = 0; i < numOfQuestions; i++){
+          $('#songlist').append('<li id="question'+i+'">' + songList[i].trackName + addTrack(songList[i].previewUrl, i)+' </li>')
         }
       },
        failure: function(response){
