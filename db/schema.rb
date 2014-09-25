@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20140925182216) do
     t.datetime "updated_at"
   end
 
-  create_table "wrongchoices", force: true do |t|
+  create_table "wrong_choices", force: true do |t|
     t.integer  "track_id"
     t.integer  "question_id"
     t.datetime "created_at"

@@ -1,6 +1,6 @@
-class CreateWrongchoices < ActiveRecord::Migration
+class CreateWrongChoices < ActiveRecord::Migration
   def change
-    create_table :wrongchoices do |t|
+    create_table :wrong_choices do |t|
       t.references :track
       t.references :question
 
