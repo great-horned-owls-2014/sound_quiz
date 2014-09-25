@@ -14,3 +14,5 @@ Quiz.first.questions << Question.create(track_id: Track.third)
 Question.first.wrongchoices << Wrongchoice.create(track_id: Track.second)
 Question.first.wrongchoices << Wrongchoice.create(track_id: Track.third)
 Question.first.wrongchoices << Wrongchoice.create(track_id: Track.fourth)
+
+User.first.useranswers << Useranswer.create(track_id: 2, question_id: 1, response_time: 0.1 )
