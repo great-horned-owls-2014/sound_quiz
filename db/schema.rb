@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20140925182216) do
     t.datetime "updated_at"
   end
 
-  create_table "useranswers", force: true do |t|
+  create_table "user_answers", force: true do |t|
     t.integer  "user_id"
     t.integer  "question_id"
     t.integer  "track_id"

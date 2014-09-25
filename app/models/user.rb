@@ -1,4 +1,4 @@
 class User < ActiveRecord::Base
-  has_many :useranswers
+  has_many :user_answers
 
 end
