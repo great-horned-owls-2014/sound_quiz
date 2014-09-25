@@ -3,7 +3,7 @@ class CreateUserAnswers < ActiveRecord::Migration
     create_table :user_answers do |t|
       t.belongs_to :user
       t.references :question
-      t.references :track #alias user_decsion
+      t.references :track
       t.float :response_time
 
       t.timestamps
