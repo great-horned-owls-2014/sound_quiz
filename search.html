@@ -1,18 +1,24 @@
 <html>
-<head>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="search.js"></script>
-  Itunes Search
-</head>
-<body>
-
-  <form action="https://itunes.apple.com/search">
-    <input type="text" name="term" id="searchterm">
-    <button type="submit">Search</button>
-  </form>
-  <div id="artistlist">
-    <ul>
-    </ul>
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="search.js"></script>
+  </head>
+  <body>
+  <div id="artistsection">
+    <form action="https://itunes.apple.com/search">
+      <input type="text" name="term" id="searchterm">
+      <button type="submit">Search</button>
+    </form>
+    <div id="artistlist">
+      <ul>
+      </ul>
+    </div>
   </div>
-</body>
-<html>
+  <div id="songsection" style="display:none">
+    <div id="songlist">
+      <ul>
+      </ul>
+    </div>
+  </div>
+  </body>
+</html>
