@@ -7,9 +7,10 @@ var artistId;
 var songList = [];
 var numOfQuestions = 5;
 var gameover = false;
-var answeredList = [];
 var currentQuestion = 0;
 var test;
+var time = new Date();
+var timeArray = [];
 
 $(document).ready(function(){
   $('form').submit(function(event){
@@ -61,8 +62,10 @@ $(document).ready(function(){
   });
 
   $('button#start').on('click', function(event){
+    timeArray.push((new Date()).getTime());
     $('audio#player'+currentQuestion)[0].play()
     $('#songlist').on('click','.answer',function(event){
+      timeArray.push((new Date()).getTime());
       $('audio#player'+currentQuestion)[0].pause()
       currentQuestion++
       if(currentQuestion >= numOfQuestions){
@@ -75,7 +78,7 @@ $(document).ready(function(){
 });
 
 function addTrack(songUrl, questionNum){
-  embedString = '<audio controls preload="auto" id="player'+questionNum+'"><source src="'+songUrl+'" type="audio/mp4"></audio><button name="button'+questionNum+'" class="answer">Answer</button>'
+  embedString = '<audio controls preload="auto" id="player'+questionNum+'" style="display:none;"><source src="'+songUrl+'" type="audio/mp4"></audio><button name="button'+questionNum+'" class="answer">Answer</button>'
   return embedString;
 }
 
