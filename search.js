@@ -6,7 +6,9 @@ var artistName;
 var artistId;
 var songList = [];
 var numOfQuestions = 5;
-
+var gameover = false;
+var answeredList = [];
+var currentQuestion = 0;
 var test;
 
 $(document).ready(function(){
@@ -59,16 +61,15 @@ $(document).ready(function(){
   });
 
   $('button#start').on('click', function(event){
-    currentQuestion = 0;
     $('audio#player'+currentQuestion)[0].play()
-    // while (currentQuestion < numOfQuestions){
-      $('#songlist').on('click','.answer',function(event){
-        $('audio#player'+currentQuestion)[0].pause()
-        currentQuestion++
-        $('audio#player'+currentQuestion)[0].play()
-      })
-    // }
-    console.log('game finsihed')
+    $('#songlist').on('click','.answer',function(event){
+      $('audio#player'+currentQuestion)[0].pause()
+      currentQuestion++
+      if(currentQuestion >= numOfQuestions){
+        alert('GameOver')
+      }
+      $('audio#player'+currentQuestion)[0].play()
+    })
   })
 
 });
