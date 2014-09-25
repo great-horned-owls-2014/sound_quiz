@@ -58,14 +58,23 @@ $(document).ready(function(){
     });
   });
 
-  // Adding the songs to the song list
-  if(songList.length > 0){
+  $('button#start').on('click', function(event){
+    currentQuestion = 0;
+    $('audio#player'+currentQuestion)[0].play()
+    // while (currentQuestion < numOfQuestions){
+      $('#songlist').on('click','.answer',function(event){
+        $('audio#player'+currentQuestion)[0].pause()
+        currentQuestion++
+        $('audio#player'+currentQuestion)[0].play()
+      })
+    // }
+    console.log('game finsihed')
+  })
 
-  }
 });
 
-function addTrack(songUrl){
-  embedString = '<audio controls preload="auto"><source src="'+songUrl+'" type="audio/mp4"></audio>'
+function addTrack(songUrl, questionNum){
+  embedString = '<audio controls preload="auto" id="player'+questionNum+'"><source src="'+songUrl+'" type="audio/mp4"></audio><button name="button'+questionNum+'" class="answer">Answer</button>'
   return embedString;
 }
 
