@@ -1,6 +1,6 @@
 // https://itunes.apple.com/search?attribute=allArtistTerm&term=massive+attack
-var songSearchUrl = 'https://itunes.apple.com/search?attribute=allArtistTerm&entity=song&limit=100&term='
-var artistSearchUrl= 'https://itunes.apple.com/search?entity=musicArtist&limit=5&term='
+var songSearchUrl = 'https://itunes.apple.com/search?attribute=allArtistTerm&entity=song&limit=100&term=';
+var artistSearchUrl= 'https://itunes.apple.com/search?entity=musicArtist&limit=5&term=';
 var testResponse;
 var artistName;
 var artistId;
@@ -27,8 +27,8 @@ $(document).ready(function(){
       failure: function(response){
         console.log('Fail');
       }
-    })
-  })
+    });
+  });
 
   $('#artistlist').on('click', 'a', function(event){
 
@@ -42,12 +42,8 @@ $(document).ready(function(){
       dataType: 'jsonp',
       success: function(response){
         songList = createSongList(response);
-
-        $('#artistsection').hide()
-        $('#songsection').show()
-
         appendSongs(songList);
-
+        dbSend(artistName, artistId, songList);
       },
        failure: function(response){
         console.log('Fail');
@@ -61,18 +57,18 @@ $(document).ready(function(){
 
     timeArray.push((new Date()).getTime());
 
-    $('audio#player'+currentQuestion)[0].play()
+    $('audio#player'+currentQuestion)[0].play();
 
     $('#songlist').on('click','.answer',function(event){
       timeArray.push((new Date()).getTime());
-      $('audio#player'+currentQuestion)[0].pause()
-      currentQuestion++
+      $('audio#player'+currentQuestion)[0].pause();
+      currentQuestion++;
       if(currentQuestion >= numOfQuestions){
-        alert('GameOver')
+        alert('GameOver');
       }
-      $('audio#player'+currentQuestion)[0].play()
-    })
-  })
+      $('audio#player'+currentQuestion)[0].play();
+    });
+  });
 
 });
 
@@ -84,7 +80,7 @@ function appendArtists(artistObject){
 }
 
 function createSongList(artistObject){
-  songArray = []
+  songArray = [];
   for(var i =0; i< artistObject['results'].length; i++){
     if (artistId === artistObject['results'][i].artistId) {
       songArray.push(artistObject['results'][i]);
@@ -93,13 +89,27 @@ function createSongList(artistObject){
   return songArray;
 }
 
+function dbSend(artistName, artistId, songArray){
+  $.ajax({
+    url: '/quiz/create',
+    type: 'POST',
+    data: {name: artistName, id: artistId, list: songArray},
+    success: function(response){
+      console.log('success');
+    },
+     failure: function(response){
+      console.log('Fail');
+    }
+  });
+}
+
 function appendSongs(songArray){
   for(var i = 0; i < numOfQuestions; i++){
-    $('#songlist').append('<li id="question'+i+'">' + songArray[i].trackName + songPlayer(songArray[i].previewUrl, i)+' </li>')
+    $('#songlist').append('<li id="question'+i+'">' + songArray[i].trackName + songPlayer(songArray[i].previewUrl, i)+' </li>');
   }
 }
 
 function songPlayer(songUrl, questionNum){
-  embedString = '<audio controls preload="auto" id="player'+questionNum+'" style="display:none;"><source src="'+songUrl+'" type="audio/mp4"></audio><button name="button'+questionNum+'" class="answer">Answer</button>'
+  embedString = '<audio controls preload="auto" id="player'+questionNum+'" style="display:none;"><source src="'+songUrl+'" type="audio/mp4"></audio><button name="button'+questionNum+'" class="answer">Answer</button>';
   return embedString;
 }
