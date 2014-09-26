@@ -8,21 +8,9 @@ class QuizController < ApplicationController
         art_url: params[:list][i.to_s]["artworkUrl100"],
         name: params[:list][i.to_s]["trackName"]  )
       new_artist.tracks << new_track
-
-      if new_artist.quizzes.last.questions.length < 5
-        new_artist.quizzes.last.questions << Question.create(right_answer: new_track)
-      end
     end
 
-    new_artist.quizzes.last.questions.each do |question|
-      choices = new_artist.tracks.first(10)
-      while question.wrong_choices.length < 3
-        potential_wrong_answer = choices.pop
-        if potential_wrong_answer != question.right_answer
-          question.wrong_choices << WrongChoice.create(track: potential_wrong_answer )
-        end
-      end
-    end
+    populate_quiz(new_artist, new_artist.quizzes.last.id)
 
     render :json => create_frontend_quiz(new_artist, new_artist.quizzes.last.id)
   end
