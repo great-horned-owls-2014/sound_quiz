@@ -1,6 +1,6 @@
 // https://itunes.apple.com/search?attribute=allArtistTerm&term=massive+attack
-var songSearchUrl = 'https://itunes.apple.com/search?attribute=allArtistTerm&entity=song&term='
-var artistSearchUrl= 'https://itunes.apple.com/search?entity=musicArtist&term='
+var songSearchUrl = 'https://itunes.apple.com/search?attribute=allArtistTerm&entity=song&limit=100&term='
+var artistSearchUrl= 'https://itunes.apple.com/search?entity=musicArtist&limit=5&term='
 var testResponse;
 var artistName;
 var artistId;
@@ -31,11 +31,11 @@ $(document).ready(function(){
   })
 
   $('#artistlist').on('click', 'a', function(event){
-    
+
     event.preventDefault();
     artistId = $(this).data('artistid');
     artistName = $(this).text();
-    
+
     $.ajax({
       url: songSearchUrl + artistName,
       type: 'GET',
