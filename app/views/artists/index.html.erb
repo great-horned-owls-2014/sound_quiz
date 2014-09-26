@@ -1,0 +1,4 @@
+Search for an artist
+<%= form_for @artist do |f| %>
+  <%= f.autocomplete_field :name, autocomplete_artist_name_artists_path, class: 'test' %>
+<% end %>
