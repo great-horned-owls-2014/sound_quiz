@@ -95,7 +95,7 @@ function dbSend(artistName, artistId, songArray){
     type: 'POST',
     data: {name: artistName, id: artistId, list: songArray},
     success: function(response){
-      console.log('success');
+      console.log(response);
     },
      failure: function(response){
       console.log('Fail');
