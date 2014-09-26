@@ -1,11 +1,28 @@
 class QuizController < ApplicationController
   def create
+    new_artist = Artist.create(name: params[:name], itunes_id: params[:id])
+    new_artist.quizzes << Quiz.create(difficulty_level: 1)
     for  i in 0..(params[:list].length - 1 ) do
-      puts params[:id]
-      puts params[:name]
-      puts params[:list][i.to_s]["trackName"]
-      puts params[:list][i.to_s]["previewUrl"]
-      puts params[:list][i.to_s]["artworkUrl100"]
+      new_track = Track.create(
+        preview_url: params[:list][i.to_s]["previewUrl"],
+        art_url: params[:list][i.to_s]["artworkUrl100"],
+        name: params[:list][i.to_s]["trackName"]  )
+      new_artist.tracks << new_track
+
+      if new_artist.quizzes.last.questions.length < 5
+        new_artist.quizzes.last.questions << Question.create(right_answer: new_track)
+      end
     end
+
+    new_artist.quizzes.last.questions.each do |question|
+      choices = new_artist.tracks.first(10)
+      while question.wrong_choices.length < 3
+        potential_wrong_answer = choices.pop
+        if potential_wrong_answer != question.right_answer
+          question.wrong_choices << WrongChoice.create(track: potential_wrong_answer )
+        end
+      end
+    end
+
   end
 end
