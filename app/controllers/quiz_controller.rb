@@ -38,8 +38,6 @@ class QuizController < ApplicationController
       end
     end
 
-    binding.pry
-
     render :json => quiz
   end
 end
