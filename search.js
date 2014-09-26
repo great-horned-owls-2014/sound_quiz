@@ -13,18 +13,16 @@ var time = new Date();
 var timeArray = [];
 
 $(document).ready(function(){
-  $('form').submit(function(event){
+  $('form').on('submit', function(event){
     event.preventDefault();
     searchTerm = $('#searchterm').val();
+
     $.ajax({
       url: artistSearchUrl+searchTerm,
       type: 'GET',
       dataType: 'jsonp',
       success: function(response){
-        testResponse = response;
-        for(var i=0; i<response['results'].length; i++){
-          $('#artistlist ul').append('<li><a href="'+ response['results'][i].artistLinkUrl +'" data-artistid="'+response['results'][i].artistId+'">'+response['results'][i].artistName + '</a></li>');
-        }
+        appendArtists(response);
       },
       failure: function(response){
         console.log('Fail');
@@ -33,27 +31,23 @@ $(document).ready(function(){
   })
 
   $('#artistlist').on('click', 'a', function(event){
+    
     event.preventDefault();
     artistId = $(this).data('artistid');
     artistName = $(this).text();
-    console.log(songSearchUrl + artistName);
+    
     $.ajax({
       url: songSearchUrl + artistName,
       type: 'GET',
       dataType: 'jsonp',
       success: function(response){
-        console.log(response);
-        test = response;
-        for(var i =0; i< response['results'].length; i++){
-          if (artistId === response['results'][i].artistId) {
-            songList.push(response['results'][i]);
-          }
-        }
+        songList = createSongList(response);
+
         $('#artistsection').hide()
         $('#songsection').show()
-        for(var i = 0; i < numOfQuestions; i++){
-          $('#songlist').append('<li id="question'+i+'">' + songList[i].trackName + addTrack(songList[i].previewUrl, i)+' </li>')
-        }
+
+        appendSongs(songList);
+
       },
        failure: function(response){
         console.log('Fail');
@@ -61,9 +55,14 @@ $(document).ready(function(){
     });
   });
 
+
+  //start and play the game
   $('button#start').on('click', function(event){
+
     timeArray.push((new Date()).getTime());
+
     $('audio#player'+currentQuestion)[0].play()
+
     $('#songlist').on('click','.answer',function(event){
       timeArray.push((new Date()).getTime());
       $('audio#player'+currentQuestion)[0].pause()
@@ -77,9 +76,30 @@ $(document).ready(function(){
 
 });
 
-function addTrack(songUrl, questionNum){
+
+function appendArtists(artistObject){
+  for(var i=0; i<artistObject['results'].length; i++){
+    $('#artistlist ul').append('<li><a href="'+ artistObject['results'][i].artistLinkUrl +'" data-artistid="'+artistObject['results'][i].artistId+'">'+artistObject['results'][i].artistName + '</a></li>');
+  }
+}
+
+function createSongList(artistObject){
+  songArray = []
+  for(var i =0; i< artistObject['results'].length; i++){
+    if (artistId === artistObject['results'][i].artistId) {
+      songArray.push(artistObject['results'][i]);
+    }
+  }
+  return songArray;
+}
+
+function appendSongs(songArray){
+  for(var i = 0; i < numOfQuestions; i++){
+    $('#songlist').append('<li id="question'+i+'">' + songArray[i].trackName + songPlayer(songArray[i].previewUrl, i)+' </li>')
+  }
+}
+
+function songPlayer(songUrl, questionNum){
   embedString = '<audio controls preload="auto" id="player'+questionNum+'" style="display:none;"><source src="'+songUrl+'" type="audio/mp4"></audio><button name="button'+questionNum+'" class="answer">Answer</button>'
   return embedString;
 }
-
-
