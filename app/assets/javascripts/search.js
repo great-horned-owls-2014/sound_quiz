@@ -31,7 +31,7 @@ $(document).ready(function(){
     });
   });
 
-  $('#artistlist').on('click', 'a', function(event){
+  $('#artist-list').on('click', 'a', function(event){
 
     event.preventDefault();
     artistId = $(this).data('artistid');
@@ -72,10 +72,16 @@ $(document).ready(function(){
 
 });
 
+function initializeGame(){
+  document.querySelector('#artist-section').style.display = 'none';
+  document.querySelector('#game-section').style.display = 'inherit';
+  // for(var i=1; i <= quiz.)
+
+}
 
 function appendArtists(artistObject){
   for(var i=0; i<artistObject['results'].length; i++){
-    $('#artistlist ul').append('<li><a href="'+ artistObject['results'][i].artistLinkUrl +'" data-artistid="'+artistObject['results'][i].artistId+'">'+artistObject['results'][i].artistName + '</a></li>');
+    $('#artist-list ul').append('<li><a href="'+ artistObject['results'][i].artistLinkUrl +'" data-artistid="'+artistObject['results'][i].artistId+'">'+artistObject['results'][i].artistName + '</a></li>');
   }
 }
 
