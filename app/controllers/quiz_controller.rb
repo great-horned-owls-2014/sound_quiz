@@ -24,20 +24,6 @@ class QuizController < ApplicationController
       end
     end
 
-    quiz = {}
-    quiz[:artist] = new_artist.name
-    quiz[:id] = new_artist.id
-    quiz[:itunes_id] = new_artist.itunes_id
-
-    new_artist.quizzes.last.questions.each_with_index do |question, index|
-      quiz[("question#{(index+1).to_s}").to_sym] = {}
-      quiz[("question#{(index+1).to_s}").to_sym][:choices] = []
-      quiz[("question#{(index+1).to_s}").to_sym][:choices] << question.right_answer
-      question.wrong_choices.each do |choice|
-        quiz[("question#{(index+1).to_s}").to_sym][:choices] << choice.track
-      end
-    end
-
-    render :json => quiz
+    render :json => create_frontend_quiz(new_artist, new_artist.quizzes.last.id)
   end
 end
