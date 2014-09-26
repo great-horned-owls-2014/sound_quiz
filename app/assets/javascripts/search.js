@@ -11,6 +11,7 @@ var currentQuestion = 0;
 var test;
 var time = new Date();
 var timeArray = [];
+var quiz;
 
 $(document).ready(function(){
   $('form').on('submit', function(event){
@@ -42,15 +43,14 @@ $(document).ready(function(){
       dataType: 'jsonp',
       success: function(response){
         songList = createSongList(response);
-        appendSongs(songList);
         dbSend(artistName, artistId, songList);
+        initializeGame();
       },
        failure: function(response){
         console.log('Fail');
       }
     });
   });
-
 
   //start and play the game
   $('button#start').on('click', function(event){
@@ -95,7 +95,7 @@ function dbSend(artistName, artistId, songArray){
     type: 'POST',
     data: {name: artistName, id: artistId, list: songArray},
     success: function(response){
-      console.log(response);
+      quiz = response;
     },
      failure: function(response){
       console.log('Fail');
