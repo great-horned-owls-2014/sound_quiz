@@ -6,13 +6,16 @@ module ApplicationHelper
     quiz[:id] = artist.id
     quiz[:itunes_id] = artist.itunes_id
 
-    artist.quizzes.find(quiz_id).questions.each_with_index do |question, index|
-      quiz[("question#{(index+1).to_s}").to_sym] = {}
-      quiz[("question#{(index+1).to_s}").to_sym][:choices] = []
-      quiz[("question#{(index+1).to_s}").to_sym][:choices] << question.right_answer
+    artist.quizzes.find(quiz_id).questions.each_with_index do |question, array_index|
+      human_index = (array_index + 1).to_s
+      quiz[("question#{human_index}").to_sym] = {}
+      quiz[("question#{human_index}").to_sym][:db_id] = question.id
+      quiz[("question#{human_index}").to_sym][:choices] = []
+      quiz[("question#{human_index}").to_sym][:choices] << question.right_answer
       question.wrong_choices.each do |choice|
-        quiz[("question#{(index+1).to_s}").to_sym][:choices] << choice.track
+        quiz[("question#{human_index}").to_sym][:choices] << choice.track
       end
+      quiz[("question#{human_index}").to_sym][:choices].shuffle
     end
 
     return quiz
