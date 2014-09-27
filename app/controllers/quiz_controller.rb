@@ -3,6 +3,7 @@ class QuizController < ApplicationController
   def create
     # artist & tracks, knows nothing of quiz
     new_artist = Artist.new artist_attribs_from_params params
+
     new_artist_tracks = []
     params[:list].length.times.map do |i|
       new_track = Track.new track_attribs_from_params params[:list][i.to_s]
@@ -12,7 +13,6 @@ class QuizController < ApplicationController
     end
 
     new_artist.tracks = new_artist_tracks
-
     new_artist.save!
 
     quiz = create_first_quiz_for(new_artist)
