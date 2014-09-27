@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
-
-
+ruby '2.0.0'
+gem 'pry', group: :development
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.5'
 # Use sqlite3 as the database for Active Record
@@ -13,7 +13,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
-
+gem 'unicorn'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
@@ -29,6 +29,7 @@ gem 'spring',        group: :development
 
 gem 'rails3-jquery-autocomplete'
 
+gem 'rails_12factor', group: :production
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -41,3 +42,4 @@ gem 'rails3-jquery-autocomplete'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem "rspec-rails", :group => [:development, :test]

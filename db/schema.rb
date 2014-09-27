@@ -18,12 +18,12 @@ ActiveRecord::Schema.define(version: 20140925182216) do
 
   create_table "artists", force: true do |t|
     t.string   "name"
+    t.integer  "itunes_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "questions", force: true do |t|
-    t.string   "api_content"
     t.integer  "track_id"
     t.integer  "quiz_id"
     t.datetime "created_at"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 20140925182216) do
 
   create_table "tracks", force: true do |t|
     t.string   "name"
+    t.string   "preview_url"
+    t.string   "art_url"
     t.integer  "artist_id"
     t.datetime "created_at"
     t.datetime "updated_at"
