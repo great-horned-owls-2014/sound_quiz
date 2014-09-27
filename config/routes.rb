@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :sessions
   get 'login' => "sessions#new", as: "login"
+  get 'logout' => "sessions#logout", as: "logout"
   get 'signup' => "users#new", as: "signup"
   resources :users
 
