@@ -33,4 +33,8 @@ class QuizController < ApplicationController
     }
   end
 
+  def stats
+
+  end
+
 end
