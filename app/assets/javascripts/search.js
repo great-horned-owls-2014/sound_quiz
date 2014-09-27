@@ -99,8 +99,7 @@ $(document).ready(function(){
     recordTimeTaken();
     hideSelf.call(this);
     showNext.call(this);
-    // $(this).parent().next().show();
-    $(this).parent().next().children('audio')[0].play();
+    playNextTrack.call(this);
   });
 
   $('body').on('click', ".answer-button", function(event){
@@ -109,20 +108,32 @@ $(document).ready(function(){
     $(this).parent().children('audio')[0].pause();
     hideSelf.call(this);
     showNext.call(this);
-    if(timeArray.length === 6){
-      $('#stats').show();
-      for(var i = 1; i< timeArray.length; i++){
-        $('#stats').append('<p>'+i+'-'+(timeArray[i]-timeArray[i-1])+'</p>');
-      }
-      for(i= 0; i< answerArray.length; i++){
-        $('#stats').append('<p>'+i+'-'+(answerArray[i].choiceid)+'</p>');
-      }
-    }
-    else{
-      $(this).parent().next().children('audio')[0].play();
-    }
+    checkGameStatus.call(this);
   });
 });
+
+function checkGameStatus(){
+  if(timeArray.length === 6){
+      endGame();
+    }
+    else{
+      playNextTrack.call(this);
+    }
+}
+
+function endGame(){
+  $('#stats').show();
+  for(var i = 1; i< timeArray.length; i++){
+    $('#stats').append('<p>'+i+'-'+(timeArray[i]-timeArray[i-1])+'</p>');
+  }
+  for(i= 0; i< answerArray.length; i++){
+    $('#stats').append('<p>'+i+'-'+(answerArray[i].choiceid)+'</p>');
+  }
+}
+
+function playNextTrack(){
+    $(this).parent().next().children('audio')[0].play();
+}
 
 function hideSelf(){
   $(this).parent().hide();
