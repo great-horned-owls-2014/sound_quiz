@@ -54,24 +54,26 @@ $(document).ready(function(){
 
   //start and play the game
   $('button#start').on('click', function(event){
-
     timeArray.push((new Date()).getTime());
-
-    $('audio#player'+currentQuestion)[0].play();
-
-    $('#songlist').on('click','.answer',function(event){
-      timeArray.push((new Date()).getTime());
-      $('audio#player'+currentQuestion)[0].pause();
-      currentQuestion++;
-      if(currentQuestion >= numOfQuestions){
-        alert('GameOver');
-      }
-      $('audio#player'+currentQuestion)[0].play();
-    });
+    $(this).parent().hide();
+    $(this).parent().next().show();
+    $(this).parent().next().children('audio')[0].play();
   });
 
-  $('body').on('click', "button", function(event){
-    console.log(this);
+  $('body').on('click', ".answer-button", function(event){
+    timeArray.push((new Date()).getTime());
+    answerArray.push($(this).data());
+    $(this).parent().children('audio')[0].pause();
+    $(this).parent().hide();
+    $(this).parent().next().show();
+    if(timeArray.length === 6){
+      $('#stats').show();
+      for(var i = 1; i< timeArray.length; i++){
+        $('#stats').append('<p>'+i+'-'+(timeArray[i]-timeArray[i-1])+'</p>');
+      }
+      $('#stats').append(answerArray);
+    }
+    $(this).parent().next().children('audio')[0].play();
   });
 
 });
