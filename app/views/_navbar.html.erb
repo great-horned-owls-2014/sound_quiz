@@ -1,15 +1,16 @@
 <div class="navbar">
 	<ul>
   	<% if session[:user_id] %>
-  		<li><a href="/user/<%=session[:user_id]%>">View Scores</a></li>
+      <li>Hi, <%= User.find(session[:user_id]).username %></a></li>
+  		<li><a href="/users/<%=session[:user_id]%>/edit">Edit Info</a></li>
+      <li><a href="/users/<%=session[:user_id]%>">View Scores</a></li>
+      <li><a href="/logout">Log Out</a></li>
   	<% else %>
-	  	<li><a href="/signup">Sign Up!</a></li>
+      <li><a href="/login">Log In</a></li>
+	  	<li><a href="/signup">Sign Up</a></li>
   	<% end %>
   	<li>
   		Leaderboards
-  		<%= form_for @artist do |f| %>
-  			<%= f.autocomplete_field :name, autocomplete_artist_name_artists_path %>
-  		<% end %>
   	</li>
   </ul>
 </div>
