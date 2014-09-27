@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
 
   #root 'artists#index'
 
@@ -12,7 +11,7 @@ Rails.application.routes.draw do
   get 'signup' => "users#new", as: "signup"
   resources :users
 
-  get 'users' => 'users#index', as: 'users'
+  get 'users' => 'users#index', as: 'usersindex'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
