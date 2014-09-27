@@ -13,6 +13,7 @@ var time = new Date();
 var timeArray = [];
 var quiz;
 var answerArray = [];
+var numOfNonQuestions = 3;
 
 $(document).ready(function(){
   $('form').on('submit', function(event){
@@ -31,6 +32,16 @@ $(document).ready(function(){
       }
     });
   });
+
+  function appendArtists(artistObject){
+    for(var i=0; i<artistObject['results'].length; i++){
+      $('#artist-list ul').append( createArtistListEntry(artistObject['results'][i] ));
+    }
+  }
+
+  function createArtistListEntry(artistObj){
+    return '<li><a href="'+ artistObj.artistLinkUrl +'" data-artistid="'+artistObj.artistId+'">'+artistObj.artistName +'</a></li>';
+  }
 
   $('#artist-list').on('click', 'a', function(event){
 
@@ -52,36 +63,111 @@ $(document).ready(function(){
     });
   });
 
+  function createSongList(artistObject){
+    songArray = [];
+    for(var i =0; i< artistObject['results'].length; i++){
+      if (artistId === artistObject['results'][i].artistId) {
+        songArray.push(createSongObject( artistObject['results'][i] ));
+      }
+    }
+    return songArray;
+  }
+
+  function createSongObject(itunesObject){
+    filteredObject = { 'artworkUrl100': itunesObject.artworkUrl100,
+                        'previewUrl': itunesObject.previewUrl,
+                        'trackName': itunesObject.trackName};
+    return filteredObject;
+  }
+
+  function dbSend(artistName, artistId, songArray){
+    $.ajax({
+      url: '/quiz/create',
+      type: 'POST',
+      data: {name: artistName, id: artistId, list: songArray},
+      success: function(response){
+
+        quiz = scrubQuestionChoices(response);
+        initializeGame();
+      },
+       failure: function(response){
+        console.log('Fail');
+      }
+    });
+  }
+
+  function scrubQuestionChoices(quiz){
+    for(var i=1; i <= (Object.keys(quiz).length - numOfNonQuestions); i++){
+      for ( var j=0; j < quiz['question_'+i]['choices'].length; j++){
+        delete (quiz['question_'+i]['choices'][j].preview_url);
+        delete (quiz['question_'+i]['choices'][j].created_at);
+        delete (quiz['question_'+i]['choices'][j].updated_at);
+      }
+    }
+    return quiz;
+  }
+
   //start and play the game
   $('button#start').on('click', function(event){
-    timeArray.push((new Date()).getTime());
-    $(this).parent().hide();
-    $(this).parent().next().show();
-    $(this).parent().next().children('audio')[0].play();
+    recordTimeTaken();
+    hideSelf.call(this);
+    showNext.call(this);
+    playNextTrack.call(this);
   });
 
   $('body').on('click', ".answer-button", function(event){
-    timeArray.push((new Date()).getTime());
-    answerArray.push($(this).data());
+    recordTimeTaken();
+    recordUserAnswer.call(this);
     $(this).parent().children('audio')[0].pause();
-    $(this).parent().hide();
-    $(this).parent().next().show();
-    if(timeArray.length === 6){
-      $('#stats').show();
-      for(var i = 1; i< timeArray.length; i++){
-        $('#stats').append('<p>'+i+'-'+(timeArray[i]-timeArray[i-1])+'</p>');
-      }
-      $('#stats').append(answerArray);
-    }
-    $(this).parent().next().children('audio')[0].play();
+    hideSelf.call(this);
+    showNext.call(this);
+    checkGameStatus.call(this);
   });
-
 });
+
+function checkGameStatus(){
+  if(timeArray.length === 6){
+      endGame();
+    }
+    else{
+      playNextTrack.call(this);
+    }
+}
+
+function endGame(){
+  $('#stats').show();
+  for(var i = 1; i< timeArray.length; i++){
+    $('#stats').append('<p>'+i+'-'+(timeArray[i]-timeArray[i-1])+'</p>');
+  }
+  for(i= 0; i< answerArray.length; i++){
+    $('#stats').append('<p>'+i+'-'+(answerArray[i].choiceid)+'</p>');
+  }
+}
+
+function playNextTrack(){
+    $(this).parent().next().children('audio')[0].play();
+}
+
+function hideSelf(){
+  $(this).parent().hide();
+}
+
+function showNext(){
+  $(this).parent().next().show();
+}
+
+function recordTimeTaken(){
+  timeArray.push((new Date()).getTime());
+}
+
+function recordUserAnswer(){
+  answerArray.push($(this).data());
+}
 
 function initializeGame(){
   document.querySelector('#artist-section').style.display = 'none';
   document.querySelector('#game-section').style.display = 'inherit';
-  for(var i=1; i <= (Object.keys(quiz).length - 3); i++){
+  for(var i=1; i <= (Object.keys(quiz).length - numOfNonQuestions); i++){
     $('#game-section').append(generateQuestionDiv(quiz['question_'+i]));
   }
 }
@@ -93,37 +179,6 @@ function generateQuestionDiv(question){
   }
   divString += songPlayer(question.player_url)+'</div>';
   return divString;
-}
-
-function appendArtists(artistObject){
-  for(var i=0; i<artistObject['results'].length; i++){
-    $('#artist-list ul').append('<li><a href="'+ artistObject['results'][i].artistLinkUrl +'" data-artistid="'+artistObject['results'][i].artistId+'">'+artistObject['results'][i].artistName + '</a></li>');
-  }
-}
-
-function createSongList(artistObject){
-  songArray = [];
-  for(var i =0; i< artistObject['results'].length; i++){
-    if (artistId === artistObject['results'][i].artistId) {
-      songArray.push(artistObject['results'][i]);
-    }
-  }
-  return songArray;
-}
-
-function dbSend(artistName, artistId, songArray){
-  $.ajax({
-    url: '/quiz/create',
-    type: 'POST',
-    data: {name: artistName, id: artistId, list: songArray},
-    success: function(response){
-      quiz = response;
-      initializeGame();
-    },
-     failure: function(response){
-      console.log('Fail');
-    }
-  });
 }
 
 function appendSongs(songArray){
