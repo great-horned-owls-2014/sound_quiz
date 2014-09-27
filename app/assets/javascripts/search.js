@@ -62,6 +62,16 @@ $(document).ready(function(){
     });
   });
 
+  function createSongList(artistObject){
+    songArray = [];
+    for(var i =0; i< artistObject['results'].length; i++){
+      if (artistId === artistObject['results'][i].artistId) {
+        songArray.push(artistObject['results'][i]);
+      }
+    }
+    return songArray;
+  }
+
   function dbSend(artistName, artistId, songArray){
     $.ajax({
       url: '/quiz/create',
@@ -79,28 +89,49 @@ $(document).ready(function(){
 
   //start and play the game
   $('button#start').on('click', function(event){
-    timeArray.push((new Date()).getTime());
-    $(this).parent().hide();
-    $(this).parent().next().show();
+    recordTimeTaken();
+    hideSelf.call(this);
+    showNext.call(this);
+    // $(this).parent().next().show();
     $(this).parent().next().children('audio')[0].play();
   });
 
   $('body').on('click', ".answer-button", function(event){
-    timeArray.push((new Date()).getTime());
-    answerArray.push($(this).data());
+    recordTimeTaken();
+    recordUserAnswer.call(this);
     $(this).parent().children('audio')[0].pause();
-    $(this).parent().hide();
-    $(this).parent().next().show();
+    hideSelf.call(this);
+    showNext.call(this);
     if(timeArray.length === 6){
       $('#stats').show();
       for(var i = 1; i< timeArray.length; i++){
         $('#stats').append('<p>'+i+'-'+(timeArray[i]-timeArray[i-1])+'</p>');
       }
-      $('#stats').append(answerArray);
+      for(i= 0; i< answerArray.length; i++){
+        $('#stats').append('<p>'+i+'-'+(answerArray[i].choiceid)+'</p>');
+      }
     }
-    $(this).parent().next().children('audio')[0].play();
+    else{
+      $(this).parent().next().children('audio')[0].play();
+    }
   });
 });
+
+function hideSelf(){
+  $(this).parent().hide();
+}
+
+function showNext(){
+  $(this).parent().next().show();
+}
+
+function recordTimeTaken(){
+  timeArray.push((new Date()).getTime());
+}
+
+function recordUserAnswer(){
+  answerArray.push($(this).data());
+}
 
 function initializeGame(){
   document.querySelector('#artist-section').style.display = 'none';
@@ -118,17 +149,6 @@ function generateQuestionDiv(question){
   divString += songPlayer(question.player_url)+'</div>';
   return divString;
 }
-
-function createSongList(artistObject){
-  songArray = [];
-  for(var i =0; i< artistObject['results'].length; i++){
-    if (artistId === artistObject['results'][i].artistId) {
-      songArray.push(artistObject['results'][i]);
-    }
-  }
-  return songArray;
-}
-
 
 function appendSongs(songArray){
   for(var i = 0; i < numOfQuestions; i++){
