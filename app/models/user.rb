@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :user_answers
+  has_many :taken_quizzes
 
   def quiz_score (quiz_id, user_answers_arr, time_arr)
 
