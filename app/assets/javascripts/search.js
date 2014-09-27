@@ -32,6 +32,16 @@ $(document).ready(function(){
     });
   });
 
+  function appendArtists(artistObject){
+    for(var i=0; i<artistObject['results'].length; i++){
+      $('#artist-list ul').append( createArtistListEntry(artistObject['results'][i] ));
+    }
+  }
+
+  function createArtistListEntry(artistObj){
+    return '<li><a href="'+ artistObj.artistLinkUrl +'" data-artistid="'+artistObj.artistId+'">'+artistObj.artistName +'</a></li>';
+  }
+
   $('#artist-list').on('click', 'a', function(event){
 
     event.preventDefault();
@@ -51,6 +61,21 @@ $(document).ready(function(){
       }
     });
   });
+
+  function dbSend(artistName, artistId, songArray){
+    $.ajax({
+      url: '/quiz/create',
+      type: 'POST',
+      data: {name: artistName, id: artistId, list: songArray},
+      success: function(response){
+        quiz = response;
+        initializeGame();
+      },
+       failure: function(response){
+        console.log('Fail');
+      }
+    });
+  }
 
   //start and play the game
   $('button#start').on('click', function(event){
@@ -75,7 +100,6 @@ $(document).ready(function(){
     }
     $(this).parent().next().children('audio')[0].play();
   });
-
 });
 
 function initializeGame(){
@@ -95,12 +119,6 @@ function generateQuestionDiv(question){
   return divString;
 }
 
-function appendArtists(artistObject){
-  for(var i=0; i<artistObject['results'].length; i++){
-    $('#artist-list ul').append('<li><a href="'+ artistObject['results'][i].artistLinkUrl +'" data-artistid="'+artistObject['results'][i].artistId+'">'+artistObject['results'][i].artistName + '</a></li>');
-  }
-}
-
 function createSongList(artistObject){
   songArray = [];
   for(var i =0; i< artistObject['results'].length; i++){
@@ -111,20 +129,6 @@ function createSongList(artistObject){
   return songArray;
 }
 
-function dbSend(artistName, artistId, songArray){
-  $.ajax({
-    url: '/quiz/create',
-    type: 'POST',
-    data: {name: artistName, id: artistId, list: songArray},
-    success: function(response){
-      quiz = response;
-      initializeGame();
-    },
-     failure: function(response){
-      console.log('Fail');
-    }
-  });
-}
 
 function appendSongs(songArray){
   for(var i = 0; i < numOfQuestions; i++){
