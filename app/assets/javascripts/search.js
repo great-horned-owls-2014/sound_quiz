@@ -85,13 +85,25 @@ $(document).ready(function(){
       type: 'POST',
       data: {name: artistName, id: artistId, list: songArray},
       success: function(response){
-        quiz = response;
+
+        quiz = scrubQuestionChoices(response);
         initializeGame();
       },
        failure: function(response){
         console.log('Fail');
       }
     });
+  }
+
+  function scrubQuestionChoices(quiz){
+    for(var i=1; i <= (Object.keys(quiz).length - numOfNonQuestions); i++){
+      for ( var j=0; j < quiz['question_'+i]['choices'].length; j++){
+        delete (quiz['question_'+i]['choices'][j].preview_url);
+        delete (quiz['question_'+i]['choices'][j].created_at);
+        delete (quiz['question_'+i]['choices'][j].updated_at);
+      }
+    }
+    return quiz;
   }
 
   //start and play the game
@@ -154,7 +166,7 @@ function recordUserAnswer(){
 function initializeGame(){
   document.querySelector('#artist-section').style.display = 'none';
   document.querySelector('#game-section').style.display = 'inherit';
-  for(var i=1; i <= (Object.keys(quiz).length - 3); i++){
+  for(var i=1; i <= (Object.keys(quiz).length - numOfNonQuestions); i++){
     $('#game-section').append(generateQuestionDiv(quiz['question_'+i]));
   }
 }
