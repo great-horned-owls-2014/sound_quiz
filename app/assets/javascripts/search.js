@@ -69,13 +69,27 @@ $(document).ready(function(){
     });
   });
 
+  $('body').on('click', "button", function(event){
+    console.log(this);
+  });
+
 });
 
 function initializeGame(){
   document.querySelector('#artist-section').style.display = 'none';
   document.querySelector('#game-section').style.display = 'inherit';
-  // for(var i=1; i <= quiz.)
+  for(var i=1; i <= (Object.keys(quiz).length - 3); i++){
+    $('#game-section').append(generateQuestionDiv(quiz['question_'+i]));
+  }
+}
 
+function generateQuestionDiv(question){
+  divString = '<div  data-questionId="'+ question['db_id']  +'">';
+  for(var i=0; i< question.choices.length; i++){
+    divString += '<button style="display:block;" data-questionId="' + question['db_id'] + '" data-choiceId="'+ question.choices[i].id +'" type="button">'+question.choices[i].name+'</button>';
+  }
+  divString += songPlayer(question.player_url)+'</div>';
+  return divString;
 }
 
 function appendArtists(artistObject){
@@ -115,7 +129,9 @@ function appendSongs(songArray){
   }
 }
 
-function songPlayer(songUrl, questionNum){
-  embedString = '<audio controls preload="auto" id="player'+questionNum+'" style="display:none;"><source src="'+songUrl+'" type="audio/mp4"></audio><button name="button'+questionNum+'" class="answer">Answer</button>';
+function songPlayer(songUrl){
+  embedString = '<audio controls preload="auto" style="display:none;"><source src="'+songUrl+'" type="audio/mp4"></audio>';
   return embedString;
 }
+
+
