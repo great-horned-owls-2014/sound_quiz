@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
-
+gem 'pry', group: :development
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.5'
 # Use sqlite3 as the database for Active Record
