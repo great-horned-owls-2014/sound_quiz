@@ -87,9 +87,9 @@ function initializeGame(){
 }
 
 function generateQuestionDiv(question){
-  divString = '<div  data-questionId="'+ question['db_id']  +'">';
+  divString = '<div  style="display: none;" data-questionId="'+ question['db_id']  +'">';
   for(var i=0; i< question.choices.length; i++){
-    divString += '<button style="display:block;" data-questionId="' + question['db_id'] + '" data-choiceId="'+ question.choices[i].id +'" type="button">'+question.choices[i].name+'</button>';
+    divString += '<button style="display:block;" data-questionId="' + question['db_id'] + '" data-choiceId="'+ question.choices[i].id +'" class="answer-button" type="button">'+question.choices[i].name+'</button>';
   }
   divString += songPlayer(question.player_url)+'</div>';
   return divString;
