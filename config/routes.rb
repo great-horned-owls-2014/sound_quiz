@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'artists#index'
+  #root 'artists#index'
 
   resources :artists do
     get :autocomplete_artist_name, :on => :collection
