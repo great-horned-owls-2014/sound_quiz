@@ -10,12 +10,16 @@ class SessionsController < ApplicationController
       redirect_to root_url, notice: "logged in!"
     else
       # flash.now.alert = "Invalid email or password"
-      render :new
+      redirect_to root_url, notice: "Invalid email or password"
     end
   end
 
   def new
-    @user = User.new
+  end
+
+  def logout
+    session.clear
+    redirect_to root_url, notice: "Logged out!"
   end
 
 end
