@@ -142,6 +142,27 @@ function endGame(){
   for(i= 0; i< answerArray.length; i++){
     $('#stats').append('<p>'+i+'-'+(answerArray[i].choiceid)+'</p>');
   }
+  $.ajax({
+    url: '/quiz/stats',
+    type: 'POST',
+    data: formatValues(),
+    success: function(response){
+      console.log(response);
+      console.log("success!");
+    },
+    failure: function(response){
+      console.log(response);
+      console.log("failure");
+    }
+  });
+}
+
+function formatValues(){
+  var formattedValues = {'returnVals':{ }};
+  for(var i=0; i < answerArray.length; i++){
+    formattedValues['returnVals'][i] = { track_id: answerArray[i].choiceid, question: answerArray[i].questionid, response_time: (timeArray[i+1] - timeArray[i]) };
+  }
+  return formattedValues;
 }
 
 function playNextTrack(){
