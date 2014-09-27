@@ -1,4 +1,4 @@
-User.create(email: "Peter")
+User.create(email: "peter.ching@gmail.com", password: "owls")
 
 Artist.create(name: "Shigoom")
 Artist.first.tracks << Track.create(name: "Shiggitty")

@@ -8,6 +8,16 @@
 </head>
 <body>
 
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg %>
+  <% end %>
+
+  <% if session[:user_id] %>
+    <p>You are logged in!</p>
+  <% else %>
+    <p>You are not logged in :( </p>
+  <% end %>
+
 <%= yield %>
 
 </body>
