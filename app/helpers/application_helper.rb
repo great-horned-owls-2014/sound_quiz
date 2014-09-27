@@ -18,6 +18,7 @@ module ApplicationHelper
   def make_question_hash question
     question_hash = {}
     question_hash[:db_id] = question.id
+    question_hash[:player_url] = question.right_answer.preview_url
     question_hash[:choices] = [ question.right_answer ] + question.wrong_choices.map(&:track)
     question_hash[:choices] = question_hash[:choices].shuffle
     question_hash
