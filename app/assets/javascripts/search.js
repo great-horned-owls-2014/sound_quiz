@@ -12,6 +12,7 @@ var test;
 var time = new Date();
 var timeArray = [];
 var quiz;
+var answerArray = [];
 
 $(document).ready(function(){
   $('form').on('submit', function(event){
