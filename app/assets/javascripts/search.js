@@ -44,7 +44,6 @@ $(document).ready(function(){
       success: function(response){
         songList = createSongList(response);
         dbSend(artistName, artistId, songList);
-        initializeGame();
       },
        failure: function(response){
         console.log('Fail');
@@ -102,6 +101,7 @@ function dbSend(artistName, artistId, songArray){
     data: {name: artistName, id: artistId, list: songArray},
     success: function(response){
       quiz = response;
+      initializeGame();
     },
      failure: function(response){
       console.log('Fail');
