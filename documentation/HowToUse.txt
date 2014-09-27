@@ -1,0 +1,66 @@
+
+How many quizzes have I take?
+
+  user.user_answers.questions.quizzes group_by
+
+
+How many total questions have I answered correctly? || How many attempts have I been successful at?
+
+  successful_attempts = 0
+
+  user.user_answers.each do | user_answer |
+    if user_answer.user_decision == user_answer.question.right_answer
+      successful_attempts += 1
+    end
+  end
+
+
+  user.user_answers.where(user_decision == question.right_answer)
+
+  this_user.user_answers.joins(:question).where('user_answers.track_id = questions.track_id')
+
+UserAnswer.where(user: this_user).joins(:question).where('user_answers.track_id = questions.track_id')
+
+How many questions have I attempted?  ||  What are my past answers?
+
+  User.find(x).user_answers
+
+
+
+
+
+
+
+
+
+
+What are the wrong_choices to this question?
+Question.find(x).wrong_choices
+
+What is the right answer to this question?
+Question.find(x).right_answer
+
+
+
+
+
+
+
+
+
+What are the questions in this quiz?
+Quiz.find(x).questions
+
+
+How many quizzes does an artist have?
+Artist.find(x).quizzes
+
+Which artist does this quiz belong to?
+Quiz.find(x).artist
+
+What was the user's answer to a given question?
+UserAnswer.where(user: User.first, question: Question.first).first.user_decision
+
+What quiz does this question belong to?
+  Question.find(x).quiz
+
