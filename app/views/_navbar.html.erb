@@ -1,0 +1,15 @@
+<div class="navbar">
+	<ul>
+  	<% if session[:user_id] %>
+  		<li><a href="/user/<%=session[:user_id]%>">View Scores</a></li>
+  	<% else %>
+	  	<li><a href="/signup">Sign Up!</a></li>
+  	<% end %>
+  	<li>
+  		Leaderboards
+  		<%= form_for @artist do |f| %>
+  			<%= f.autocomplete_field :name, autocomplete_artist_name_artists_path %>
+  		<% end %>
+  	</li>
+  </ul>
+</div>
