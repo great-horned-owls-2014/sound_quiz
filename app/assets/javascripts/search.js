@@ -66,10 +66,17 @@ $(document).ready(function(){
     songArray = [];
     for(var i =0; i< artistObject['results'].length; i++){
       if (artistId === artistObject['results'][i].artistId) {
-        songArray.push(artistObject['results'][i]);
+        songArray.push(createSongObject( artistObject['results'][i] ));
       }
     }
     return songArray;
+  }
+
+  function createSongObject(itunesObject){
+    filteredObject = { 'artworkUrl100': itunesObject.artworkUrl100,
+                        'previewUrl': itunesObject.previewUrl,
+                        'trackName': itunesObject.trackName};
+    return filteredObject;
   }
 
   function dbSend(artistName, artistId, songArray){
