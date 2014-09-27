@@ -1,3 +1,5 @@
+require 'bcrypt'
+
 class User < ActiveRecord::Base
   has_many :user_answers
   has_secure_password #takes care of password prescence validation
