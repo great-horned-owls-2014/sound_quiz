@@ -9,22 +9,17 @@ class QuizController < ApplicationController
 
   def create
     # artist & tracks, knows nothing of quiz
-    new_artist = Artist.new artist_attribs_from_params params
-
-    new_artist_tracks = []
-    params[:list].length.times.map do |i|
-      new_track = Track.new track_attribs_from_params params[:list][i.to_s]
-      if new_track.save != false
-        new_artist_tracks << new_track
-      end
+    if artist_created?(params[:id])
+      artist = Artist.find_by(itunes_id: params[:id])
+    else
+      artist = Artist.new(artist_attribs_from_params(params))
+      initialize_new_artist_tracks(artist, params[:list])
     end
 
-    new_artist.tracks = new_artist_tracks
-    new_artist.save!
+    #need to create logic to see what to do with th quiz, whether to return a quiz, or to create new quiz
+    quiz = create_quiz(artist, QUIZKEY[0])
 
-    quiz = create_quiz(new_artist, QUIZKEY[0])
-
-    render :json => create_frontend_quiz(new_artist, quiz.id)
+    render :json => create_frontend_quiz(artist, quiz.id)
   end
 
   def artist_attribs_from_params params
