@@ -1,33 +1,43 @@
 class QuizController < ApplicationController
 
-  QUIZKEY = {
-    0 => {difficulty: 0, source: 5, choices:  10},
-    1 => {difficulty: 1, source: 5, choices:  15 },
-    2 => {difficulty: 2, source: 10, choices: 20 },
-    3 => {difficulty: 3, source: 20, choices: 20 }
-  }
+
 
   def create
     # artist & tracks, knows nothing of quiz
-    if artist_created?(params[:id])
-      artist = Artist.find_by(itunes_id: params[:id])
+    artist_itunes_id = params[:id]
+    if artist_created?(artist_itunes_id)
+      artist = Artist.find_by(itunes_id: artist_itunes_id)
     else
       artist = Artist.new(artist_attribs_from_params(params))
       initialize_new_artist_tracks(artist, params[:list])
     end
 
-    #need to create logic to see what to do with th quiz, whether to return a quiz, or to create new quiz
     if signed_in?
-      if artist_created?(params[:id])
+      user = User.find(session[:user_id])
+
+      if artist_created?(artist_itunes_id)
+
         if artist.quizzes.length > 0
-          quiz = artist.quizzes.last
+          user_quiz_count_of_artist = user.taken_quizzes.where(artist: artist).count
+          artist_quiz_count = artist.quizzes.count
+
+          if user_quiz_count_of_artist >= artist_quiz_count
+            difficulty = artist_quiz_count + 1
+            quiz = create_quiz(artist, difficulty)
+            artist.quizzes << quiz
+          else
+            quiz = artist.quizzes.find_by(difficulty_level: user_quiz_count_of_artist + 1)
+          end
+
         else
-          quiz = create_quiz(artist, QUIZKEY[1])
+          quiz = create_quiz(artist, 1)
           artist.quizzes << quiz
         end
+
       end
+
     else
-      quiz = create_quiz(artist, QUIZKEY[0])
+      quiz = create_quiz(artist, 0)
     end
 
     render :json => create_frontend_quiz(artist, quiz.id)
@@ -66,8 +76,8 @@ class QuizController < ApplicationController
         times << x[:response_time].to_f
       end
     end
-
-    new_record = TakenQuiz.create(quiz_id: quiz_id, time: times.reduce(:+), score: user.quiz_score(quiz_id, answers, times ) )
+#NEED TO ADD ARTIST ID IN HERE
+    new_record = TakenQuiz.create(quiz_id: quiz_id, time: times.reduce(:+), score: user.quiz_score(quiz_id, answers, times), artist_id: Quiz.find(quiz_id).artist.id)
     user.taken_quizzes << new_record
 
     render :json => new_record.score

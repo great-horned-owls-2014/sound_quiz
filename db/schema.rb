@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20140927222831) do
   create_table "taken_quizzes", force: true do |t|
     t.integer  "user_id"
     t.integer  "quiz_id"
+    t.integer  "artist_id"
     t.integer  "time"
     t.integer  "score"
     t.datetime "created_at"
