@@ -23,7 +23,6 @@ class QuizController < ApplicationController
     new_artist.save!
 
     quiz = create_first_quiz_for(new_artist)
-    quiz.save!
 
     render :json => create_frontend_quiz(new_artist, new_artist.quizzes.last.id)
   end
@@ -41,7 +40,7 @@ class QuizController < ApplicationController
   end
 
   def stats
-    if session[:user_id]
+    if signed_in?
       user = User.find(session[:user_id])
       quiz_id = Question.find(params[:returnVals]['0'][:question].to_i).quiz_id
       answers = []

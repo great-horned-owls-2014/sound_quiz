@@ -24,6 +24,10 @@ module ApplicationHelper
     question_hash
   end
 
+  def signed_in?
+    session[:user_id] ? true : false
+  end
+
   # def create_first_quiz_for artist
   #   artist.quizzes = [ Quiz.new(difficulty_level: 1) ]
 
@@ -73,6 +77,7 @@ module ApplicationHelper
 
     if quiz_key_entry[:difficulty] > 0
       artist.quizzes << new_quiz
+      artist.save!
     end
 
     new_quiz
