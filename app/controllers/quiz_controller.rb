@@ -1,24 +1,36 @@
 class QuizController < ApplicationController
 
+  QUIZKEY = {
+    0 => {difficulty: 0, source: 5, choices:  10},
+    1 => {difficulty: 1, source: 5, choices:  15 },
+    2 => {difficulty: 2, source: 10, choices: 20 },
+    3 => {difficulty: 3, source: 20, choices: 20 }
+  }
+
   def create
     # artist & tracks, knows nothing of quiz
-    new_artist = Artist.new artist_attribs_from_params params
-
-    new_artist_tracks = []
-    params[:list].length.times.map do |i|
-      new_track = Track.new track_attribs_from_params params[:list][i.to_s]
-      if new_track.save != false
-        new_artist_tracks << new_track
-      end
+    if artist_created?(params[:id])
+      artist = Artist.find_by(itunes_id: params[:id])
+    else
+      artist = Artist.new(artist_attribs_from_params(params))
+      initialize_new_artist_tracks(artist, params[:list])
     end
 
-    new_artist.tracks = new_artist_tracks
-    new_artist.save!
+    #need to create logic to see what to do with th quiz, whether to return a quiz, or to create new quiz
+    if signed_in?
+      if artist_created?(params[:id])
+        if artist.quizzes.length > 0
+          quiz = artist.quizzes.last
+        else
+          quiz = create_quiz(artist, QUIZKEY[1])
+          artist.quizzes << quiz
+        end
+      end
+    else
+      quiz = create_quiz(artist, QUIZKEY[0])
+    end
 
-    quiz = create_first_quiz_for(new_artist)
-    quiz.save!
-
-    render :json => create_frontend_quiz(new_artist, new_artist.quizzes.last.id)
+    render :json => create_frontend_quiz(artist, quiz.id)
   end
 
   def artist_attribs_from_params params
@@ -34,7 +46,7 @@ class QuizController < ApplicationController
   end
 
   def stats
-    if session[:user_id]
+    if signed_in?
       user = User.find(session[:user_id])
       quiz_id = Question.find(params[:returnVals]['0'][:question].to_i).quiz_id
       answers = []
