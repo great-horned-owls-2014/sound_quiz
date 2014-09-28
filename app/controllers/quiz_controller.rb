@@ -1,5 +1,12 @@
 class QuizController < ApplicationController
 
+  QUIZKEY = {
+    0 => {difficulty: 0, source: 5, choices:  10},
+    1 => {difficulty: 1, source: 5, choices:  15 },
+    2 => {difficulty: 2, source: 10, choices: 20 },
+    3 => {difficulty: 3, source: 20, choices: 20 }
+  }
+
   def create
     # artist & tracks, knows nothing of quiz
     new_artist = Artist.new artist_attribs_from_params params
