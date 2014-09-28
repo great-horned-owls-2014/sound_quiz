@@ -1,5 +1,26 @@
 module ApplicationHelper
 
+  def signed_in?
+    session[:user_id] ? true : false
+  end
+
+  def artist_created?(artist_itunes_id)
+    Artist.find_by(itunes_id: artist_itunes_id) ? true : false
+  end
+
+  def initialize_new_artist_tracks(artist, songlist)
+    new_artist_tracks = []
+    songlist.length.times.map do |i|
+      new_track = Track.new(track_attribs_from_params(songlist[i.to_s]))
+      if new_track.save != false
+        new_artist_tracks << new_track
+      end
+    end
+
+    artist.tracks = new_artist_tracks
+    artist.save!
+  end
+
   def create_frontend_quiz(artist, quiz_id)
     quiz = {}
     quiz[:artist] = artist.name
@@ -24,37 +45,8 @@ module ApplicationHelper
     question_hash
   end
 
-  def signed_in?
-    session[:user_id] ? true : false
-  end
-
-  # def create_first_quiz_for artist
-  #   artist.quizzes = [ Quiz.new(difficulty_level: 1) ]
-
-  #    answer_tracks = artist.tracks.first(5)
-
-  #    while artist.quizzes.first.questions.length < 5
-  #      artist.quizzes.first.questions << Question.new(right_answer: answer_tracks.shift)
-  #    end
-
-  #    artist.quizzes.first.questions.each do |question|
-  #      choices = artist.tracks.first(10)
-  #      while question.wrong_choices.length < 3
-  #        potential_wrong_answer = choices.pop
-  #        if potential_wrong_answer != question.right_answer
-  #          question.wrong_choices << WrongChoice.new(track: potential_wrong_answer )
-  #        end
-  #      end
-  #    end
-
-  #    artist.quizzes.first
-  # end
-
 
   def create_quiz(artist, quiz_key_entry)
-    #Just create a quiz in here. Its not associated to any artist.
-    #If its difficulty 1 or more, associate and save it.
-
     new_quiz = Quiz.new(difficulty_level: quiz_key_entry[:difficulty])
       answer_tracks = artist.tracks.first(quiz_key_entry[:source])
       answer_tracks.shuffle!
@@ -82,6 +74,8 @@ module ApplicationHelper
     new_quiz.save!
     new_quiz
   end
+
+
 
 
 end
