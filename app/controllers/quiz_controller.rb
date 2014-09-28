@@ -22,9 +22,9 @@ class QuizController < ApplicationController
     new_artist.tracks = new_artist_tracks
     new_artist.save!
 
-    quiz = create_first_quiz_for(new_artist)
+    quiz = create_quiz(new_artist, QUIZKEY[0])
 
-    render :json => create_frontend_quiz(new_artist, new_artist.quizzes.last.id)
+    render :json => create_frontend_quiz(new_artist, quiz.id)
   end
 
   def artist_attribs_from_params params
