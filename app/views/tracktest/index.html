@@ -66,7 +66,7 @@
   // var names = ['Shiraj', 'Peter', 'Victor', 'Daniel']
   $('#artistsearchterm').autocomplete({
     // minLength: 3,
-    delay: 00,
+    delay: 500,
     source: 
       // calling autocomplete creates a request object containing the terms you input into the selector.
       // not sure what the response argument is
@@ -85,9 +85,9 @@
               // console.log( data.results );
               response($.map( data.results, function( item ) {
                 return {
-                    label: item.artistId,
-                    value: item.artistName,
-                    id: item.artistId 
+                    label: item.artistName,
+                    value: item.artistId,
+                    // id: item.artistId 
                 }
               }));
             },
