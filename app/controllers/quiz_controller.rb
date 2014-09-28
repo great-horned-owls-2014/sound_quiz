@@ -33,4 +33,34 @@ class QuizController < ApplicationController
     }
   end
 
+  def stats
+    session[:user_id] = 1
+    if session[:user_id]
+      user = User.find(session[:user_id])
+      quiz_id = Question.find(params[:returnVals]['0'][:question].to_i).quiz_id
+      answers = []
+      times = []
+
+      params[:returnVals].values.each do |x|
+
+        new_answer = UserAnswer.create(
+          question_id: x[:question].to_i,
+          track_id: x[:track_id].to_i,
+          response_time: x[:response_time].to_f
+        )
+
+        user.user_answers << new_answer
+        answers << new_answer
+
+        times << x[:response_time].to_f
+      end
+    end
+
+    new_record = TakenQuiz.create(quiz_id: quiz_id, time: times.reduce(:+), score: user.quiz_score(quiz_id, answers, times ) )
+    user.taken_quizzes << new_record
+
+    render :json => new_record.score
+
+  end
+
 end

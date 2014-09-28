@@ -136,12 +136,26 @@ function checkGameStatus(){
 
 function endGame(){
   $('#stats').show();
-  for(var i = 1; i< timeArray.length; i++){
-    $('#stats').append('<p>'+i+'-'+(timeArray[i]-timeArray[i-1])+'</p>');
+  $.ajax({
+    url: '/quiz/stats',
+    type: 'POST',
+    data: formatValues(),
+    success: function(response){
+      $('#score').append('<h1>'+response+'</h1>');
+    },
+    failure: function(response){
+      console.log(response);
+      console.log("failure");
+    }
+  });
+}
+
+function formatValues(){
+  var formattedValues = {'returnVals':{ }};
+  for(var i=0; i < answerArray.length; i++){
+    formattedValues['returnVals'][i] = { track_id: answerArray[i].choiceid, question: answerArray[i].questionid, response_time: (timeArray[i+1] - timeArray[i]) };
   }
-  for(i= 0; i< answerArray.length; i++){
-    $('#stats').append('<p>'+i+'-'+(answerArray[i].choiceid)+'</p>');
-  }
+  return formattedValues;
 }
 
 function playNextTrack(){
