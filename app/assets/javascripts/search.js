@@ -16,7 +16,7 @@ var answerArray = [];
 var numOfNonQuestions = 3;
 
 $(document).ready(function(){
-  $('form').on('submit', function(event){
+  $('#searchbar').on('submit', function(event){
     event.preventDefault();
     searchTerm = $('#searchterm').val();
 
