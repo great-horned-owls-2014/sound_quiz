@@ -56,13 +56,10 @@ class QuizController < ApplicationController
       end
     end
 
-    binding.pry
-    user.quiz_score(quiz_id, answers, times )
+    new_record = TakenQuiz.create(quiz_id: quiz_id, time: times.reduce(:+), score: user.quiz_score(quiz_id, answers, times ) )
+    user.taken_quizzes << new_record
 
-
-
-
-
+    render :json => new_record.score
 
   end
 

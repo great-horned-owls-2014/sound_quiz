@@ -136,19 +136,12 @@ function checkGameStatus(){
 
 function endGame(){
   $('#stats').show();
-  for(var i = 1; i< timeArray.length; i++){
-    $('#stats').append('<p>'+i+'-'+(timeArray[i]-timeArray[i-1])+'</p>');
-  }
-  for(i= 0; i< answerArray.length; i++){
-    $('#stats').append('<p>'+i+'-'+(answerArray[i].choiceid)+'</p>');
-  }
   $.ajax({
     url: '/quiz/stats',
     type: 'POST',
     data: formatValues(),
     success: function(response){
-      console.log(response);
-      console.log("success!");
+      $('#score').append('<h1>'+response+'</h1>');
     },
     failure: function(response){
       console.log(response);
