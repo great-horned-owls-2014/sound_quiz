@@ -5,6 +5,15 @@ Rails.application.routes.draw do
   resources :artists do
     get :autocomplete_artist_name, :on => :collection
   end
+
+  resources :sessions
+  get 'login' => "sessions#new", as: "login"
+  get 'logout' => "sessions#logout", as: "logout"
+  get 'signup' => "users#new", as: "signup"
+  resources :users
+
+  get 'users' => 'users#index', as: 'usersindex'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

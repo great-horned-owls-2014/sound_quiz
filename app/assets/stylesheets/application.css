@@ -13,3 +13,25 @@
  *= require_tree .
  *= require_self
  */
+
+.container{
+  margin-top: 5%;
+}
+
+.navbar {
+  width: 100%;
+  height: 5%;
+  color: white;
+  background-color: black;
+  position: fixed;
+  top: 0;
+}
+
+.navbar a{
+  text-decoration: none;
+  color: red;
+}
+
+.navbar li {
+  display: inline-block;
+}

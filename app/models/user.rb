@@ -1,24 +1,24 @@
+require 'bcrypt'
+
 class User < ActiveRecord::Base
+  # validates_format_of :email, :with => /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/
+  validates_uniqueness_of :email
+  validates_presence_of :username
+
   has_many :user_answers
   has_many :taken_quizzes
+  has_secure_password #takes care of password prescence validation
 
   def quiz_score (quiz_id, user_answers_arr, time_arr)
-
     time_elapsed_for_quiz = time_arr.reduce(:+)
-
     inverse_time_elapsed = 1.0 / time_elapsed_for_quiz
-
     raw_score = percentage_correct_for_current_quiz(quiz_id, user_answers_arr) * inverse_time_elapsed
-
     meaningful_score = (raw_score * 1000000000).to_i
-
   end
 
   def all_time_percentage_correct # returns percentage correct vs all questions ever taken
     total_attempts_ever = self.user_answers.count.to_f
-
     total_successful_attempts_ever = self.user_answers.joins(:question).where('user_answers.track_id = questions.track_id').count.to_f
-
     total_successful_attempts_ever / total_attempts_ever
   end
 
@@ -40,11 +40,5 @@ class User < ActiveRecord::Base
 
     total_successful_attempts_for_this_quiz / total_attempts_for_this_quiz
   end
-
 end
 
-#============
-# QUESTIONS
-#============
-
-# user_answers should have a boolean that says if it's correct or not.
