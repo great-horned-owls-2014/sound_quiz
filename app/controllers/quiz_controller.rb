@@ -17,7 +17,18 @@ class QuizController < ApplicationController
     end
 
     #need to create logic to see what to do with th quiz, whether to return a quiz, or to create new quiz
-    quiz = create_quiz(artist, QUIZKEY[0])
+    if signed_in?
+      if artist_created?(params[:id])
+        if artist.quizzes.length > 0
+          quiz = artist.quizzes.last
+        else
+          quiz = create_quiz(artist, QUIZKEY[1])
+          artist.quizzes << quiz
+        end
+      end
+    else
+      quiz = create_quiz(artist, QUIZKEY[0])
+    end
 
     render :json => create_frontend_quiz(artist, quiz.id)
   end
