@@ -1,0 +1,6 @@
+<ul>
+  <% @user.taken_quizzes.each do |takenquiz|  %>
+
+    <li><%= takenquiz.quiz.artist.name %> - Difficulty <%= takenquiz.quiz.difficulty_level %> - <%= takenquiz.score %></li>
+  <% end%>
+</ul>
