@@ -35,6 +35,10 @@ class UsersController < ApplicationController
     redirect_to root_url, notice: notice_string
   end
 
+  def show
+    @user = User.find(params[:id])
+  end
+
   def destroy
     @user = User.find(params[:id])
     @user.destroy
