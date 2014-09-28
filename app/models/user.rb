@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
   def quiz_score (quiz_id, user_answers_arr, time_arr)
 
-    time_elapsed_for_quiz = time_arr[-1] - time_arr[0]
+    time_elapsed_for_quiz = time_arr.reduce(:+)
 
     inverse_time_elapsed = 1.0 / time_elapsed_for_quiz
 

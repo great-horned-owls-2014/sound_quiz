@@ -34,25 +34,35 @@ class QuizController < ApplicationController
   end
 
   def stats
-    # puts
-    # puts "=" * 50
-    # puts params[:answerArray]
-    # puts "=" * 50
-    # puts
-
-    ## Have this route update user_answers.user_decision with the choices
-    ## Have this route also write the resulting score to a scores table. A user has many scores. A quiz has many scores. Scores table should have user_id, quiz_id, and score (integer).
     session[:user_id] = 1
-    user = User.find(session[:user_id])
-    params[:returnVals].values.each do |x|
-      user.user_answers << UserAnswer.create(
-        question_id: x[:question].to_i,
-        track_id: x[:track_id].to_i,
-        response_time: x[:response_time].to_f
-      )
+    if session[:user_id]
+      user = User.find(session[:user_id])
+      quiz_id = Question.find(params[:returnVals]['0'][:question].to_i).quiz_id
+      answers = []
+      times = []
+
+      params[:returnVals].values.each do |x|
+
+        new_answer = UserAnswer.create(
+          question_id: x[:question].to_i,
+          track_id: x[:track_id].to_i,
+          response_time: x[:response_time].to_f
+        )
+
+        user.user_answers << new_answer
+        answers << new_answer
+
+        times << x[:response_time].to_f
+      end
     end
 
     binding.pry
+    user.quiz_score(quiz_id, answers, times )
+
+
+
+
+
 
   end
 
