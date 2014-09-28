@@ -27,5 +27,10 @@
   </div>
 
 
+  <h2> Autocomplete Search for an Artist</h2>
+  <%= form_for @artist do |f| %>
+    <%= f.autocomplete_field :name, autocomplete_artist_name_artists_path, class: 'test' %>
+  <% end %>
+
   </body>
 </html>
