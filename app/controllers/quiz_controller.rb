@@ -34,7 +34,6 @@ class QuizController < ApplicationController
   end
 
   def stats
-    session[:user_id] = 1
     if session[:user_id]
       user = User.find(session[:user_id])
       quiz_id = Question.find(params[:returnVals]['0'][:question].to_i).quiz_id
