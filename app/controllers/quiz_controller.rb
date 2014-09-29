@@ -43,17 +43,7 @@ class QuizController < ApplicationController
     render :json => create_frontend_quiz(artist, quiz.id)
   end
 
-  def artist_attribs_from_params params
-    { name: params[:name], itunes_id: params[:id] }
-  end
 
-  def track_attribs_from_params track_from_params
-    {
-      preview_url: track_from_params["previewUrl"],
-      art_url: track_from_params["artworkUrl100"],
-      name: track_from_params["trackName"]
-    }
-  end
 
   def stats
     if signed_in?
