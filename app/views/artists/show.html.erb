@@ -1,5 +1,7 @@
 <h2><%= @artist.name.upcase %> LEADERBOARD</h2>
+
 <br>
+
 <table style="width:100%">
   <tr>
     <td> <h3>Trackmaster</h3> </td>
@@ -7,33 +9,12 @@
     <td> <h3># Quizzes Taken</h3> </td>
   </tr>
 
-
-
-
 <% @sorted_avg_scores.each do |user_info, avg_score| %>
-  <%= user_info[0] %>
   <tr>
     <td> <a href="/users/<%= user_info[0] %>"><%= user_info[1].upcase %></a> </td>
     <td> <%= avg_score.round %> </td>
-  <tr>
-<% end%>
+    <td> <%= TakenQuiz.where(["artist_id = ? and user_id = ?", @artist.id, user_info[0] ]).count %></td>
+  </tr>
+<% end %>
 
-
-
-
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
-<% @user_taken.each do |user_id, count| %>
-  <% user = User.find(user_id) %>
-  <tr>
-    <td> <a href="/users/<%= user_id %>"><%= user.username.upcase %></a> </td>
-    <td> <%= user.artist_score(@artist).round %> </td>
-    <td> <%= count %> </td>
-  <tr>
-<% end%>
 </table>
