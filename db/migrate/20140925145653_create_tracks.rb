@@ -5,7 +5,7 @@ class CreateTracks < ActiveRecord::Migration
       t.string :preview_url
       t.string :art_url
       t.belongs_to :artist
-
+      t.integer :itunes_track_id
       t.timestamps
     end
   end

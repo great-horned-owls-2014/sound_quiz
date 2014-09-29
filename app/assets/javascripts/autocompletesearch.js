@@ -31,7 +31,7 @@ $(document).ready(function(){
     filteredObject = { 'artworkUrl100': itunesObject.artworkUrl100,
                         'previewUrl': itunesObject.previewUrl,
                         'trackName': itunesObject.trackName,
-                        'trackdId': itunesObject.trackId
+                        'trackId': itunesObject.trackId
                       };
 
     return filteredObject;
@@ -89,6 +89,7 @@ $(document).ready(function(){
                 artistName: item.artistName
               }
               }));
+              document.querySelector("#ui-id-1").removeAttribute("style");
             },
             failure: function( data ) {
               console.log ('Ajax fail');

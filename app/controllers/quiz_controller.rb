@@ -51,7 +51,8 @@ class QuizController < ApplicationController
     {
       preview_url: track_from_params["previewUrl"],
       art_url: track_from_params["artworkUrl100"],
-      name: track_from_params["trackName"]
+      name: track_from_params["trackName"],
+      itunes_track_id: track_from_params["trackId"]
     }
   end
 
@@ -76,7 +77,7 @@ class QuizController < ApplicationController
         times << x[:response_time].to_f
       end
     end
-    
+
     new_record = TakenQuiz.create(quiz_id: quiz_id, time: times.reduce(:+), score: user.quiz_score(quiz_id, answers, times), artist_id: Quiz.find(quiz_id).artist.id)
     user.taken_quizzes << new_record
 
