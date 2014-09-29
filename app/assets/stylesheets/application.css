@@ -153,4 +153,10 @@ display: none;
 text-align: center;
 }
 
+@media (max-width: 500px) {
+  .logo img {
+    display: none;
+  }
+}
+
 
