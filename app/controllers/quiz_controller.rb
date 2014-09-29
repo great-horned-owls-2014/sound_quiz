@@ -78,18 +78,26 @@ class QuizController < ApplicationController
       end
     end
 
-    #times is empty if you are not signed in; kicks back an error that #reduce can't be performed on a nil class
-    new_record = TakenQuiz.create(quiz_id: quiz_id, time: times.reduce(:+), score: user.quiz_score(quiz_id, answers, times), artist_id: Quiz.find(quiz_id).artist.id)
+    quiz_artist_id = Quiz.find(quiz_id).artist.id
+    new_record = TakenQuiz.create(quiz_id: quiz_id, time: times.reduce(:+), score: user.quiz_score(quiz_id, answers, times), artist_id: quiz_artist_id)
+
     user.taken_quizzes << new_record
 
-    quiz_stats = {
+    itunes_ids = []
+
+    Quiz.find(quiz_id).questions.each do |question|
+      itunes_ids << question.right_answer.itunes_track_id
+    end    
+
+    @quiz_stats = {
+      artist_id: quiz_artist_id,
       score: new_record.score,
-      right_answers: user.number_correct_for_current_quiz(quiz_id, answers)
+      num_of_correct: user.number_correct_for_current_quiz(quiz_id, answers),
+      time: times.reduce(:+),
+      itunes_track_ids: itunes_ids
     }
 
-    # return all quiz stats once front end js is synced
-
-    render :json => quiz_stats[:score]
+    render "stats", locals: {quiz_stats: @quiz_stats}
 
   end
 

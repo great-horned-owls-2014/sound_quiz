@@ -1,7 +1,28 @@
-Scores for <%=@user.username%>:
-<ul>
+
+<div class="userprofile">
+	<h2><%=@user.username%>'s Page</h2>
+
+	<% if @user.id == session[:user_id] %>
+		<a href="/users/<=%@user.id%>/edit">Edit Info</a>
+	<% end %>
+
+	<br>
+	<table style="width:50%">
+  <tr>
+    <td>Artist</td>
+    <td>Score</td> 
+    <td># Taken</td>
+  </tr>
   <% @artist_taken.each do |artist_id, count| %>
-  	<% artist = Artist.find(artist_id) %>
-    <li><%= artist.name %> - Score: <%= @user.artist_score(artist).round %> - # Taken: - <%= count %></li>
+  	<tr>
+	  	<% artist = Artist.find(artist_id) %>
+		    <td><a href="/artists/<%=artist_id%>"><%= artist.name %></a></td>
+		    <td><%= @user.artist_score(artist).round %></td>
+		    <td><%= count %></td>
+  	</tr>
   <% end%>
-</ul>
+</table>
+	<ul>
+	
+	</ul>
+</div>
