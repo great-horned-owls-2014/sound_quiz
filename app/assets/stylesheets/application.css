@@ -23,7 +23,6 @@
  }
 .navbar {
   border-top: 5px solid black;
-  border-bottom: 5px solid black;
   width: 100%;
   height: 90px;
   line-height: 94px;
@@ -38,7 +37,13 @@
 .navbar ul{
   margin-left: 10px;
 }
-
+button{
+  padding: 10px;
+  background-color: red;
+  border: 1px solid red;
+  color: orange;
+  text-decoration: none;
+}
 .navbar li a{
   font-size: 1.3em;
   text-decoration: none;
