@@ -16,6 +16,7 @@
 
 .container{
   margin-top: 5%;
+  text-align: center;
 }
 
 .navbar {
@@ -35,3 +36,4 @@
 .navbar li {
   display: inline-block;
 }
+
