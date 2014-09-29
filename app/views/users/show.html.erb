@@ -1,6 +1,7 @@
+Scores for <%=@user.username%>:
 <ul>
-  <% @user.taken_quizzes.each do |takenquiz|  %>
-
-    <li><%= takenquiz.quiz.artist.name %> - Difficulty <%= takenquiz.quiz.difficulty_level %> - <%= takenquiz.score %></li>
+  <% @artist_taken.each do |artist_id, count| %>
+  	<% artist = Artist.find(artist_id) %>
+    <li><%= artist.name %> - Score: <%= @user.artist_score(artist).round %> - # Taken: - <%= count %></li>
   <% end%>
 </ul>
