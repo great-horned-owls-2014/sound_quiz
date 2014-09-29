@@ -1,7 +1,13 @@
-Scores for <%=@artist.name%>:
-<ul>
-  <% @user_taken.each do |user_id, count| %>
-  	<% user = User.find(user_id) %>
-    <li><%= user.username %> - Score: <%= user.artist_score(@artist).round %> - # Taken: - <%= count %></li>
-  <% end%>
-</ul>
+<h2><%= @artist.name.upcase %> LEADERBOARD</h2>
+
+<% @user_taken.each do |user_id, count| %>
+  <br>
+	<div>
+    <% user = User.find(user_id) %>
+    <a href="/users/<%= user_id %>"><%= user.username.upcase %></a>
+    <p> Average Score:  <%= user.artist_score(@artist).round %></p>
+    <p> # Quizzes Taken:  <%= count %></p>
+  </div>
+  <br>
+<% end%>
+
