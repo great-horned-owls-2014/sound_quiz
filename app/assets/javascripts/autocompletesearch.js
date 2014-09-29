@@ -30,7 +30,8 @@ $(document).ready(function(){
   function createSongObject(itunesObject){
     filteredObject = { 'artworkUrl100': itunesObject.artworkUrl100,
                         'previewUrl': itunesObject.previewUrl,
-                        'trackName': itunesObject.trackName};
+                        'trackName': itunesObject.trackName,
+                        'trackdId': itunesObject.trackId};
     return filteredObject;
   }
 
@@ -94,12 +95,16 @@ $(document).ready(function(){
 
     select: function(event, ui){
       event.preventDefault();
+      // console.log(this);
       $.ajax({
         url: songSearchUrl + artistName,
         type: 'GET',
         dataType: 'jsonp'
       })
       .done(function(songObject){
+        console.log(artistName);
+        console.log(artistId);
+        console.log(selectedArtistSongList);
         selectedArtistSongList = createSongList(songObject);
         dbSend(artistName, artistId, selectedArtistSongList);
       })
