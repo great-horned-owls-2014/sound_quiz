@@ -78,6 +78,7 @@ class QuizController < ApplicationController
       end
     end
 
+    #times is empty if you are not signed in; kicks back an error that #reduce can't be performed on a nil class
     new_record = TakenQuiz.create(quiz_id: quiz_id, time: times.reduce(:+), score: user.quiz_score(quiz_id, answers, times), artist_id: Quiz.find(quiz_id).artist.id)
     user.taken_quizzes << new_record
 
