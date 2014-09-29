@@ -37,6 +37,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @artist_taken = Hash.new(0)
+    @user.taken_quizzes.each { |takenquiz| @artist_taken[takenquiz.artist.id] += 1}
   end
 
   def destroy
