@@ -11,10 +11,10 @@ $(document).ready(function(){
   //invariants
   var songSearchUrl = 'https://itunes.apple.com/search?attribute=allArtistTerm&entity=song&limit=100&term=';
   var artistSearchUrl= 'https://itunes.apple.com/search?entity=musicArtist&limit=5&term=';
-  
+
   //results from iTunes APIs
   var artistName = '';
-  var artistId = '';
+  var artistId;
   var artistObjectResults = null;
 
   function createSongList(artistObjectResults){
@@ -77,15 +77,17 @@ $(document).ready(function(){
             dataType: "jsonp",
             data: {term: request.term},
             success: function( artistObject ) {
+              console.log(artistObject)
               artistObjectResults = artistObject.results
               response($.map( artistObjectResults, function( item ) {
-                // artistObject = item
-                artistName = item.artistName;
-                artistId = item.artistId;
-                var artistLabel = item.artistName + "     / GENRE: " + item.primaryGenreName;
-                return {
-                    label: artistLabel
-                }
+
+              artistLabel = item.artistName + "     / GENRE: " + item.primaryGenreName;
+              //var artistLabel = item.artistName + "     / GENRE: " + item.primaryGenreName;
+              return {
+                label: artistLabel,
+                artistId: item.artistId,
+                artistName: item.artistName
+              }
               }));
             },
             failure: function( data ) {
@@ -97,17 +99,14 @@ $(document).ready(function(){
 
     select: function(event, ui){
       event.preventDefault();
+      artistId = ui.item.artistId;
+      artistName = ui.item.artistName;
       $.ajax({
         url: songSearchUrl + artistName,
         type: 'GET',
         dataType: 'jsonp'
       })
       .done(function(songObject){
-
-        console.log(artistName);
-        console.log(artistId);
-        console.log(selectedArtistSongList);
-
         selectedArtistSongList = createSongList(songObject);
         dbSend(artistName, artistId, selectedArtistSongList);
       })
