@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20140927222831) do
     t.string   "preview_url"
     t.string   "art_url"
     t.integer  "artist_id"
+    t.integer  "itunes_track_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
