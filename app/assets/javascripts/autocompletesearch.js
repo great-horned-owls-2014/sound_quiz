@@ -89,6 +89,7 @@ $(document).ready(function(){
                 artistName: item.artistName
               }
               }));
+              document.querySelector("#ui-id-1").removeAttribute("style");
             },
             failure: function( data ) {
               console.log ('Ajax fail');

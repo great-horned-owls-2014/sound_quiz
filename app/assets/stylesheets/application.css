@@ -60,11 +60,13 @@ button:hover{
   opacity: 1;
   color: #FFF;
 }
-.logo{
+.logo img{
   padding-top: 5px;
   padding-left: 8px;
   position: fixed;
   left: 0;
+  height: 50px;
+  width: 50px;
 }
 #search-button{
   height: 30px;
@@ -86,7 +88,7 @@ button:hover{
 }
 .navbar ul{
   float: right;
-  margin-right: 4px;
+  margin-right: 10px;
 }
 .navbar li a{
   font-size: 1.3em;
@@ -95,7 +97,8 @@ button:hover{
   background-color: #C50;
   border-radius: 5px;
   padding: 2px 15px;
-  margin: 0 0px;
+  margin: 0;
+  margin-left: 5px;
 }
 .navbar li a:hover{
   color: white;
@@ -112,6 +115,7 @@ button:hover{
 
 input[type=text]
 {
+    box-sizing: border-box;
     font-family: 'Fira Sans', sans-serif;
     background-color: #eee;
     padding-left: 10px;
@@ -124,4 +128,27 @@ input[type=text]
     margin: auto;
     display: block;
 }
+#ui-id-1 {
+    box-sizing: border-box;
+    font-family: 'Fira Sans', sans-serif;
+    background-color: #eee;
+    font-size: 1em;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 20px;
+    border: solid 1px black;
+    border-radius: 5px;
+}
+#ui-id-1 li {
+  list-style: none;
+  padding-left: 10px;
+}
+#ui-id-1 li:hover {
+  background-color: #666;
+}
+.ui-helper-hidden-accessible {
+display: none;
+text-align: center;
+}
+
 
