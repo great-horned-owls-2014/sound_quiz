@@ -4,13 +4,11 @@
       <li>Hi, <%= User.find(session[:user_id]).username %></a></li>
   		<li><a href="/users/<%=session[:user_id]%>/edit">Edit Info</a></li>
       <li><a href="/users/<%=session[:user_id]%>">View Scores</a></li>
-      <li><a href="/logout">Log Out</a></li>
+      <li><a href="/logout">exit</a></li>
   	<% else %>
-      <li><a href="/login">Log In</a></li>
-	  	<li><a href="/signup">Sign Up</a></li>
+      <li><a href="/login">login</a></li>
+	  	<li><a href="/signup">signup</a></li>
   	<% end %>
-  	<li>
-  		Leaderboards
-  	</li>
+  	<li><a href="/login">leaderboards</a></li>
   </ul>
 </div>
