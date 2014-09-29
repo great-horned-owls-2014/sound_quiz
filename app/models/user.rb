@@ -34,10 +34,7 @@ class User < ActiveRecord::Base
     total_successful_attempts_ever / total_attempts_ever
   end
 
-  private
-
-  def percentage_correct_for_current_quiz (quiz_id, user_answers_arr)
-    total_attempts_for_this_quiz = 5.0
+  def number_correct_for_current_quiz (quiz_id, user_answers_arr)
     total_successful_attempts_for_this_quiz = 0.0
     quiz = Quiz.find(quiz_id)
     quiz_questions = quiz.questions
