@@ -76,14 +76,16 @@ $(document).ready(function(){
             data: {term: request.term},
             success: function( artistObject ) {
               artistObjectResults = artistObject.results
-              response($.map( artistObjectResults, function( item ) {
-                artistName = item.artistName;
-                artistId = item.artistId;
-                var artistLabel = item.artistName + "     / GENRE: " + item.primaryGenreName;
-                return {
-                    label: artistLabel
-                }
-              }));
+              response(
+                $.map( artistObjectResults, 
+                  function( item ) {
+                    artistName = item.artistName;
+                    artistId = item.artistId;
+                    var artistLabel = item.artistName + "     / GENRE: " + item.primaryGenreName;
+                    return { label: artistLabel }
+                  })
+                );
+              document.querySelector("#ui-id-1").removeAttribute("style");
             },
             failure: function( data ) {
               console.log ('Ajax fail');
