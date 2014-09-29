@@ -31,7 +31,7 @@ $(document).ready(function(){
     filteredObject = { 'artworkUrl100': itunesObject.artworkUrl100,
                         'previewUrl': itunesObject.previewUrl,
                         'trackName': itunesObject.trackName,
-                        'trackdId': itunesObject.trackId
+                        'trackId': itunesObject.trackId
                       };
 
     return filteredObject;
