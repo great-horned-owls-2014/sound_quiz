@@ -1,10 +1,5 @@
-// https://itunes.apple.com/search?attribute=allArtistTerm&term=massive+attack
-var songSearchUrl = 'https://itunes.apple.com/search?attribute=allArtistTerm&entity=song&limit=100&term=';
-var artistSearchUrl= 'https://itunes.apple.com/search?entity=musicArtist&limit=5&term=';
+
 var testResponse;
-var artistName;
-var artistId;
-var songList = [];
 var numOfQuestions = 5;
 var gameover = false;
 var currentQuestion = 0;
@@ -16,96 +11,6 @@ var answerArray = [];
 var numOfNonQuestions = 3;
 
 $(document).ready(function(){
-  $('#searchbar').on('submit', function(event){
-    event.preventDefault();
-    searchTerm = $('#searchterm').val();
-
-    $.ajax({
-      url: artistSearchUrl+searchTerm,
-      type: 'GET',
-      dataType: 'jsonp',
-      success: function(response){
-        appendArtists(response);
-      },
-      failure: function(response){
-        console.log('Fail');
-      }
-    });
-  });
-
-  function appendArtists(artistObject){
-    for(var i=0; i<artistObject['results'].length; i++){
-      $('#artist-list ul').append( createArtistListEntry(artistObject['results'][i] ));
-    }
-  }
-
-  function createArtistListEntry(artistObj){
-    return '<li><a href="'+ artistObj.artistLinkUrl +'" data-artistid="'+artistObj.artistId+'">'+artistObj.artistName +'</a></li>';
-  }
-
-  $('#artist-list').on('click', 'a', function(event){
-
-    event.preventDefault();
-    artistId = $(this).data('artistid');
-    artistName = $(this).text();
-
-    $.ajax({
-      url: songSearchUrl + artistName,
-      type: 'GET',
-      dataType: 'jsonp',
-      success: function(response){
-        songList = createSongList(response);
-        dbSend(artistName, artistId, songList);
-      },
-       failure: function(response){
-        console.log('Fail');
-      }
-    });
-  });
-
-  function createSongList(artistObject){
-    songArray = [];
-    for(var i =0; i< artistObject['results'].length; i++){
-      if (artistId === artistObject['results'][i].artistId) {
-        songArray.push(createSongObject( artistObject['results'][i] ));
-      }
-    }
-    return songArray;
-  }
-
-  function createSongObject(itunesObject){
-    filteredObject = { 'artworkUrl100': itunesObject.artworkUrl100,
-                        'previewUrl': itunesObject.previewUrl,
-                        'trackName': itunesObject.trackName};
-    return filteredObject;
-  }
-
-  function dbSend(artistName, artistId, songArray){
-    $.ajax({
-      url: '/quiz/create',
-      type: 'POST',
-      data: {name: artistName, id: artistId, list: songArray},
-      success: function(response){
-
-        quiz = scrubQuestionChoices(response);
-        initializeGame();
-      },
-       failure: function(response){
-        console.log('Fail');
-      }
-    });
-  }
-
-  function scrubQuestionChoices(quiz){
-    for(var i=1; i <= (Object.keys(quiz).length - numOfNonQuestions); i++){
-      for ( var j=0; j < quiz['question_'+i]['choices'].length; j++){
-        delete (quiz['question_'+i]['choices'][j].preview_url);
-        delete (quiz['question_'+i]['choices'][j].created_at);
-        delete (quiz['question_'+i]['choices'][j].updated_at);
-      }
-    }
-    return quiz;
-  }
 
   //start and play the game
   $('button#start').on('click', function(event){
@@ -114,7 +19,6 @@ $(document).ready(function(){
     showNext.call(this);
     playNextTrack.call(this);
   });
-
   $('body').on('click', ".answer-button", function(event){
     recordTimeTaken();
     recordUserAnswer.call(this);
@@ -179,7 +83,7 @@ function recordUserAnswer(){
 }
 
 function initializeGame(){
-  document.querySelector('#artist-section').style.display = 'none';
+  document.querySelector('#artist-search').style.display = 'none';
   document.querySelector('#game-section').style.display = 'inherit';
   for(var i=1; i <= (Object.keys(quiz).length - numOfNonQuestions); i++){
     $('#game-section').append(generateQuestionDiv(quiz['question_'+i]));
@@ -205,5 +109,3 @@ function songPlayer(songUrl){
   embedString = '<audio controls preload="auto" style="display:none;"><source src="'+songUrl+'" type="audio/mp4"></audio>';
   return embedString;
 }
-
-
