@@ -47,7 +47,19 @@ class User < ActiveRecord::Base
       end
     end
 
-    total_successful_attempts_for_this_quiz / total_attempts_for_this_quiz
+    total_successful_attempts_for_this_quiz
   end
+
+  def artist_score(artist)
+    scores_array = []
+    self.taken_quizzes.each do |takenquiz|
+      if takenquiz.quiz.artist == artist
+        scores_array << takenquiz.score
+      end
+    end
+
+    average = scores_array.reduce(:+).to_f / scores_array.size
+  end
+
 end
 
