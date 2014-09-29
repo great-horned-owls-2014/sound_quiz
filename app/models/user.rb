@@ -10,10 +10,22 @@ class User < ActiveRecord::Base
   has_secure_password #takes care of password prescence validation
 
   def quiz_score (quiz_id, user_answers_arr, time_arr)
+
+    difficulty = Quiz.find(quiz_id).difficulty_level
+
+    if difficulty == 1
+      multiplier = 1
+    elsif difficulty == 2
+      multiplier = 1.5
+    else
+      multiplier = 2.5
+    end
+
     time_elapsed_for_quiz = time_arr.reduce(:+)
     inverse_time_elapsed = 1.0 / time_elapsed_for_quiz
-    raw_score = percentage_correct_for_current_quiz(quiz_id, user_answers_arr) * inverse_time_elapsed
-    meaningful_score = (raw_score * 1000000000).to_i
+    raw_score = number_correct_for_current_quiz(quiz_id, user_answers_arr) * inverse_time_elapsed
+
+    meaningful_score = (raw_score * 1000000000 * multiplier).to_i
   end
 
   def all_time_percentage_correct # returns percentage correct vs all questions ever taken
