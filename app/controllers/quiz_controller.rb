@@ -76,11 +76,18 @@ class QuizController < ApplicationController
         times << x[:response_time].to_f
       end
     end
-#NEED TO ADD ARTIST ID IN HERE
+    
     new_record = TakenQuiz.create(quiz_id: quiz_id, time: times.reduce(:+), score: user.quiz_score(quiz_id, answers, times), artist_id: Quiz.find(quiz_id).artist.id)
     user.taken_quizzes << new_record
 
-    render :json => new_record.score
+    quiz_stats = {
+      score: new_record.score,
+      right_answers: user.number_correct_for_current_quiz(quiz_id, answers)
+    }
+
+    # return all quiz stats once front end js is synced
+
+    render :json => quiz_stats[:score]
 
   end
 
