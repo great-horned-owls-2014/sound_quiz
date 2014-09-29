@@ -23,7 +23,6 @@
  }
 .navbar {
   border-top: 5px solid black;
-  border-bottom: 5px solid black;
   width: 100%;
   height: 90px;
   line-height: 94px;
@@ -38,7 +37,18 @@
 .navbar ul{
   margin-left: 10px;
 }
-
+button{
+  padding: 8px;
+  background-color: red;
+  border: 2px solid red;
+  color: white;
+  text-decoration: none;
+  font-size: 1em;
+  border-radius: 5px;
+  height:35px;
+  margin: 0 auto;
+  margin-top:10px;
+}
 .navbar li a{
   font-size: 1.3em;
   text-decoration: none;
@@ -55,4 +65,14 @@
 }
 .navbar li {
   display: inline-block;
+}
+input[type=text]
+{
+    background-color: #eee;
+    border:solid 3px #300c34;
+    border-radius: 5px;
+    color: #979797;
+    height: 35px;
+    width: 60%;
+    margin: 0 auto;
 }
