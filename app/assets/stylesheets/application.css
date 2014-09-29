@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
  *{
   margin:0;
   padding:0;
@@ -21,6 +22,7 @@
   font-family: 'Fira Sans', sans-serif;
   /*font-family: 'Lato', sans-serif;*/
  }
+
 .navbar {
   border-top: 5px solid black;
   width: 100%;
@@ -66,6 +68,7 @@ button{
 .navbar li {
   display: inline-block;
 }
+
 input[type=text]
 {
     background-color: #eee;
@@ -76,3 +79,4 @@ input[type=text]
     width: 60%;
     margin: 0 auto;
 }
+
