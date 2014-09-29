@@ -1,12 +1,12 @@
 <div class="navbar">
 	<ul>
   	<% if session[:user_id] %>
-      <li><a href="/"><img src="" alt="home"></a></li>
+      <span class="logo"><a href="/" title="home"><%= image_tag "logo_tmt.png" %></a></span>
       <li><a href="/users/<%=session[:user_id]%>">profile</a></li>
       <li><a href="/login">hi-scores</a></li>
       <li><a href="/logout">exit</a></li>
     <% else %>
-
+      <span class="logo"><a href="/" title="home"><%= image_tag "logo_tmt.png" %></a></span>
       <li><a href="/login">login</a></li>
       <li><a href="/signup">signup</a></li>
       <li><a href="/login">hi-scores</a></li>

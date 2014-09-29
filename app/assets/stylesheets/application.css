@@ -32,7 +32,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  box-shadow: 0 5px 10px 4px rgba(0,0,0,0.5);
+  box-shadow: 0 5px 10px 4px rgba(0,0,0,0.3);
 }
 button{
   padding: 0 10px;
@@ -53,10 +53,18 @@ button:hover{
   border: 2px solid #A00;
 }
 .answer-button{
-  opacity: 0.5;
+  opacity: 0.8;
+  color: #DDD;
 }
 .answer-button:hover{
   opacity: 1;
+  color: #FFF;
+}
+.logo{
+  padding-top: 5px;
+  padding-left: 8px;
+  position: fixed;
+  left: 0;
 }
 #search-button{
   height: 30px;
@@ -74,6 +82,7 @@ button:hover{
   border-radius: 0;
   height: 70px;
   border: 0;
+  box-shadow: 0 0 6px 1px rgba(0,0,0,0.5);
 }
 .navbar ul{
   float: right;
@@ -111,7 +120,7 @@ input[type=text]
     border-radius: 5px;
     color: #979797;
     height: 35px;
-    width: 60%;
+    width: 100%;
     margin: auto;
     display: block;
 }
