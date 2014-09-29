@@ -11,4 +11,5 @@
 			<li data-track-id="<%=id%>"><%=id%></li>
 		<% end %>
 	</ul>
+	<h3>Check out <a href = "/artists/<%=quiz_stats[:artist_id]%>"><%=Artist.find(quiz_stats[:artist_id]).name%></a></h3>
 </div>
