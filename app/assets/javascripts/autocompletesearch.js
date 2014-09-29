@@ -76,7 +76,6 @@ $(document).ready(function(){
             success: function( artistObject ) {
               artistObjectResults = artistObject.results
               response($.map( artistObjectResults, function( item ) {
-                // artistObject = item
                 artistName = item.artistName;
                 artistId = item.artistId;
                 var artistLabel = item.artistName + "     / GENRE: " + item.primaryGenreName;
@@ -106,7 +105,6 @@ $(document).ready(function(){
       .fail(function(failResponse){
         console.log("Ajax failed. Here was the response from the server: " + failResponse);
       })
-    }
-
+    },
   });
 })
