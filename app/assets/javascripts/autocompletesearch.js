@@ -69,6 +69,7 @@ $(document).ready(function(){
       // not sure what the response argument is
     source: function(request, response) {
         var artistSearchTerms = $('#artistsearchterm').val();
+        document.querySelector('img').style.display = 'none';
         $.ajax({
             url: artistSearchUrl + artistSearchTerms,
             dataType: "jsonp",
