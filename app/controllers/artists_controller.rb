@@ -17,6 +17,8 @@ class ArtistsController < ApplicationController
   def first_quiz
     @artist = Artist.find(params[:id])
     @quiz = @artist.quizzes.first
+    # @quiz here might be nil b/c if an anonymous user searches an artist not in the db, our app will populate our db with the artist, its tracks, but not with a quiz. So, even if the artist exists, it doesn't mean it has any quizzes.
+    # If a signed_in user searches an artist not in the db, quizzes will be generated and thus, #quizzes is NOT nil.
     render :json => create_frontend_quiz(@artist, @quiz.id)
   end
 end
