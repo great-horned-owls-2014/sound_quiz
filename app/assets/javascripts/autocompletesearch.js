@@ -43,11 +43,12 @@ $(document).ready(function(){
       type: 'POST',
       data: {name: artistName, id: artistId, list: songArray},
       success: function(response){
-
+        $('#loadingscreen').slideUp(1000);
         quiz = scrubQuestionChoices(response);
         initializeGame();
       },
        failure: function(response){
+       $('#loadingscreen').slideUp(1000);
         console.log('Fail');
       }
     });
@@ -77,7 +78,6 @@ $(document).ready(function(){
             dataType: "jsonp",
             data: {term: request.term},
             success: function( artistObject ) {
-              console.log(artistObject)
               artistObjectResults = artistObject.results
               response($.map( artistObjectResults, function( item ) {
 
