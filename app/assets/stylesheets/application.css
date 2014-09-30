@@ -233,7 +233,11 @@ text-align: center;
   .artist_name{
     width:100%;
   }
+  .nav-caption{
+    display: none;
+  }
 }
+
 
 
 
