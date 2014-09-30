@@ -1,0 +1,55 @@
+<div id="artist-section">
+  <% if !session[:user_id] %>
+    <h2>Enter An Artist Name To Start A Practice Quiz</h2>
+  <% else %>
+    <h2>Enter An Artist Name To Start A Competitve Quiz</h2>
+  <% end %>
+
+  <div id="artist-search">
+    <form action="https://itunes.apple.com/search">
+      <input type="text"  placeholder="Enter an artist!" name="term" id="artistsearchterm">
+    </form>
+
+    <div id="artist-list">
+      <ul>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div id="game-section" style="display:none">
+
+<!--   <div id="stats" style="display:none">
+    Stats
+    <div id="score">
+    </div>
+  </div> -->
+  <div id="start-game">
+    <button id="start">
+      <span class="fa-stack fa-lg">
+      <i class="fa fa-circle-thin fa-stack-2x "></i>
+      <i class="fa fa-play fa-stack-1x "></i>
+      </span>
+    </button>
+  </div>
+</div>
+
+<div id="loadingscreen">
+  <img src="711.gif">
+</div>
+
+<div class="practice-quizzes">
+  <h3>Or Take These Popular Artist Quizzes</h3>
+  <ul>
+    <li class="practice-quiz"><a href="#"><img src="http://1.bp.blogspot.com/--QvOPsG5VEo/TcLshUE3DaI/AAAAAAAADIU/Mti4Vd_7pVE/s1600/rare%252520beatles%252520t%252520shirt%252520goes%252520on%252520sale%252520on%252520ebay_2591_800521235_0_0_7014392_300.jpg" alt=""></a></li>
+    <li class="practice-quiz"><a href="#"><img src="http://theversed.com/files/2012/03/Notorious-BIG.jpg"></a></li>
+    <li class="practice-quiz"><a href="#"><img src="http://images.contactmusic.com/images/feature-images/pinkfloyd-darksideofthemoon.jpg"></a></li>
+    <li class="practice-quiz"><a href="#"><img src="http://cdn.sonicomusica.com/artists/m/michael-jackson/michael-jackson-5.jpg"></a></li>
+    <li class="practice-quiz"><a href="#"><img src="http://entertainmentaroundtheworld.files.wordpress.com/2012/02/weird-al-yankovic-300x300.jpg"></a></li>
+    <li class="practice-quiz"><a href="#"><img src="http://www.thetribeonline.com/wp-content/uploads/2011/04/Daft-Punk1.jpg"></a></li>
+    <li class="practice-quiz"><a href="#"><img src="http://fashionjunqui.files.wordpress.com/2012/04/madonna-80s1.jpg?w=490"></a></li>
+    <li class="practice-quiz"><a href="#"><img src="http://www.music.vt.edu/musicdictionary/appendix/composers/B/images/LudwigvanBeethoven.jpg"></a></li>
+  </ul>
+</div>
+
+

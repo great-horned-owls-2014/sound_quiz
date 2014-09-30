@@ -140,6 +140,9 @@ input[type=text], input[type=password]{
 }
 #ui-id-1 {
     box-sizing: border-box;
+    position: absolute;
+    top: 170px;
+    left: 15%;
     font-family: 'Lato', sans-serif;
     background-color: #eee;
     font-size: 1em;
