@@ -83,8 +83,8 @@ function recordUserAnswer(){
 }
 
 function initializeGame(){
-  document.querySelector('#artist-search').style.display = 'none';
-  document.querySelector('#game-section').style.display = 'inherit';
+  $('#artist-search').css('display', 'none');
+  $('#game-section').css('display', 'inherit');
   for(var i=1; i <= (Object.keys(quiz).length - numOfNonQuestions); i++){
     $('#game-section').append(generateQuestionDiv(quiz['question_'+i]));
   }
