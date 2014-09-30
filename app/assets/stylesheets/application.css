@@ -151,4 +151,11 @@ display: none;
 text-align: center;
 }
 
+div#game-section {
+  display:none;
+}
+
+div#stats {
+  display:none;
+}
 
