@@ -9,7 +9,7 @@ $(document).ready(function(){
 	     dataType: 'jsonp',
 	     success: function(response){
 	     	itunesObject=response['results'][0]
-	      element.innerHTML = '<a href="'+itunesObject.trackViewUrl+'">'+itunesObject.trackName+'</a>';
+	      element.innerHTML = '<a target = "_blank" href="'+itunesObject.trackViewUrl+'">'+itunesObject.trackName+'</a>';
 	     },
 	     failure: function(response){
 	       console.log(response);

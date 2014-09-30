@@ -1,14 +1,12 @@
-<h1>Login</h1>
-
+<div class="login-form">
 <%= form_tag sessions_path do %>
   <p>
-    <%= label_tag :email %><br>
-    <%= text_field_tag :email, params[:email] %>
+    <%= text_field_tag :email, params[:email], placeholder: "email" %>
   </p>
 
   <p>
-    <%= label_tag :password %><br>
-    <%= password_field_tag :password %>
+    <%= password_field_tag :password, nil, placeholder: "password" %>
   </p>
     <%= button_tag "login" %>
 <% end %>
+</div>

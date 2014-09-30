@@ -1,4 +1,3 @@
-
 var testResponse;
 var numOfQuestions = 5;
 var gameover = false;
@@ -46,11 +45,10 @@ function endGame(){
     type: 'POST',
     data: formatValues(),
     success: function(response){
-      
       $('#loadingscreen').slideUp(1000);
       
       setTimeout(function (){ 
-        $('#score').append('<h1>'+response+'</h1>');
+        $('#score').append(response);
         $('#score').show() 
       },1000);
       

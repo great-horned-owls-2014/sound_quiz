@@ -1,28 +1,28 @@
 
 <div class="userprofile">
-	<h2><%=@user.username%>'s Page</h2>
+	<h2><%=@user.username%>'s stats</h2>
 
 	<% if @user.id == session[:user_id] %>
-		<a href="/users/<=%@user.id%>/edit">Edit Info</a>
+		<a href="/users/<%= @user.id %>/edit">edit</a>
 	<% end %>
 
 	<br>
-	<table style="width:50%">
-  <tr>
-    <td>Artist</td>
-    <td>Score</td> 
-    <td># Taken</td>
+	<table>
+  <tr class="table-headings">
+    <td>artist</td>
+    <td>score</td>
+    <td>taken</td>
   </tr>
   <% @artist_taken.each do |artist_id, count| %>
-  	<tr>
+  	<tr class="table-row">
 	  	<% artist = Artist.find(artist_id) %>
 		    <td><a href="/artists/<%=artist_id%>"><%= artist.name %></a></td>
 		    <td><%= @user.artist_score(artist).round %></td>
-		    <td><%= count %></td>
+		    <td class="taken-count"><%= count %></td>
   	</tr>
   <% end%>
 </table>
 	<ul>
-	
+
 	</ul>
 </div>
