@@ -1,5 +1,11 @@
 <div id="game-section" >
 
+  <% if @artist %>
+    <center>
+      <h2><%= @artist.name %> Quiz<h2>
+    </center>
+  <% end %>
+
   <div id="stats">
     Stats
     <div id="score">

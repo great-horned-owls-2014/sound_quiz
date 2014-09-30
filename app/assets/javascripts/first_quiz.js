@@ -9,6 +9,7 @@ $(document).ready(function(){
           url: '/artists/' + artistId + '/first_quiz',
           type: 'GET',
           success: function(response){
+            $('.artist-leaderboard').hide();
             alert('Success! Something else wrong?');
             quiz = scrubQuestionChoices(response);
             initializeGame();
