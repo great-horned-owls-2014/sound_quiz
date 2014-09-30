@@ -33,11 +33,12 @@
       type: 'POST',
       data: {name: artistName, id: artistId, list: songArray},
       success: function(response){
-
+        $('#loadingscreen').slideUp(1000);
         quiz = scrubQuestionChoices(response);
         initializeGame();
       },
        failure: function(response){
+       $('#loadingscreen').slideUp(1000);
         console.log('Fail');
       }
     });
@@ -80,7 +81,6 @@ $(document).ready(function(){
             dataType: "jsonp",
             data: {term: request.term},
             success: function( artistObject ) {
-              console.log(artistObject)
               artistObjectResults = artistObject.results
               response($.map( artistObjectResults, function( item ) {
 
@@ -105,19 +105,22 @@ $(document).ready(function(){
       event.preventDefault();
       artistId = ui.item.artistId;
       artistName = ui.item.artistName;
+
+      $('#loadingscreen').slideDown(1000);
+
       $.ajax({
         url: songSearchUrl + artistName,
         type: 'GET',
-        dataType: 'jsonp'
-      })
-      .done(function(songObject){
-        selectedArtistSongList = createSongList(songObject);
-        dbSend(artistName, artistId, selectedArtistSongList);
-      })
-      .fail(function(failResponse){
-        console.log("Ajax failed. Here was the response from the server: " + failResponse);
+        dataType: 'jsonp',
+        success: function(songObject){
+          selectedArtistSongList = createSongList(songObject);
+          dbSend(artistName, artistId, selectedArtistSongList);
+        },
+        failure: function(failResponse){
+          $('#loadingscreen').slideUp();
+          console.log("Ajax failed. Here was the response from the server: " + failResponse);
+        }  
       })
     }
-
   });
 })
