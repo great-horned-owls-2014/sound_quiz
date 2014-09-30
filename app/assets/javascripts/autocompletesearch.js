@@ -43,7 +43,6 @@ $(document).ready(function(){
       type: 'POST',
       data: {name: artistName, id: artistId, list: songArray},
       success: function(response){
-
         quiz = scrubQuestionChoices(response);
         initializeGame();
       },
