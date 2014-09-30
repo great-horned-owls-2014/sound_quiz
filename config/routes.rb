@@ -4,6 +4,9 @@ Rails.application.routes.draw do
 
   resources :artists do
     get :autocomplete_artist_name, :on => :collection
+    member do
+      get 'first_quiz'
+    end
   end
 
   resources :sessions
