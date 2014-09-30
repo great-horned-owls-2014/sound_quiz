@@ -45,7 +45,7 @@ function endGame(){
     type: 'POST',
     data: formatValues(),
     success: function(response){
-      $('#score').append('<h1>'+response+'</h1>');
+      $('.container').append(response);
     },
     failure: function(response){
       console.log(response);

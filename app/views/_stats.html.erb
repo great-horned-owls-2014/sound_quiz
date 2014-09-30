@@ -1,0 +1,17 @@
+<div class="returnedstats">
+	<h3>leaderboard</h3>
+	<a href = "/artists/<%=@quiz_stats[:artist_id]%>"><%=Artist.find(@quiz_stats[:artist_id]).name%></a>
+	<h3>stats</h3>
+	<ul>
+		<li>score: <%= @quiz_stats[:score]%></li>
+		<li>took you: <%= @quiz_stats[:time]/1000%></li>
+		<li>right: <%= @quiz_stats[:num_of_correct] %></li>
+	</ul>
+
+	<h3>tracks played</h3>
+	<ul>
+		<% @quiz_stats[:itunes_track_ids].each do |id| %>
+			<li data-track-id="<%=id%>"><%=id%></li>
+		<% end %>
+	</ul>
+</div>
