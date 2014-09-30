@@ -163,7 +163,7 @@ input[type=text], input[type=password]{
 display: none;
 text-align: center;
 }
-.returnedstats, .artist-search, .userprofile, .artist-profile, .signup-form{
+.returnedstats, .artist-search, .userprofile, .artist-profile{
   text-align: center;
   padding: 15px;
   box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.3);
@@ -219,13 +219,17 @@ text-align: center;
   margin-top: -38px;
   padding: 0;
 }
-.signup-form button{
+.signup-form, .login-form{
+  text-align: center;
+  padding: 15px;
+}
+.signup-form button, .login-form button{
   font-size: 1.3em;
   width: 40%;
   height: 40px;
   padding: 0;
 }
-.signup-form input{
+.signup-form input, .login-form input{
   margin-bottom: 4px;
   border-radius: 5px;
 }
@@ -278,7 +282,7 @@ text-align: center;
   .nav-caption{
     display: none;
   }
-  .signup-form input{
+  .signup-form input, .login-form input{
     margin-bottom: 4px;
     border-radius: 5px;
   }
