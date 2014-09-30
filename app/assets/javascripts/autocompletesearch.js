@@ -1,13 +1,3 @@
-$(document).ready(function(){
-
-  //prevent pressing of enter and making a manual call to iTunes API
-  $(window).keydown(function(event){
-     if(event.keyCode == 13) {
-       event.preventDefault();
-       return false;
-     }
-   });
-
   //invariants
   var songSearchUrl = 'https://itunes.apple.com/search?attribute=allArtistTerm&entity=song&limit=100&term=';
   var artistSearchUrl= 'https://itunes.apple.com/search?entity=musicArtist&limit=5&term=';
@@ -63,6 +53,19 @@ $(document).ready(function(){
     }
     return quiz;
   }
+
+
+
+$(document).ready(function(){
+
+  //prevent pressing of enter and making a manual call to iTunes API
+  $(window).keydown(function(event){
+     if(event.keyCode == 13) {
+       event.preventDefault();
+       return false;
+     }
+   });
+
 
 
   $('#artistsearchterm').autocomplete({
