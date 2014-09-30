@@ -46,12 +46,12 @@ function endGame(){
     data: formatValues(),
     success: function(response){
       $('#loadingscreen').slideUp(1000);
-      
-      setTimeout(function (){ 
-        $('#score').append(response);
-        $('#score').show() 
+
+      setTimeout(function (){
+        $('.container').append(response);
+        // $('#score').show()
       },1000);
-      
+
     },
     failure: function(response){
       $('#loadingscreen').slideUp(1000);
