@@ -165,29 +165,32 @@ input[type=text]{
 display: none;
 text-align: center;
 }
-.returnedstats, .artist-search, .userprofile{
+.returnedstats, .artist-search, .userprofile, .artist-profile{
   text-align: center;
   padding: 15px;
   box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.3);
   background-color: #555;
 }
-.returnedstats h3, .artist-search h3, .userprofile h3{
+.returnedstats h3, .artist-search h3, .userprofile h3, .artist-profile h3{
   font-weight: 600;
 }
 .returnedstats li{
   list-style: none;
 }
-.returnedstats a, .artist-search a, .userprofile a{
+.returnedstats a, .artist-search a, .userprofile a, .artist-profile a{
   text-decoration: none;
   color: #fa0;
   text-shadow: 1px 1px 2px black;
   list-style: none;
 }
-.returnedstats a:hover, .artist-search a:hover, .userprofile a:hover{
+.returnedstats a:hover, .artist-search a:hover, .userprofile a:hover, .artist-profile a:hover{
   text-decoration: none;
   color: white;
   text-shadow: 2px 2px 2px black;
   list-style: none;
+}
+.artist-profile h2{
+  font-size: 1.3em;
 }
 .userprofile h2{
   display: inline-block;
@@ -244,6 +247,18 @@ text-align: center;
     border-radius: 0px;
   }
   .artist-list{
+    height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 25px;
+  }
+  .userprofile{
+    height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 25px;
+  }
+  .artist-profile{
     height: 400px;
     overflow-y: auto;
     overflow-x: hidden;
