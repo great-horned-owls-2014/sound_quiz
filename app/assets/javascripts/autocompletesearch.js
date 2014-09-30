@@ -116,7 +116,7 @@ $(document).ready(function(){
         failure: function(failResponse){
           $('#loadingscreen').slideUp();
           console.log("Ajax failed. Here was the response from the server: " + failResponse);
-        }  
+        }
       })
     }
   });
