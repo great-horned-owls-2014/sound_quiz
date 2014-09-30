@@ -165,32 +165,51 @@ input[type=text]{
 display: none;
 text-align: center;
 }
-.returnedstats, .artist-search{
+.returnedstats, .artist-search, .userprofile{
   text-align: center;
   padding: 15px;
   box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.3);
   background-color: #555;
 }
-.returnedstats h3, .artist-search h3{
+.returnedstats h3, .artist-search h3, .userprofile h3{
   font-weight: 600;
 }
 .returnedstats li{
   list-style: none;
 }
-.returnedstats a, .artist-search a{
+.returnedstats a, .artist-search a, .userprofile a{
   text-decoration: none;
   color: #fa0;
   text-shadow: 1px 1px 2px black;
   list-style: none;
 }
-.artist-search a{
-  font-size: 1.3em;
-}
-.returnedstats a:hover, .artist-search a:hover{
+.returnedstats a:hover, .artist-search a:hover, .userprofile a:hover{
   text-decoration: none;
   color: white;
   text-shadow: 2px 2px 2px black;
   list-style: none;
+}
+.userprofile h2{
+  display: inline-block;
+  margin-right: 5px;
+}
+.userprofile table{
+  margin: 0 auto;
+  width: 65%;
+}
+.userprofile .table-headings{
+  font-weight: bold;
+  font-size: 1.2em;
+  text-align: left;
+}
+.taken-count{
+  text-align: center;
+}
+.table-row{
+  text-align: left;
+}
+.artist-search a{
+  font-size: 1.3em;
 }
 .artist-list{
   margin-top: 25px;
