@@ -13,4 +13,10 @@ class ArtistsController < ApplicationController
     avg_scores = TakenQuiz.where(artist_id: artist_id).joins(:user).group('users.id').group('users.username').average(:score)
     @sorted_avg_scores = avg_scores.sort_by {|user_info, avg_score| avg_score}.reverse
   end
+
+  def first_quiz
+    @artist = Artist.find(params[:id])
+    @quiz = @artist.quizzes.first
+    render :json => create_frontend_quiz(@artist, @quiz.id)
+  end
 end
