@@ -22,10 +22,12 @@
   <center>
     <h3> NO SCORES YET! </h3>
     <br>
-    <h3>Sign In and Take A <br> <a data-artist-id="<%= @artist.id %>" href="#"> <%= @artist.name.upcase %> Quiz </a>  <br> To Get On the Leaderboard.</h3>
+    <h3>Sign In and Take A <br> <a class="first-quiz-link" data-artist-id="<%= @artist.id %>" href="#"> <%= @artist.name.upcase %> Quiz </a>  <br> To Get On the Leaderboard.</h3>
   </center>
 
   <center><h3> NO SCORES YET! </h3></center>
 <% end %>
+
+<%= render partial: '/game_section' %>
 
 
