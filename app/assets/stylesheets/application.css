@@ -165,29 +165,39 @@ input[type=text]{
 display: none;
 text-align: center;
 }
-.returnedstats{
+.returnedstats, .artist-search{
   text-align: center;
   padding: 15px;
-  border: 1px solid black;
+  box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.3);
   background-color: #555;
 }
-.returnedstats h3{
+.returnedstats h3, .artist-search h3{
   font-weight: 600;
 }
 .returnedstats li{
   list-style: none;
 }
-.returnedstats a{
+.returnedstats a, .artist-search a{
   text-decoration: none;
   color: #fa0;
   text-shadow: 1px 1px 2px black;
   list-style: none;
 }
-.returnedstats a:hover{
+.artist-search a{
+  font-size: 1.3em;
+}
+.returnedstats a:hover, .artist-search a:hover{
   text-decoration: none;
   color: white;
   text-shadow: 2px 2px 2px black;
   list-style: none;
+}
+.artist-list{
+  margin-top: 25px;
+}
+.artist-search{
+  margin-top: -38px;
+  padding: 0;
 }
 
 @media (max-width: 500px) {
@@ -198,6 +208,7 @@ text-align: center;
   }
   .container {
     width: 100%;
+    height: 100%;
     margin: 100px 0;
   }
   #ui-id-1{
@@ -213,7 +224,15 @@ text-align: center;
     border: none;
     border-radius: 0px;
   }
-
+  .artist-list{
+    height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 25px;
+  }
+  .artist_name{
+    width:100%;
+  }
 }
 
 

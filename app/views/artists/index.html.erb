@@ -1,15 +1,14 @@
-Search For An Artist Leaderboard
+
+<div class="artist-search">
 <%= form_for @artist do |f| %>
-  <%= f.autocomplete_field :name, autocomplete_artist_name_artists_path, class: 'test' %>
+  <%= f.autocomplete_field :name, autocomplete_artist_name_artists_path, class: 'test', placeholder: "search artist leaderboard" %>
 <% end %>
 
-<br>
-<br>
 
-<center>
+  <div class="artist-list">
+  <% @artists.each do |artist| %>
+    <a href="/artists/<%= artist.id %>"><%= artist.name %></a><br>
+  <% end %>
+  </div>
 
-<% @artists.each do |artist| %>
-  <a href="/artists/<%= artist.id %>"><%= artist.name %></a>
-  <br>
-<% end %>
-</center>
+</div>
