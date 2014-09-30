@@ -102,19 +102,22 @@ $(document).ready(function(){
       event.preventDefault();
       artistId = ui.item.artistId;
       artistName = ui.item.artistName;
+
+      $('#loadingscreen').slideDown(1000);
+
       $.ajax({
         url: songSearchUrl + artistName,
         type: 'GET',
-        dataType: 'jsonp'
-      })
-      .done(function(songObject){
-        selectedArtistSongList = createSongList(songObject);
-        dbSend(artistName, artistId, selectedArtistSongList);
-      })
-      .fail(function(failResponse){
-        console.log("Ajax failed. Here was the response from the server: " + failResponse);
+        dataType: 'jsonp',
+        success: function(songObject){
+          selectedArtistSongList = createSongList(songObject);
+          dbSend(artistName, artistId, selectedArtistSongList);
+        },
+        failure: function(failResponse){
+          $('#loadingscreen').slideUp();
+          console.log("Ajax failed. Here was the response from the server: " + failResponse);
+        }  
       })
     }
-
   });
 })
