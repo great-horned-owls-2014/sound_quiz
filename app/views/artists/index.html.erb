@@ -9,7 +9,9 @@ Search For An Artist Leaderboard
 <center>
 
 <% @artists.each do |artist| %>
-  <a href="/artists/<%= artist.id %>"><%= artist.name %></a>
-  <br>
+  <% if artist.taken_quizzes.count > 0 %>
+    <a href="/artists/<%= artist.id %>"><%= artist.name %></a>
+    <br>
+  <% end %>
 <% end %>
 </center>

@@ -1,20 +1,31 @@
-<h2><%= @artist.name.upcase %> LEADERBOARD</h2>
+<center><h2><%= @artist.name.upcase %> LEADERBOARD</h2></center>
 
 <br>
 
-<table style="width:100%">
-  <tr>
-    <td> <h3>Trackmaster</h3> </td>
-    <td> <h3>Average Score</h3> </td>
-    <td> <h3># Quizzes Taken</h3> </td>
-  </tr>
 
-<% @sorted_avg_scores.each do |user_info, avg_score| %>
-  <tr>
-    <td> <a href="/users/<%= user_info[0] %>"><%= user_info[1].upcase %></a> </td>
-    <td> <%= avg_score.round %> </td>
-    <td> <%= TakenQuiz.where(["artist_id = ? and user_id = ?", @artist.id, user_info[0] ]).count %></td>
-  </tr>
+<% if @artist.taken_quizzes.count > 0 %>
+  <% @sorted_avg_scores.each do |user_info, avg_score| %>
+  <table style="width:100%">
+    <tr>
+      <td> <h3>Trackmaster</h3> </td>
+      <td> <h3>Average Score</h3> </td>
+      <td> <h3># Quizzes Taken</h3> </td>
+    </tr>
+    <tr>
+      <td> <a href="/users/<%= user_info[0] %>"><%= user_info[1].upcase %></a> </td>
+      <td> <%= avg_score.round %> </td>
+      <td> <%= TakenQuiz.where(["artist_id = ? and user_id = ?", @artist.id, user_info[0] ]).count %></td>
+    </tr>
+  </table>
+  <% end %>
+<% else %>
+  <center>
+    <h3> NO SCORES YET! </h3>
+    <br>
+    <h3>Sign In and Take A <br> <%= @artist.name.upcase %> Quiz <br> To Get On the Leaderboard.</h3>
+  </center>
+
+  <center><h3> NO SCORES YET! </h3></center>
 <% end %>
 
-</table>
+
