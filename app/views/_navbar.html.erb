@@ -1,16 +1,15 @@
 <div class="navbar">
-	<ul>
+	<ul><i class="fa fa-bars-lg"></i>
   	<% if session[:user_id] %>
-      <span class="logo"><a href="/" title="home"><%= image_tag "logo_tmt_2.png" %></a></span>
-      <li><a href="/users/<%=session[:user_id]%>">profile</a></li>
-      <li><a href="/artists">hi-scores</a></li>
-      <li><a href="/logout">exit</a></li>
+      <li><a href="/users/<%=session[:user_id]%>"><i class="fa fa-user"></i><span class="nav-caption"> profile</span></a></li>
+      <li><a href="/artists"><i class="fa fa-bar-chart"></i><span class="nav-caption"> scores</span></a></li>
+      <li><a href="/logout"><i class="fa fa-sign-out"></i><span class="nav-caption"> exit</span></a></li>
+      <li><a href="/"><i class="fa fa-home"></i><span class="nav-caption"> home</span></a></li>
     <% else %>
-      <span class="logo"><a href="/" title="home"><%= image_tag "logo_tmt_2.png" %></a></span>
+      <li><a href="/artists"><i class="fa fa-bar-chart"></i><span class="nav-caption"> scores</span></a></li>
       <li><a href="/login">login</a></li>
-
       <li><a href="/signup">signup</a></li>
-      <li><a href="/login">hi-scores</a></li>
+      <li><a href="/"><i class="fa fa-home"></i><span class="nav-caption"> home</span></a></li>
     <% end %>
 
   </ul>

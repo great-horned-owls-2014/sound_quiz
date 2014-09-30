@@ -21,7 +21,8 @@
  html{
   font-family: 'Fira Sans', sans-serif;
   /*font-family: 'Lato', sans-serif;*/
-  background-color: #333;
+  background-color: #292929;
+  max-height: 100vh;
  }
 .navbar {
   width: 100%;
@@ -96,7 +97,6 @@ button:hover{
 .fa-stack:hover {
   color: white;
 }
-
 .navbar ul{
   float: right;
   margin-right: 10px;
@@ -123,9 +123,7 @@ button:hover{
 .navbar li {
   display: inline-block;
 }
-
-input[type=text]
-{
+input[type=text], input[type=password]{
     box-sizing: border-box;
     font-family: 'Fira Sans', sans-serif;
     background-color: #eee;
@@ -166,11 +164,159 @@ input[type=text]
 display: none;
 text-align: center;
 }
+.returnedstats, .artist-search, .userprofile, .artist-profile{
+  text-align: center;
+  padding: 15px;
+  box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.3);
+  background-color: #555;
+}
+.returnedstats h3, .artist-search h3, .userprofile h3, .artist-profile h3{
+  font-weight: 600;
+}
+.returnedstats li{
+  list-style: none;
+}
+.returnedstats a, .artist-search a, .userprofile a, .artist-profile a{
+  text-decoration: none;
+  color: #fa0;
+  text-shadow: 1px 1px 2px black;
+  list-style: none;
+}
+.returnedstats a:hover, .artist-search a:hover, .userprofile a:hover, .artist-profile a:hover{
+  text-decoration: none;
+  color: white;
+  text-shadow: 2px 2px 2px black;
+  list-style: none;
+}
+.artist-profile h2{
+  font-size: 1.3em;
+}
+.userprofile h2{
+  display: inline-block;
+  margin-right: 5px;
+}
+.userprofile table{
+  margin: 0 auto;
+  width: 65%;
+}
+.userprofile .table-headings{
+  font-weight: bold;
+  font-size: 1.2em;
+  text-align: left;
+}
+.taken-count{
+  text-align: center;
+}
+.table-row{
+  text-align: left;
+}
+.artist-search a{
+  font-size: 1.3em;
+}
+.artist-list{
+  margin-top: 25px;
+}
+.artist-search{
+  margin-top: -38px;
+  padding: 0;
+}
+.signup-form, .login-form, .useredit{
+  text-align: center;
+  padding: 15px;
+}
+.useredit a{
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 5px;
+  line-height: 40px;
+  color: white;
+  font-size: 1.3em;
+  width: 40%;
+  height: 40px;
+  padding: 0;
+  background-color: rgb(150,15,15);
+  top: -2px;
+  max-width: 200px;
+}
+.signup-form button, .login-form button{
+  font-size: 1.3em;
+  width: 40%;
+  height: 40px;
+  padding: 0;
+}
+.useredit button{
+  font-size: 1.3em;
+  width: 40%;
+  height: 40px;
+  padding: 0;
+  display: inline-block;
+  max-width: 200px;
+}
+.signup-form input, .login-form input{
+  margin-bottom: 4px;
+  border-radius: 5px;
+}
+.useredit h1{
+  color: white;
+  text-shadow: 1px 1px 3px black;
+}
 
 @media (max-width: 500px) {
   .logo img {
+    height: 35px;
+    width: 70px;
+    margin-top: 6px;
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+    margin: 100px 0;
+  }
+  #ui-id-1{
+    margin-top: -100px;
+    width: 100%;
+    border-radius: 0px;
+  }
+  #ui-id-1 li{
+    height: 45px;
+    overflow: hidden;
+  }
+  input[type=text], input[type=password]{
+    border: none;
+    border-radius: 0px;
+  }
+  .artist-list{
+    height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 25px;
+  }
+  .userprofile{
+    height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 25px;
+  }
+  .artist-profile{
+    height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 25px;
+  }
+  .artist_name{
+    width:100%;
+  }
+  .nav-caption{
     display: none;
   }
+  .signup-form input, .login-form input, .useredit input{
+    margin-bottom: 4px;
+    border-radius: 5px;
+    width: 100%;
+  }
 }
+
+
 
 

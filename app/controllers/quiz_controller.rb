@@ -87,7 +87,7 @@ class QuizController < ApplicationController
 
     Quiz.find(quiz_id).questions.each do |question|
       itunes_ids << question.right_answer.itunes_track_id
-    end    
+    end
 
     @quiz_stats = {
       artist_id: quiz_artist_id,
@@ -97,7 +97,7 @@ class QuizController < ApplicationController
       itunes_track_ids: itunes_ids
     }
 
-    render "stats", locals: {quiz_stats: @quiz_stats}
+    render "/_stats"
 
   end
 

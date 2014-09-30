@@ -16,39 +16,19 @@
       </div>
     <% end %>
 
-
-    <p>
-      <label for="username">Username</label>:
-      <input id="username" name="user[username]" type="text" value="<%=@user.username%>" />
-    </p>
-
-    <p>
-      <label for="email">E-mail</label>:
       <input id="email" name="user[email]" type="text" value="<%=@user.email%>" />
-    </p>
 
-    <p>If you would like to update your password, please enter your old password below</p>
+      <input id="email" name="user[oldpassword]" type="password" placeholder="current password" />
 
-    <p>
-      <label for="oldpassword">Old Password</label>:
-      <input id="email" name="user[oldpassword]" type="password" placeholder="Enter old password" />
-    </p>
+      <input id="newpassword" name="user[newpassword]" type="password" placeholder="new password" />
 
-    <p>
-      <label for="newpassword">New Password</label>:
-      <input id="newpassword" name="user[newpassword]" type="password" placeholder="Enter new password" />
-    </p>
-
-    <p>
-      <label for="confirmpassword">Confirm Password</label>:
       <input id="confirmpassword" name="user[confirmpassword]" type="password" placeholder="Confirm password" />
-    </p>
 
-    <button type="submit">Edit!</button>
+    <button type="submit">edit</button>
+  <%= link_to 'delete acct', user_path(@user), method: :delete,
+    data:{confirm: "Are you sure you want to delete this account" } %>
   </form>
 
-  <%= link_to 'Delete', user_path(@user), method: :delete,
-    data:{confirm: "Are you sure you want to delete this account" } %>
 </div>
 
 
