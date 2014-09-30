@@ -1,7 +1,5 @@
-<center><h2><%= @artist.name.upcase %> LEADERBOARD</h2></center>
-
-<br>
-
+<div class="artist-profile">
+  <h2><%= @artist.name.upcase %> LEADERBOARD</h2>
 
 <% if @artist.taken_quizzes.count > 0 %>
   <table style="width:100%">
@@ -27,5 +25,4 @@
 
   <center><h3> NO SCORES YET! </h3></center>
 <% end %>
-
-
+</div>

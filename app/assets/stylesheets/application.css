@@ -21,7 +21,8 @@
  html{
   font-family: 'Fira Sans', sans-serif;
   /*font-family: 'Lato', sans-serif;*/
-  background-color: #333;
+  background-color: #292929;
+  max-height: 100vh;
  }
 .navbar {
   width: 100%;
@@ -62,19 +63,20 @@ button:hover{
 }
 .logo img{
   padding-top: 5px;
-  padding-left: 8px;
+  padding-left: 4px;
   position: fixed;
   left: 0;
   height: 50px;
-  width: 50px;
+  width: 80px;
 }
 #search-button{
   height: 30px;
   line-height: 30px;
 }
 #start{
+  color: black;
   font-family: 'Lato', sans-serif;
-  font-weight: 100;
+  font-weight: 400;
   font-size: 2em;
   position:fixed;
   bottom: 25%;
@@ -82,9 +84,18 @@ button:hover{
   background-color: #fa0;
   width: 100%;
   border-radius: 0;
-  height: 70px;
+  height: 90px;
   border: 0;
   box-shadow: 0 0 6px 1px rgba(0,0,0,0.5);
+  margin-top: 0;
+}
+.fa-play:before {
+  content: "\f04b";
+  position: relative;
+  right: -5px;
+}
+.fa-stack:hover {
+  color: white;
 }
 .navbar ul{
   float: right;
@@ -107,33 +118,33 @@ button:hover{
 .container{
   width: 70%;
   margin: 0 auto;
-  margin-top:150px;
+  margin-top:100px;
 }
 .navbar li {
   display: inline-block;
 }
-
-input[type=text]
-{
+input[type=text], input[type=password]{
     box-sizing: border-box;
     font-family: 'Fira Sans', sans-serif;
     background-color: #eee;
     padding-left: 10px;
-    font-size: 1.1em;
+    font-size: 1.3em;
     border:solid 2px #303;
     border-radius: 5px;
-    color: #979797;
-    height: 35px;
+    color: #111;
+    height: 50px;
     width: 100%;
+    max-width: 700px;
     margin: auto;
     display: block;
 }
 #ui-id-1 {
     box-sizing: border-box;
-    font-family: 'Fira Sans', sans-serif;
+    font-family: 'Lato', sans-serif;
     background-color: #eee;
     font-size: 1em;
     width: 70%;
+    max-width: 700px;
     margin: 0 auto;
     margin-top: 20px;
     border: solid 1px black;
@@ -141,7 +152,10 @@ input[type=text]
 }
 #ui-id-1 li {
   list-style: none;
+  height: 50px;
+  line-height: 50px;
   padding-left: 10px;
+  font-size: 1.2em;
 }
 #ui-id-1 li:hover {
   background-color: #666;
@@ -150,5 +164,159 @@ input[type=text]
 display: none;
 text-align: center;
 }
+.returnedstats, .artist-search, .userprofile, .artist-profile{
+  text-align: center;
+  padding: 15px;
+  box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.3);
+  background-color: #555;
+}
+.returnedstats h3, .artist-search h3, .userprofile h3, .artist-profile h3{
+  font-weight: 600;
+}
+.returnedstats li{
+  list-style: none;
+}
+.returnedstats a, .artist-search a, .userprofile a, .artist-profile a{
+  text-decoration: none;
+  color: #fa0;
+  text-shadow: 1px 1px 2px black;
+  list-style: none;
+}
+.returnedstats a:hover, .artist-search a:hover, .userprofile a:hover, .artist-profile a:hover{
+  text-decoration: none;
+  color: white;
+  text-shadow: 2px 2px 2px black;
+  list-style: none;
+}
+.artist-profile h2{
+  font-size: 1.3em;
+}
+.userprofile h2{
+  display: inline-block;
+  margin-right: 5px;
+}
+.userprofile table{
+  margin: 0 auto;
+  width: 65%;
+}
+.userprofile .table-headings{
+  font-weight: bold;
+  font-size: 1.2em;
+  text-align: left;
+}
+.taken-count{
+  text-align: center;
+}
+.table-row{
+  text-align: left;
+}
+.artist-search a{
+  font-size: 1.3em;
+}
+.artist-list{
+  margin-top: 25px;
+}
+.artist-search{
+  margin-top: -38px;
+  padding: 0;
+}
+.signup-form, .login-form, .useredit{
+  text-align: center;
+  padding: 15px;
+}
+.useredit a{
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 5px;
+  line-height: 40px;
+  color: white;
+  font-size: 1.3em;
+  width: 40%;
+  height: 40px;
+  padding: 0;
+  background-color: rgb(150,15,15);
+  top: -2px;
+  max-width: 200px;
+}
+.signup-form button, .login-form button{
+  font-size: 1.3em;
+  width: 40%;
+  height: 40px;
+  padding: 0;
+}
+.useredit button{
+  font-size: 1.3em;
+  width: 40%;
+  height: 40px;
+  padding: 0;
+  display: inline-block;
+  max-width: 200px;
+}
+.signup-form input, .login-form input{
+  margin-bottom: 4px;
+  border-radius: 5px;
+}
+.useredit h1{
+  color: white;
+  text-shadow: 1px 1px 3px black;
+}
+
+@media (max-width: 500px) {
+  .logo img {
+    height: 35px;
+    width: 70px;
+    margin-top: 6px;
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+    margin: 100px 0;
+  }
+  #ui-id-1{
+    margin-top: -100px;
+    width: 100%;
+    border-radius: 0px;
+  }
+  #ui-id-1 li{
+    height: 45px;
+    overflow: hidden;
+  }
+  input[type=text], input[type=password]{
+    border: none;
+    border-radius: 0px;
+  }
+  .artist-list{
+    height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 25px;
+  }
+  .userprofile{
+    height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 25px;
+  }
+  .artist-profile{
+    height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: 25px;
+  }
+  .artist_name{
+    width:100%;
+  }
+  .nav-caption{
+    display: none;
+  }
+  .signup-form input, .login-form input, .useredit input{
+    margin-bottom: 4px;
+    border-radius: 5px;
+    width: 100%;
+  }
+}
+
+
 
 

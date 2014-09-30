@@ -1,4 +1,3 @@
-
 var testResponse;
 var numOfQuestions = 5;
 var gameover = false;
@@ -31,6 +30,7 @@ $(document).ready(function(){
 
 function checkGameStatus(){
   if(timeArray.length === 6){
+      $('#loadingscreen').slideDown(1000);
       endGame();
     }
     else{
@@ -45,9 +45,16 @@ function endGame(){
     type: 'POST',
     data: formatValues(),
     success: function(response){
-      $('#score').append('<h1>'+response+'</h1>');
+      $('#loadingscreen').slideUp(1000);
+
+      setTimeout(function (){
+        $('.container').append(response);
+        // $('#score').show()
+      },1000);
+
     },
     failure: function(response){
+      $('#loadingscreen').slideUp(1000);
       console.log(response);
       console.log("failure");
     }
