@@ -38,6 +38,7 @@ html::after {
 .container{
   width: 70%;
   margin: 0 auto;
+  padding-bottom: 40px;
 }
 input[type=text], input[type=password]{
     box-sizing: border-box;
@@ -272,9 +273,10 @@ input[type=text], input[type=password]{
 .info-area {
   border: 0;
   background: rgba(0,0,0,0.7);
-  margin-top: 60px;
+  margin-top: 40px;
   border-radius: 3px;
   padding: 20px;
+  color: #fff;
 }
 
 .info-area h2 {
