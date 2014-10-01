@@ -90,6 +90,8 @@ function recordUserAnswer(){
 function initializeGame(){
   document.querySelector('#artist-search').style.display = 'none';
   document.querySelector('#game-section').style.display = 'inherit';
+  timeArray = [];
+  answerArray = [];
   for(var i=1; i <= (Object.keys(quiz).length - numOfNonQuestions); i++){
     $('#game-section').append(generateQuestionDiv(quiz['question_'+i]));
   }

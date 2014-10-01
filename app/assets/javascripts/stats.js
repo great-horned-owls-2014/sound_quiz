@@ -32,6 +32,8 @@ $(document).ready(function(){
  		  success: function(response){
  		    $('#loadingscreen').slideUp(1000);
  		    quiz = scrubQuestionChoices(response);
+ 		    $('.ui-autocomplete').remove();
+ 		    $('.ui-helper-hidden-accessible').remove();
  		    initializeGame();
  		    $('#start-game').show();
  		  },
