@@ -97,7 +97,7 @@ class QuizController < ApplicationController
       itunes_track_ids: itunes_ids.shuffle
     }
 
-    render "/_stats"
+    render partial: "/stats"
 
   end
 
