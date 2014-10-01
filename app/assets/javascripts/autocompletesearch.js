@@ -52,9 +52,11 @@
         quiz = scrubQuestionChoices(response);
         initializeGame();
       },
-       failure: function(response){
+       error: function(response){
        $('#loadingscreen').slideUp(1000);
-        console.log('Fail');
+       $('.errors').append("<p>iTunes does not have enough songs to generate quiz.</p><br>")
+       $('.errors').append('<p><a href="/">Please pick another artist</a></p>')
+       $('.errors').show();
       }
     });
   }
