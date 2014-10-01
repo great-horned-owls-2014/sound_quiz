@@ -1,11 +1,3 @@
-  //prevent pressing of enter and making a manual call to iTunes API
-  $(window).keydown(function(event){
-     if(event.keyCode == 13) {
-       event.preventDefault();
-       return false;
-     }
-   });
-
   function placeAutocomplete(){
       var inputWidth = $('#artistsearchterm').width();
       console.log(inputWidth)
@@ -103,7 +95,6 @@ $(document).ready(function(){
               document.querySelector("#ui-id-1").removeAttribute("style");
             },
             error: function(request, status, err) {
-                    debugger
                    if(status==="timeout") {
                       $('.container').hide();
                       $('.errors').append('<p>iTunes seems to be unresponsive.</p><br>')
