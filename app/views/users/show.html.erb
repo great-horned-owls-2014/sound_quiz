@@ -3,10 +3,9 @@
 	<h2><%=@user.username%>'s stats</h2>
 
 	<% if @user.id == session[:user_id] %>
-		<a href="/users/<%= @user.id %>/edit">edit</a>
+		<p><a href="/users/<%= @user.id %>/edit">edit registration info</a></p>
 	<% end %>
 
-	<br>
 	<table>
   <tr class="table-headings">
     <td>artist</td>
