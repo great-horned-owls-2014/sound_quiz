@@ -1,16 +1,15 @@
+<%= form_for @artist do |f| %>
+  <%= f.autocomplete_field :name, autocomplete_artist_name_artists_path, class: 'blocky-input', placeholder: "search artist leaderboard" %>
+<% end %>
 
 <div class=" display-board info-area">
-  <%= form_for @artist do |f| %>
-    <%= f.autocomplete_field :name, autocomplete_artist_name_artists_path, class: 'blocky-input', placeholder: "search artist leaderboard" %>
-  <% end %>
-
 
   <div class="artist-list">
-  <table style="width:100%">
+  <table style="width:100%" cellspacing="0">
       <tr class="table-headings">
-        <td> <h3>Artist </h3> </td>
-        <td> <h3>Players</h3> </td>
-        <td> <h3>Top Scorer</h3> </td>
+        <td>Artist</td>
+        <td>Players</td>
+        <td>Top Scorer</td>
       </tr>
    <% @artists.each do |artist| %>
      <% if artist.taken_quizzes.count > 0 %>

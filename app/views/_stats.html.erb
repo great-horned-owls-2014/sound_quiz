@@ -2,9 +2,9 @@
 		<h2>your quiz results</h2>
 
 		<ul class="quiz-results-list left-align">
-			<li>score: <%= @quiz_stats[:score]%></li>
-			<li>time taken: <%= @quiz_stats[:time]/1000%> seconds</li>
-			<li>correct choices: <%= @quiz_stats[:num_of_correct].round %></li>
+			<li><span>score</span> <%= @quiz_stats[:score]%></li>
+			<li><span>time taken</span> <%= @quiz_stats[:time]/1000%> seconds</li>
+			<li><span>correct choices</span> <%= @quiz_stats[:num_of_correct].round %></li>
 		</ul>
 </div>
 
