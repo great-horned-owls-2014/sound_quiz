@@ -185,9 +185,9 @@ input[type=text], input[type=password]{
   text-align: center;
   padding: 10px 0;
 }
-.score{
+/*.score{
   text-align: right;
-}
+}*/
 .marquee{
   color: #Fa0;
   font-size: 1.9em;
@@ -271,7 +271,7 @@ input[type=text], input[type=password]{
 
 .info-area {
   border: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.7);
   margin-top: 60px;
   border-radius: 3px;
   padding: 20px;
@@ -300,12 +300,35 @@ input[type=text], input[type=password]{
   color: #fff;
 }
 
-.highlight {
+.highlight, .table-row a {
   color: #fff;
+  font-size: 1em;
 }
 
 tr.table-headings {
   height: 60px;
   font-size: 16px;
   text-transform: uppercase;
+}
+
+td {
+  text-align: center;
+}
+
+.highlight td {
+  font-size: 16px;
+}
+
+.marquee {
+  display: block;
+  float: left;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.small-link {
+  display: block;
+  float: right;
+  font-size: 0.6em;
 }

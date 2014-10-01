@@ -1,26 +1,26 @@
 
 <div class="userprofile display-board info-area">
-	<h2 class="marquee"><%=@user.username%>'s stats</h2>
+	<h2 class="marquee"><%=@user.username%></h2>
 
 	<% if @user.id == session[:user_id] %>
-		<p class="small-link"><a href="/users/<%= @user.id %>/edit">edit registration info</a></p>
+		<p class="small-link"><a href="/users/<%= @user.id %>/edit">edit user info</a></p>
 	<% end %>
 
-	<table>
-  <tr class="table-headings">
-    <td>artist</td>
-    <td>score</td>
-    <td>taken</td>
-  </tr>
-  <% @artist_taken.each do |artist_id, count| %>
-  	<tr class="table-row highlight">
-	  	<% artist = Artist.find(artist_id) %>
-		    <td><a href="/artists/<%=artist_id%>"><%= artist.name %></a></td>
-		    <td class="score"><%= @user.artist_score(artist).round %></td>
-		    <td class="taken-count"><%= count %></td>
-  	</tr>
-  <% end%>
-</table>
+	<table cellspacing="0" style="clear: both;">
+    <tr class="table-headings">
+      <td>artist</td>
+      <td>score</td>
+      <td>taken</td>
+    </tr>
+    <% @artist_taken.each do |artist_id, count| %>
+    	<tr class="table-row highlight">
+  	  	<% artist = Artist.find(artist_id) %>
+  		    <td><a href="/artists/<%=artist_id%>"><%= artist.name %></a></td>
+  		    <td class="score"><%= @user.artist_score(artist).round %></td>
+  		    <td class="taken-count"><%= count %></td>
+    	</tr>
+    <% end%>
+  </table>
 	<ul>
 
 	</ul>
