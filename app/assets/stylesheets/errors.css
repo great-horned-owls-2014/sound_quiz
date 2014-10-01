@@ -1,0 +1,10 @@
+.errors {
+  margin-top: 20%;
+  display: none;
+  text-align: center;
+  color: white;
+}
+
+.errors a{
+  text-decoration: none;
+}
