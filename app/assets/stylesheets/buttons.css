@@ -1,0 +1,53 @@
+button{
+  padding: 0 10px;
+  background-color: rgb(150,15,15);
+  border: 2px solid rgb(150,15,15);
+  color: white;
+  text-decoration: none;
+  font-size: 1em;
+  border-radius: 5px;
+  height:70px;
+  margin: 0 auto;
+  margin-top:10px;
+  width: 100%;
+}
+button:hover{
+  background-color: #A00;
+  border: 2px solid #A00;
+}
+.answer-button{
+  opacity: 0.8;
+  color: #DDD;
+}
+.answer-button:hover{
+  opacity: 1;
+  color: #FFF;
+}
+#search-button{
+  height: 30px;
+  line-height: 30px;
+}
+#start{
+  color: black;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 2em;
+  position:fixed;
+  bottom: 25%;
+  left:0;
+  background-color: #fa0;
+  width: 100%;
+  border-radius: 0;
+  height: 90px;
+  border: 0;
+  box-shadow: 0 0 6px 1px rgba(0,0,0,0.5);
+  margin-top: 0;
+}
+.fa-play:before {
+  content: "\f04b";
+  position: relative;
+  right: -5px;
+}
+.fa-stack:hover {
+  color: white;
+}

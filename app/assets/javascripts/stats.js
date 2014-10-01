@@ -39,7 +39,7 @@ function updateItunesLinks(){
 	     dataType: 'jsonp',
 	     success: function(response){
 	     	itunesObject=response['results'][0]
-	      element.innerHTML = '<a target = "_blank" href="'+itunesObject.trackViewUrl+'">'+itunesObject.trackName+'</a> <img class="itunesicon" src="itunes.png">';
+	      element.innerHTML = '<a target = "_blank" href="'+itunesObject.trackViewUrl+'">'+itunesObject.trackName+'</a> ';
 	     },
 	     failure: function(response){
 	       console.log(response);

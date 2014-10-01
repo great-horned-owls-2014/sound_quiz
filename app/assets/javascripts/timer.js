@@ -1,7 +1,6 @@
 var intervalId;
 
 var timer = function(choiceTime, returnedThis){
-  debugger
   clearInterval(intervalId);
   var timerTime = choiceTime;
   $('#timer').text(timerTime/1000);

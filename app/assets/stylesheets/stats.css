@@ -1,6 +1,7 @@
 .itunesicon {
-  height: 32px;
-  width: 64px;
+  height: 25px;
+  width: 25px;
+  margin: 4px 5px;
 }
 .userprofile{
 }
@@ -11,4 +12,15 @@
 .userprofile td{
   line-height: 2em;
   overflow: hidden;
+}
+.quiz-results-list{
+  width: 65%;
+  margin: 0 auto;
+}
+.leaderboard-blurb{
+  margin-top: 15px;
+}
+.quiz-results-stats{
+  margin-top:10px;
+  margin-bottom:10px;
 }
