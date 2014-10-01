@@ -1,6 +1,7 @@
 <div class="returnedstats">
+
 	<h2>your quiz results</h2>
-	<br>
+
 	<ul>
 		<li>score: <%= @quiz_stats[:score]%></li>
 		<li>time taken: <%= @quiz_stats[:time]/1000%> seconds</li>
@@ -17,5 +18,15 @@
 	<br><br>
 
 	<h2><a href="#" id="playartistagain" data-itunesId="<%=Artist.find(@quiz_stats[:artist_id]).itunes_id%>">play <%=Artist.find(@quiz_stats[:artist_id]).name%> again?</a></h2>
-		<h2><a href= "/">play a new artist?</a><h2>
+	<h2><a href= "/">play a new artist?</a><h2>
+
+	<% if !session[:user_id] %>
+
+		<div id='login-reminder'>
+			<p> Looks like you weren't signed in.</p>
+			<p>Make Sure You Sign In To Have Your Future Scores Recorded On Artists' Leaderboards</p>
+			<a href="/login">Login</a> or <a href="/signup">Signup</a>
+		</div>
+	<% end %>
 </div>
+
