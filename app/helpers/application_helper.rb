@@ -3,19 +3,6 @@ module ApplicationHelper
     session[:user_id] ? true : false
   end
 
-  def initialize_new_artist_tracks(artist, songlist)
-    new_artist_tracks = []
-    songlist.length.times.map do |i|
-      new_track = Track.new(track_attribs_from_params(songlist[i.to_s]))
-      if new_track.save != false
-        new_artist_tracks << new_track
-      end
-  end
-
-    artist.tracks = new_artist_tracks
-    artist.save!
-  end
-
   def create_frontend_quiz(artist, quiz_id)
     quiz = {}
     quiz[:artist] = artist.name

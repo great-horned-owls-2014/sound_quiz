@@ -1,5 +1,18 @@
 class QuizController < ApplicationController
 
+  def initialize_new_artist_tracks(artist, songlist)
+    new_artist_tracks = []
+    songlist.length.times.map do |i|
+      new_track = Track.new(track_attribs_from_params(songlist[i.to_s]))
+      if new_track.save != false
+        new_artist_tracks << new_track
+      end
+  end
+
+    artist.tracks = new_artist_tracks
+    artist.save!
+  end
+
   def create
     # artist & tracks, knows nothing of quiz
     artist_itunes_id = params[:id]
