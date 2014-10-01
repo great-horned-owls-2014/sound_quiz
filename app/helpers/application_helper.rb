@@ -18,7 +18,7 @@ module ApplicationHelper
       if new_track.save != false
         new_artist_tracks << new_track
       end
-    end
+  end
 
     artist.tracks = new_artist_tracks
     artist.save!
@@ -82,13 +82,4 @@ module ApplicationHelper
     new_quiz.save!
     new_quiz
   end
-
-  def require_login
-    unless signed_in?
-      flash[:error] = "You must be logged in to access this section"
-      redirect_to root_path
-    end
-  end
-
-
 end
