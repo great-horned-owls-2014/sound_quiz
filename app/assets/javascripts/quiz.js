@@ -8,15 +8,19 @@ var timeArray = [];
 var quiz;
 var answerArray = [];
 var numOfNonQuestions = 3;
+var questionTime = 30000;
 
 $(document).ready(function(){
 
   //start and play the game
   $('button#start').on('click', function(event){
+    $('#choices-screen').show();
     recordTimeTaken();
     hideSelf.call(this);
     showNext.call(this);
     playNextTrack.call(this);
+    $('#timer').show();
+    timer(questionTime, this);
   });
   $('body').on('click', ".answer-button", function(event){
     recordTimeTaken();
@@ -25,12 +29,15 @@ $(document).ready(function(){
     hideSelf.call(this);
     showNext.call(this);
     checkGameStatus.call(this);
+    timer(questionTime, this);
   });
 });
 
 function checkGameStatus(){
   if(timeArray.length === 6){
       $('#loadingscreen').slideDown(1000);
+      $('#timer').hide();
+      $('#choices-screen').hide();
       endGame();
     }
     else{
@@ -40,7 +47,6 @@ function checkGameStatus(){
 
 function endGame(){
   $('#stats').show();
-  console.log(formatValues());
   $.ajax({
     url: '/quiz/stats',
     type: 'POST',
