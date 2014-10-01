@@ -2,17 +2,17 @@
   <h2><%= @artist.name.upcase %> LEADERBOARD</h2>
 
 <% if @artist.taken_quizzes.count > 0 %>
-  <table style="width:100%">
-    <tr>
+  <table style="width:100%" cellspacing="0">
+    <tr class="table-headings">
       <td> <h3>Trackmaster</h3> </td>
       <td> <h3>Top Score</h3> </td>
       <td> <h3>Quiz Attempts</h3> </td>
     </tr>
   <% @sorted_avg_scores.each do |user_info, avg_score| %>
-    <tr>
-      <td> <a href="/users/<%= user_info[0] %>"><%= user_info[1].upcase %></a> </td>
-      <td> <%= avg_score.round %> </td>
-      <td> <%= TakenQuiz.where(["artist_id = ? and user_id = ?", @artist.id, user_info[0] ]).count %></td>
+    <tr class="highlight">
+      <td class="left-align"> <a href="/users/<%= user_info[0] %>"><%= user_info[1].upcase %></a> </td>
+      <td class="left-align"> <%= avg_score.round %> </td>
+      <td class="left-align"> <%= TakenQuiz.where(["artist_id = ? and user_id = ?", @artist.id, user_info[0] ]).count %></td>
     </tr>
   <% end %>
 </table>

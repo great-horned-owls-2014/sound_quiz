@@ -277,6 +277,11 @@ input[type=text], input[type=password]{
   padding: 20px;
 }
 
+.info-area h2 {
+  color: #f90;
+  margin-bottom: 40px;
+}
+
 #artist_name {
   border: 0;
   background: #fff;
