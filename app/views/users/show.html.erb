@@ -1,9 +1,9 @@
 
-<div class="userprofile display-board">
-	<h2><%=@user.username%>'s stats</h2>
+<div class="userprofile display-board info-area">
+	<h2 class="marquee"><%=@user.username%>'s stats</h2>
 
 	<% if @user.id == session[:user_id] %>
-		<p><a href="/users/<%= @user.id %>/edit">edit registration info</a></p>
+		<p class="small-link"><a href="/users/<%= @user.id %>/edit">edit registration info</a></p>
 	<% end %>
 
 	<table>

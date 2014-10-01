@@ -13,167 +13,93 @@
  *= require_tree .
  *= require_self
  */
-
  *{
   margin:0;
   padding:0;
  }
  html{
   font-family: 'Fira Sans', sans-serif;
-  /*font-family: 'Lato', sans-serif;*/
   font-family: 'Press Start 2P', cursive;
-  background-color: #292929;
-  max-height: 100vh;
+  background-color: #000;
  }
-.navbar {
-  width: 100%;
-  height: 60px;
-  line-height: 60px;
-  color: white;
-  background-color: #fa0;
-  position: fixed;
+html::after {
+  content: "";
+  background: url("/tiling_bg.jpg");
+  background-repeat: repeat;
+  box-shadow:inset 0 0 600px 75px rgba(0,0,0,1);
+  opacity: 0.2;
   top: 0;
   left: 0;
-  box-shadow: 0 5px 10px 4px rgba(0,0,0,0.3);
-}
-button{
-  padding: 0 10px;
-  background-color: rgb(150,15,15);
-  border: 2px solid rgb(150,15,15);
-  color: white;
-  text-decoration: none;
-  font-size: 1em;
-  border-radius: 5px;
-  height:70px;
-  margin: 0 auto;
-  margin-top:10px;
-  width: 100%;
-}
-button:hover{
-  background-color: #A00;
-  /*border: 2px solid #fa0;*/
-  border: 2px solid #A00;
-}
-.answer-button{
-  opacity: 0.8;
-  color: #DDD;
-}
-.answer-button:hover{
-  opacity: 1;
-  color: #FFF;
-}
-.logo img{
-  padding-top: 5px;
-  padding-left: 4px;
+  bottom: 0;
+  right: 0;
   position: fixed;
-  left: 0;
-  height: 50px;
-  width: 80px;
-}
-#search-button{
-  height: 30px;
-  line-height: 30px;
-}
-#start{
-  color: black;
-  font-family: 'Lato', sans-serif;
-  font-weight: 400;
-  font-size: 2em;
-  position:fixed;
-  bottom: 25%;
-  left:0;
-  background-color: #fa0;
-  width: 100%;
-  border-radius: 0;
-  height: 90px;
-  border: 0;
-  box-shadow: 0 0 6px 1px rgba(0,0,0,0.5);
-  margin-top: 0;
-}
-.fa-play:before {
-  content: "\f04b";
-  position: relative;
-  right: -5px;
-}
-.fa-stack:hover {
-  color: white;
-}
-.navbar ul{
-  float: right;
-  margin-right: 10px;
+  z-index: -10;
 }
 .container{
   width: 70%;
   margin: 0 auto;
-  margin-top:100px;
-}
-.navbar li {
-  display: inline-block;
 }
 input[type=text], input[type=password]{
     box-sizing: border-box;
-    font-family: 'Fira Sans', sans-serif;
+    font-family: 'Press Start 2P', sans-serif;
     background-color: #eee;
     padding-left: 10px;
     font-size: 1.3em;
-    border:solid 2px #303;
     border-radius: 5px;
     color: #111;
     height: 50px;
-    width: 100%;
-    max-width: 700px;
+    width: 500px;
     margin: auto;
     display: block;
 }
-#ui-id-1 {
+#artist-search input[type=text]{
     box-sizing: border-box;
-    position: fixed;
-    top: 170px;
-    left:50%;
-    font-family: 'Lato', sans-serif;
-    background-color: #eee;
+    font-family: 'Press Start 2P', sans-serif;
+    background-color: #fff;
     font-size: 1em;
-    width: 70%;
-/*    max-width: 700px;*/
-    margin: 0 auto;
-    margin-top: 20px;
-    margin-left: -35%;
-    border: solid 1px black;
-    border-radius: 5px;
+    border-radius: 3px;
+    outline: 0;
+    border: 0;
+    color: #111;
+    height: 50px;
+    width: 500px;
+    margin: auto;
+    display: block;
+    padding 0 20px;
+    text-transform: uppercase;
 }
-#ui-id-1 li {
-  list-style: none;
-  height: 50px;
-  line-height: 50px;
-  padding-left: 10px;
-  font-size: 1.2em;
+#artist-search{
+  margin-bottom: 80px;
 }
-#ui-id-1 li:hover {
-  background-color: #666;
-}
-.ui-helper-hidden-accessible {
-display: none;
-text-align: center;
-}
-.returnedstats, .artist-search, .userprofile, .artist-profile{
+
+.display-board{
   text-align: center;
   padding: 15px;
   box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.3);
   background-color: #555;
+  border: 10px dashed #999;
 }
-.returnedstats h3, .artist-search h3, .userprofile h3, .artist-profile h3{
+.info-area{
+  text-align: center;
+  padding: 15px;
+  box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.3);
+  background-color: #555;
+  margin-bottom: 10px;
+  border: 10px dashed #999;
+}
+.info-area h3{
   font-weight: 600;
 }
-.returnedstats li{
+.info-area li{
   list-style: none;
 }
-.returnedstats a, .artist-search a, .userprofile a, .artist-profile a{
+.info-area a{
   text-decoration: none;
   color: #fa0;
   text-shadow: 1px 1px 2px black;
   list-style: none;
 }
-.returnedstats a:hover, .artist-search a:hover, .userprofile a:hover, .artist-profile a:hover{
+.info-area a:hover{
   text-decoration: none;
   color: white;
   text-shadow: 2px 2px 2px black;
@@ -186,7 +112,7 @@ text-align: center;
   display: inline-block;
   margin-right: 5px;
 }
-.userprofile .table-headings{
+.userprofile{
   font-weight: bold;
   font-size: 1.2em;
   text-align: left;
@@ -252,16 +178,8 @@ text-align: center;
   background-color: #777;
   color: white;
 }
-
 .highlight:hover a{
   color: white;
-}
-.display-board{
-  text-align: center;
-  padding: 15px;
-  box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.3);
-  background-color: #555;
-  border: 8px dashed white;
 }
 .left-align{
   text-align: left;
@@ -270,7 +188,19 @@ text-align: center;
 .score{
   text-align: right;
 }
-
+.marquee{
+  color: #Fa0;
+  font-size: 1.9em;
+}
+.table-headings{
+  font-weight: bold;
+  background-color: #fa0;
+  font-size: 1.2em;
+  text-align: center;
+}
+#artist_name input{
+  border: 5px dashed black;
+}
 @media (max-width: 591px) {
   .logo img {
     height: 35px;

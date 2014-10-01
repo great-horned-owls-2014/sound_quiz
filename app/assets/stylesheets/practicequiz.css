@@ -2,17 +2,24 @@
   text-align: center;
   text-shadow: 2px 2px 3px black;
   color:white;
+  line-height: 1.5em;
+  margin-bottom: 25px;
 }
 .practice-quizzes{
   text-align: center;
   font-size: 0;
+  width: 800px;
+  margin: 0 auto;
+}
+.practice-quizzes a img{
+  width: 200px;
 }
 .practice-quizzes h3 {
-  font-size: 22px;
+  font-size: 18px;
   text-align: center;
   text-shadow: 2px 2px 3px black;
   color:white;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: 10px;
 }
 @media (max-width: 500px) {
@@ -27,7 +34,6 @@
   .practice-quizzes a {
     float: left;
     line-height: 0;
-    margin-bottom: -5px;
 }
 
 }
