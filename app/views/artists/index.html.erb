@@ -4,12 +4,30 @@
     <%= f.autocomplete_field :name, autocomplete_artist_name_artists_path, class: 'test', placeholder: "search artist leaderboard" %>
   <% end %>
 
+
   <div class="artist-list">
-  
-  <% @artists.each do |artist| %>
-    <% if artist.taken_quizzes.count > 0 %>
-      <a href="/artists/<%= artist.id %>"><%= artist.name %></a>
-      <br>
+<table style="width:100%">
+    <tr>
+      <td> <h3>Artist </h3> </td>
+      <td> <h3># of Users Playing</h3> </td>
+      <td> <h3>Top Scorer</h3> </td>
+    </tr>
+ <% @artists.each do |artist| %>
+   <% if artist.taken_quizzes.count > 0 %>
+      <tr>
+        <td> <a href="/artists/<%= artist.id %>"><%= artist.name %></a> </td>
+        <% avg_scores = TakenQuiz.where(artist_id: artist.id).joins(:user).group('users.id').group('users.username').average(:score)%>
+
+        <td>
+        <% users = [] %>
+        <% artist.taken_quizzes.each do |takenquiz| %>
+          <% users << takenquiz.user_id %>
+        <% end %>
+        <%= users.uniq.count %>
+        </td>
+        <td><%= sorted_avg_scores = avg_scores.sort_by {|user_info, avg_score| avg_score}.reverse.first[0][1] %> </td>
+      </tr>
     <% end %>
   <% end %>
+  </div>
 </div>

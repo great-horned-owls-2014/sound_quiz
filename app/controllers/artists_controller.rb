@@ -3,7 +3,7 @@ class ArtistsController < ApplicationController
 
   def index
     @artist = Artist.new
-    @artists = Artist.all
+    @artists = Artist.order("name ASC").all
   end
 
   def show
