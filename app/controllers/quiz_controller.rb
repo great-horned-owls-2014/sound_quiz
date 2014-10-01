@@ -3,11 +3,8 @@ class QuizController < ApplicationController
   def initialize_new_artist_tracks(artist, songlist)
     songlist.each do |key, value|
       track_params = track_attribs_from_itunes_hash(value)
-      if ! Track.find_by_name(track_params[:name])
-        artist.tracks << Track.create(track_params)
-      end
+      artist.add_track_if_not_present(track_params)
     end
-    artist.save!
   end
 
   def create_frontend_quiz(artist, quiz_id)
