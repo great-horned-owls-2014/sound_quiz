@@ -8,64 +8,6 @@ $(document).ready(function(){
      }
    });
 
-  //invariants
-  var songSearchUrl = 'https://itunes.apple.com/search?attribute=allArtistTerm&entity=song&limit=100&term=';
-  var artistSearchUrl= 'https://itunes.apple.com/search?entity=musicArtist&limit=5&term=';
-
-  //results from iTunes APIs
-  var artistName = '';
-  var artistId;
-  var artistObjectResults = null;
-
-  function createSongList(artistObjectResults){
-    songArray = [];
-    for(var i =0; i< artistObjectResults['results'].length; i++){
-      if (artistId === artistObjectResults['results'][i].artistId) {
-        songArray.push(createSongObject( artistObjectResults['results'][i] ));
-      }
-    }
-    return songArray;
-  }
-
-  function createSongObject(itunesObject){
-    filteredObject = { 'artworkUrl100': itunesObject.artworkUrl100,
-                        'previewUrl': itunesObject.previewUrl,
-                        'trackName': itunesObject.trackName,
-                        'trackId': itunesObject.trackId
-                      };
-
-    return filteredObject;
-  }
-
-  function dbSend(artistName, artistId, songArray){
-    $.ajax({
-      url: '/quiz/create',
-      type: 'POST',
-      data: {name: artistName, id: artistId, list: songArray},
-      success: function(response){
-        $('#loadingscreen').slideUp(1000);
-        quiz = scrubQuestionChoices(response);
-        initializeGame();
-      },
-       failure: function(response){
-       $('#loadingscreen').slideUp(1000);
-        console.log('Fail');
-      }
-    });
-  }
-
-  function scrubQuestionChoices(quiz){
-    for(var i=1; i <= (Object.keys(quiz).length - numOfNonQuestions); i++){
-      for ( var j=0; j < quiz['question_'+i]['choices'].length; j++){
-        delete (quiz['question_'+i]['choices'][j].preview_url);
-        delete (quiz['question_'+i]['choices'][j].created_at);
-        delete (quiz['question_'+i]['choices'][j].updated_at);
-      }
-    }
-    return quiz;
-  }
-
-
   $('#artistsearchterm').autocomplete({
     // minLength: 3,
     delay: 500,
@@ -102,7 +44,7 @@ $(document).ready(function(){
       event.preventDefault();
       artistId = ui.item.artistId;
       artistName = ui.item.artistName;
-
+      $('.practice-quizzes').hide();
       $('#loadingscreen').slideDown(1000);
 
       $.ajax({
@@ -121,3 +63,63 @@ $(document).ready(function(){
     }
   });
 })
+//invariants
+var songSearchUrl = 'https://itunes.apple.com/search?attribute=allArtistTerm&entity=song&limit=100&term=';
+var artistSearchUrl= 'https://itunes.apple.com/search?entity=musicArtist&limit=5&term=';
+
+//results from iTunes APIs
+var artistName = '';
+var artistId;
+var artistObjectResults = null;
+
+function createSongList(artistObjectResults){
+  songArray = [];
+  for(var i =0; i< artistObjectResults['results'].length; i++){
+    if (artistId === artistObjectResults['results'][i].artistId) {
+      songArray.push(createSongObject( artistObjectResults['results'][i] ));
+    }
+  }
+  return songArray;
+}
+
+function createSongObject(itunesObject){
+  filteredObject = { 'artworkUrl100': itunesObject.artworkUrl100,
+                      'previewUrl': itunesObject.previewUrl,
+                      'trackName': itunesObject.trackName,
+                      'trackId': itunesObject.trackId
+                    };
+
+  return filteredObject;
+}
+
+function dbSend(artistName, artistId, songArray){
+  $.ajax({
+    url: '/quiz/create',
+    type: 'POST',
+    data: {name: artistName, id: artistId, list: songArray},
+    success: function(response){
+      $('#loadingscreen').slideUp(1000);
+      quiz = scrubQuestionChoices(response);
+      initializeGame();
+    },
+     failure: function(response){
+     $('#loadingscreen').slideUp(1000);
+      console.log('Fail');
+    }
+  });
+}
+
+function scrubQuestionChoices(quiz){
+  for(var i=1; i <= (Object.keys(quiz).length - numOfNonQuestions); i++){
+    for ( var j=0; j < quiz['question_'+i]['choices'].length; j++){
+      delete (quiz['question_'+i]['choices'][j].preview_url);
+      delete (quiz['question_'+i]['choices'][j].created_at);
+      delete (quiz['question_'+i]['choices'][j].updated_at);
+    }
+  }
+  return quiz;
+}
+
+
+
+

@@ -94,7 +94,7 @@ class QuizController < ApplicationController
       score: new_record.score,
       num_of_correct: user.number_correct_for_current_quiz(quiz_id, answers),
       time: times.reduce(:+),
-      itunes_track_ids: itunes_ids
+      itunes_track_ids: itunes_ids.shuffle
     }
 
     render "/_stats"
