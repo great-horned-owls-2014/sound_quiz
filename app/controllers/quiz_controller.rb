@@ -134,10 +134,6 @@ class QuizController < ApplicationController
       }
     end
 
-
-
-
-
     render "/_stats"
 
   end
