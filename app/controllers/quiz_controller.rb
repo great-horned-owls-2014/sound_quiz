@@ -126,9 +126,9 @@ class QuizController < ApplicationController
       end
 
       @quiz_stats = {
-        artist_id: params[:artistId],
+        artist_id: quiz_artist_id,
         score: new_record.score,
-        num_of_correct: user.number_correct_for_current_quiz(quiz_id, answers),
+        num_of_correct: dummy_user.number_correct_for_current_quiz(quiz_id, answers),
         time: times.reduce(:+),
         itunes_track_ids: itunes_ids
       }
