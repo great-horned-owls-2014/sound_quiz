@@ -266,7 +266,7 @@ text-align: center;
   text-shadow: 1px 1px 3px black;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 591px) {
   .logo img {
     height: 35px;
     width: 70px;
