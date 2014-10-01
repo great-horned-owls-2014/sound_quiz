@@ -109,6 +109,7 @@ function generateQuestionDiv(question){
   for(var i=0; i< question.choices.length; i++){
     divString += '<button style="display:block;" data-questionId="' + question['db_id'] + '" data-choiceId="'+ question.choices[i].id +'" class="answer-button" type="button">'+question.choices[i].name+'</button>';
   }
+  divString += '<button style="display:none;" data-questionId="' + question['db_id'] + '" data-choiceId="-1" class="answer-button" type="button"></button>';
   divString += songPlayer(question.player_url)+'</div>';
   return divString;
 }
