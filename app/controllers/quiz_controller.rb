@@ -13,7 +13,7 @@ class QuizController < ApplicationController
     if signed_in?
       user = User.find(session[:user_id])
 
-      if artist_created?(artist_itunes_id)
+      if artist
 
         if artist.quizzes.length > 0
           user_quiz_count_of_artist = user.taken_quizzes.where(artist: artist).count
@@ -21,21 +21,21 @@ class QuizController < ApplicationController
 
           if user_quiz_count_of_artist >= artist_quiz_count
             difficulty = artist_quiz_count + 1
-            quiz = create_quiz(artist, difficulty)
+            quiz = Quiz.create_quiz(artist, difficulty)
             artist.quizzes << quiz
           else
             quiz = artist.quizzes.find_by(difficulty_level: user_quiz_count_of_artist + 1)
           end
 
         else
-          quiz = create_quiz(artist, 1)
+          quiz = Quiz.create_quiz(artist, 1)
           artist.quizzes << quiz
         end
 
       end
 
     else
-      quiz = create_quiz(artist, 0)
+      quiz = Quiz.create_quiz(artist, 0)
     end
 
     render :json => create_frontend_quiz(artist, quiz.id)
