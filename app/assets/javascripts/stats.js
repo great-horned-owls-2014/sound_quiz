@@ -5,13 +5,15 @@ $(document).ready(function(){
 	// this part is really really freaking buggy, maybe take out
  	$('body').delegate('#playartistagain', 'click', function(event){
  		event.preventDefault();
+ 		$('#artist-section').hide();
+ 		$('.practice-quizzes').hide();
  		$('#loadingscreen').slideDown(1000);
  		$('.returnedstats').hide();
  		$('.gamequestions').remove();
  		$.ajax({
  		  url: '/quiz/create',
  		  type: 'POST',
- 		  data: {id: $('#playartistagain').data().itunesid},
+ 		  data: {id: $(this).data().itunesid},
  		  success: function(response){
  		    $('#loadingscreen').slideUp(1000);
  		    quiz = scrubQuestionChoices(response);
