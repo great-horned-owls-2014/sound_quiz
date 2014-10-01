@@ -1,16 +1,10 @@
 class QuizController < ApplicationController
 
   def initialize_new_artist_tracks(artist, songlist)
-    new_artist_tracks = []
-    songlist.length.times.map do |i|
-      new_track = Track.new(track_attribs_from_params(songlist[i.to_s]))
-      if new_track.save != false
-        new_artist_tracks << new_track
-      end
-  end
-
-    artist.tracks = new_artist_tracks
-    artist.save!
+    songlist.each do |key, value|
+      track_params = track_attribs_from_itunes_hash(value)
+      artist.add_track_if_not_present(track_params)
+    end
   end
 
   def create_frontend_quiz(artist, quiz_id)
@@ -82,12 +76,12 @@ class QuizController < ApplicationController
     { name: params[:name], itunes_id: params[:id] }
   end
 
-  def track_attribs_from_params track_from_params
+  def track_attribs_from_itunes_hash itunes_hash
     {
-      preview_url: track_from_params["previewUrl"],
-      art_url: track_from_params["artworkUrl100"],
-      name: track_from_params["trackName"],
-      itunes_track_id: track_from_params["trackId"]
+      preview_url: itunes_hash["previewUrl"],
+      art_url: itunes_hash["artworkUrl100"],
+      name: itunes_hash["trackName"],
+      itunes_track_id: itunes_hash["trackId"]
     }
   end
 
