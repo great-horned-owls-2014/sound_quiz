@@ -8,10 +8,12 @@
   font-size: 0;
 }
 .practice-quizzes h3 {
+  font-size: 22px;
   text-align: center;
   text-shadow: 2px 2px 3px black;
   color:white;
-  margin-top: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 @media (max-width: 500px) {
   .practice-quizzes{
