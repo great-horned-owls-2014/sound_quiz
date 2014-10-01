@@ -3,17 +3,30 @@
   text-shadow: 2px 2px 3px black;
   color:white;
 }
-
+.practice-quizzes{
+  text-align: center;
+  font-size: 0;
+}
 .practice-quizzes h3 {
   text-align: center;
   text-shadow: 2px 2px 3px black;
   color:white;
   margin-top: 15px;
 }
-.practice-quizzes ul {
-  text-align: center;
+@media (max-width: 500px) {
+  .practice-quizzes{
+    width:300px;
+    margin: 0 auto;
+  }
+  .practice-quizzes h3 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .practice-quizzes a {
+    float: left;
+    line-height: 0;
+    margin-bottom: -5px;
 }
 
-.practice-quizzes li {
-  display: inline-block;
 }
+
