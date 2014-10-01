@@ -59,6 +59,7 @@ class QuizController < ApplicationController
   def stats
     if signed_in?
       user = User.find(session[:user_id])
+      # quiz_id is set to questions.quiz.id
       quiz_id = Question.find(params[:returnVals]['0'][:question].to_i).quiz_id
       answers = []
       times = []
@@ -78,24 +79,64 @@ class QuizController < ApplicationController
       end
     end
 
-    quiz_artist_id = Quiz.find(quiz_id).artist.id
-    new_record = TakenQuiz.create(quiz_id: quiz_id, time: times.reduce(:+), score: user.quiz_score(quiz_id, answers, times), artist_id: quiz_artist_id)
-
-    user.taken_quizzes << new_record
-
     itunes_ids = []
 
-    Quiz.find(quiz_id).questions.each do |question|
-      itunes_ids << question.right_answer.itunes_track_id
+    unless quiz_id.nil?
+      quiz_artist_id = Quiz.find(quiz_id).artist.id
+      new_record = TakenQuiz.create(quiz_id: quiz_id, time: times.reduce(:+), score: user.quiz_score(quiz_id, answers, times), artist_id: quiz_artist_id)
+      user.taken_quizzes << new_record
+
+      Quiz.find(quiz_id).questions.each do |question|
+        itunes_ids << question.right_answer.itunes_track_id
+      end
+      @quiz_stats = {
+        artist_id: quiz_artist_id,
+        score: new_record.score,
+        num_of_correct: user.number_correct_for_current_quiz(quiz_id, answers),
+        time: times.reduce(:+),
+        itunes_track_ids: itunes_ids
+      }
+    else
+      answers = []
+      times = []
+      quiz_id = Question.find(params[:returnVals]["0"]["question"].to_i).quiz.id
+      quiz_artist_id = Artist.find_by(itunes_id: params[:artistId])
+      dummy_user = User.new(username: 'dummy', email: 'dummy@dummy')
+
+      params[:returnVals].values.each do |x|
+
+        new_answer = UserAnswer.new(
+          question_id: x[:question].to_i,
+          track_id: x[:track_id].to_i,
+          response_time: x[:response_time].to_f
+        )
+
+        dummy_user.user_answers << new_answer
+        answers << new_answer
+
+        times << x[:response_time].to_f
+      end
+
+      new_record = TakenQuiz.new(time: times.reduce(:+), score: dummy_user.quiz_score(quiz_id, answers, times))
+
+      dummy_user.taken_quizzes << new_record
+
+      Quiz.find(quiz_id).questions.each do |question|
+        itunes_ids << question.right_answer.itunes_track_id
+      end
+
+      @quiz_stats = {
+        artist_id: quiz_artist_id,
+        score: new_record.score,
+        num_of_correct: dummy_user.number_correct_for_current_quiz(quiz_id, answers),
+        time: times.reduce(:+),
+        itunes_track_ids: itunes_ids
+      }
     end
 
-    @quiz_stats = {
-      artist_id: quiz_artist_id,
-      score: new_record.score,
-      num_of_correct: user.number_correct_for_current_quiz(quiz_id, answers),
-      time: times.reduce(:+),
-      itunes_track_ids: itunes_ids
-    }
+
+
+
 
     render "/_stats"
 
