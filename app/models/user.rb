@@ -21,11 +21,72 @@ class User < ActiveRecord::Base
       multiplier = 2.5
     end
 
-    time_elapsed_for_quiz = time_arr.reduce(:+)
-    inverse_time_elapsed = 1.0 / time_elapsed_for_quiz
-    raw_score = number_correct_for_current_quiz(quiz_id, user_answers_arr) * inverse_time_elapsed
 
-    meaningful_score = (raw_score * 1000000000 * multiplier).to_i
+
+
+
+
+
+    num_correct = number_correct_for_current_quiz(quiz_id, user_answers_arr)
+
+    if num_correct > 0
+
+      quiz = Quiz.find(quiz_id)
+      quiz_questions = quiz.questions.order(id: :asc)
+      user_answers_arr.sort_by{|x| x.question_id}
+
+      quiz_answers = quiz_questions.map{|x| x.track_id}
+      user_choices = user_answers_arr.map{|x| x.track_id}
+      pairs = user_choices.zip(quiz_answers)
+
+      i = 1
+      total_correct = 0
+      question_scores = []
+
+      pairs.each do |pair|
+        if  pair[0] == pair[1]
+          question_score = (1 * 100000) + ((time_arr[i] - time_arr[i-1]) * 10)
+          question_scores << question_score
+          total_correct += 1
+        end
+
+        i += 1
+
+      end
+
+      question_scores.reduce(:+)
+
+
+
+      # scores_per_question = []
+
+      # user_answers_arr.each do | user |
+
+      # puts "=" * 50
+      # puts "Here are the times in the times_arr:"
+      # puts time_arr
+      # puts "=" * 50
+
+      # puts "=" * 50
+      # puts "Here are your user's answers:"
+      # puts user_answers_arr
+      # puts "=" * 50
+
+      # time_elapsed_for_quiz = time_arr.reduce(:+)
+      # inverse_time_elapsed = 1.0 / time_elapsed_for_quiz
+      # time_bonus = inverse_time_elapsed * 1000
+
+      # score = multiplied_num_correct + time_bonus
+
+    else
+
+      score = 0
+
+    end
+
+    # raw_score = number_correct_for_current_quiz(quiz_id, user_answers_arr) * inverse_time_elapsed
+
+    # meaningful_score = (raw_score * 1000000000 * multiplier).to_i
   end
 
   def all_time_percentage_correct # returns percentage correct vs all questions ever taken
