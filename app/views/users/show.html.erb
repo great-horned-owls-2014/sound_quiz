@@ -1,5 +1,5 @@
 
-<div class="userprofile">
+<div class="userprofile display-board">
 	<h2><%=@user.username%>'s stats</h2>
 
 	<% if @user.id == session[:user_id] %>
@@ -13,10 +13,10 @@
     <td>taken</td>
   </tr>
   <% @artist_taken.each do |artist_id, count| %>
-  	<tr class="table-row">
+  	<tr class="table-row highlight">
 	  	<% artist = Artist.find(artist_id) %>
 		    <td><a href="/artists/<%=artist_id%>"><%= artist.name %></a></td>
-		    <td><%= @user.artist_score(artist).round %></td>
+		    <td class="score"><%= @user.artist_score(artist).round %></td>
 		    <td class="taken-count"><%= count %></td>
   	</tr>
   <% end%>

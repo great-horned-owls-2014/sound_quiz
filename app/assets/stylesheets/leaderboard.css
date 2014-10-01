@@ -1,0 +1,14 @@
+.artist-search{
+  margin-top: 10px;
+  padding-top: 10px;
+
+}
+.artist-search table{
+  padding-bottom: 15px;
+  line-height: 2em;
+}
+.artist-search tr:hover{
+  background-color: #777;
+  color: white;
+}
+

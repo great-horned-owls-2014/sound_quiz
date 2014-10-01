@@ -1,0 +1,19 @@
+.navbar i{
+  display: none;
+}
+.navbar li a{
+  font-size: 1.3em;
+  text-decoration: none;
+  color: #fa0;
+  background-color: #C50;
+  border-radius: 5px;
+  border: 6px solid #ea8008;
+  padding: 10px;
+  margin: 0;
+  margin-left: 5px;
+}
+.navbar li a:hover{
+  color: white;
+  border: 6px solid white;
+  background-color: #ee7722;
+}

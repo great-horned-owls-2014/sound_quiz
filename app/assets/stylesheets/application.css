@@ -21,6 +21,7 @@
  html{
   font-family: 'Fira Sans', sans-serif;
   /*font-family: 'Lato', sans-serif;*/
+  font-family: 'Press Start 2P', cursive;
   background-color: #292929;
   max-height: 100vh;
  }
@@ -100,20 +101,6 @@ button:hover{
 .navbar ul{
   float: right;
   margin-right: 10px;
-}
-.navbar li a{
-  font-size: 1.3em;
-  text-decoration: none;
-  color: #fa0;
-  background-color: #C50;
-  border-radius: 5px;
-  padding: 2px 15px;
-  margin: 0;
-  margin-left: 5px;
-}
-.navbar li a:hover{
-  color: white;
-  background-color: #ee7722;
 }
 .container{
   width: 70%;
@@ -199,10 +186,6 @@ text-align: center;
   display: inline-block;
   margin-right: 5px;
 }
-.userprofile table{
-  margin: 0 auto;
-  width: 65%;
-}
 .userprofile .table-headings{
   font-weight: bold;
   font-size: 1.2em;
@@ -265,6 +248,28 @@ text-align: center;
   color: white;
   text-shadow: 1px 1px 3px black;
 }
+.highlight:hover{
+  background-color: #777;
+  color: white;
+}
+
+.highlight:hover a{
+  color: white;
+}
+.display-board{
+  text-align: center;
+  padding: 15px;
+  box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.3);
+  background-color: #555;
+  border: 8px dashed white;
+}
+.left-align{
+  text-align: left;
+  padding-left: 15px;
+}
+.score{
+  text-align: right;
+}
 
 @media (max-width: 591px) {
   .logo img {
@@ -322,6 +327,9 @@ text-align: center;
   }
   .nav-caption{
     display: none;
+  }
+  .navbar i{
+    display: inherit;
   }
   .signup-form input, .login-form input, .useredit input{
     margin-bottom: 4px;
