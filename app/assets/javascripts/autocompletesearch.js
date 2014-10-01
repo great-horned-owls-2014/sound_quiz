@@ -6,9 +6,16 @@
      }
    });
 
+  function placeAutocomplete(){
+      var inputWidth = $('#artistsearchterm').width();
+      console.log(inputWidth)
+     $('#ui-id-1').css("margin-left",  (-1 * inputWidth / 2 - 6) +"px" );
+  }
+
   //invariants
   var songSearchUrl = 'https://itunes.apple.com/search?attribute=allArtistTerm&entity=song&limit=100&term=';
   var artistSearchUrl= 'https://itunes.apple.com/search?entity=musicArtist&limit=5&term=';
+  var menuUL = $('.ui-menu');
 
   //results from iTunes APIs
   var artistName = '';
@@ -121,6 +128,12 @@ $(document).ready(function(){
           console.log("Ajax failed. Here was the response from the server: " + failResponse);
         }
       })
-    }
+    },
   });
 })
+
+
+
+
+
+
