@@ -105,7 +105,8 @@ $(document).ready(function(){
       event.preventDefault();
       artistId = ui.item.artistId;
       artistName = ui.item.artistName;
-
+      $('#artist-section').hide();
+      $('.practice-quizzes').hide();
       $('#loadingscreen').slideDown(1000);
 
       $.ajax({
