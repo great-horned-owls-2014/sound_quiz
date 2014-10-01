@@ -1,3 +1,4 @@
+
 Question.create!([
   {id: 1, track_id: 1, quiz_id: 1, created_at: "2014-09-29 20:49:37", updated_at: "2014-09-29 20:49:37"},
   {id: 2, track_id: 2, quiz_id: 1, created_at: "2014-09-29 20:49:37", updated_at: "2014-09-29 20:49:37"},
@@ -5034,3 +5035,10 @@ Artist.create!([
   {id: 14, name: "Wolfgang Amadeus Mozart", itunes_id: 12374, created_at: "2014-10-01 18:43:08", updated_at: "2014-10-01 18:43:08"},
   {id: 15, name: "Luciano Pavarotti", itunes_id: 219627, created_at: "2014-10-01 18:46:05", updated_at: "2014-10-01 18:46:05"}
 ])
+
+tables = ['artists', 'questions', 'quizzes', 'taken_quizzes', 'tracks', 'user_answers', 'users', 'wrong_choices']
+tables.each do |table|
+  seq = table + '_id_seq'
+  statement = "SELECT setval('#{seq}', (SELECT MAX(id) FROM #{table}));"
+  ActiveRecord::Base.connection.execute(statement)
+end
