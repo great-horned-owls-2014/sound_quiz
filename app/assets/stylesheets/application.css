@@ -65,7 +65,7 @@ input[type=text], input[type=password]{
     width: 500px;
     margin: auto;
     display: block;
-    padding 0 20px;
+    padding: 0 20px;
     text-transform: uppercase;
 }
 #artist-search{
@@ -175,15 +175,15 @@ input[type=text], input[type=password]{
   text-shadow: 1px 1px 3px black;
 }
 .highlight:hover{
-  background-color: #777;
-  color: white;
+  background-color: #fff;
+  color: #000;
 }
 .highlight:hover a{
-  color: white;
+  color: #000;
 }
 .left-align{
-  text-align: left;
-  padding-left: 15px;
+  text-align: center;
+  padding: 10px 0;
 }
 .score{
   text-align: right;
@@ -194,9 +194,10 @@ input[type=text], input[type=password]{
 }
 .table-headings{
   font-weight: bold;
-  background-color: #fa0;
-  font-size: 1.2em;
+  /*background-color: #fa0;*/
+  font-size: 1em;
   text-align: center;
+  color: #f90;
 }
 #artist_name input{
   border: 5px dashed black;
@@ -268,6 +269,43 @@ input[type=text], input[type=password]{
   }
 }
 
+.info-area {
+  border: 0;
+  background: rgba(0,0,0,0.5);
+  margin-top: 60px;
+  border-radius: 3px;
+  padding: 20px;
+}
 
+#artist_name {
+  border: 0;
+  background: #fff;
+  border-radius: 3px;
+  padding: 0 20px;
+  text-transform: uppercase;
+  outline: 0;
+  font-size: 1em;
+}
 
+.highlight:hover {
+  cursor: pointer;
+}
 
+.artist-list {
+  margin-top: 0;
+}
+
+.left-align a {
+  text-shadow: 0;
+  color: #fff;
+}
+
+.highlight {
+  color: #fff;
+}
+
+tr.table-headings {
+  height: 60px;
+  font-size: 16px;
+  text-transform: uppercase;
+}
