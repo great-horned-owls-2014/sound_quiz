@@ -16,9 +16,10 @@
 #ui-id-1 li {
   list-style: none;
   height: 50px;
+  overflow:hidden;
   line-height: 50px;
   padding-left: 10px;
-  font-size: 1.2em;
+  font-size: 1em;
 }
 #ui-id-1 li:hover {
   background-color: #666;
