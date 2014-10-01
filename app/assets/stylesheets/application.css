@@ -13,20 +13,19 @@
  *= require_tree .
  *= require_self
  */
- *{
+*{
   margin:0;
   padding:0;
  }
- html{
+html{
   font-family: 'Fira Sans', sans-serif;
   font-family: 'Press Start 2P', cursive;
   background-color: #000;
- }
+}
 html::after {
   content: "";
   background: url("/tiling_bg.jpg");
   background-repeat: repeat;
-  box-shadow:inset 0 0 600px 75px rgba(0,0,0,1);
   opacity: 0.2;
   top: 0;
   left: 0;
@@ -267,7 +266,6 @@ input[type=text], input[type=password]{
     width: 100%;
   }
 }
-
 
 
 

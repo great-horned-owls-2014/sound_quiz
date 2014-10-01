@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 
     time_elapsed_for_quiz = time_arr.reduce(:+)
     inverse_time_elapsed = 1.0 / time_elapsed_for_quiz
-    raw_score = number_correct_for_current_quiz(quiz_id, user_answers_arr) * inverse_time_elapsed
+    raw_score = number_correct_for_current_quiz(user_answers_arr) * inverse_time_elapsed
 
     meaningful_score = (raw_score * 1000000000 * multiplier).to_i
   end
@@ -34,18 +34,12 @@ class User < ActiveRecord::Base
     total_successful_attempts_ever / total_attempts_ever
   end
 
-  def number_correct_for_current_quiz (quiz_id, user_answers_arr)
-    total_successful_attempts_for_this_quiz = 0
-    quiz = Quiz.find(quiz_id)
-    quiz_questions = quiz.questions.order(id: :asc)
-    user_answers_arr.sort_by{|x| x.question_id}
-
-    answers = quiz_questions.map{|x| x.track_id}
-    choices = user_answers_arr.map{|x| x.track_id}
-    pairs = choices.zip(answers)
-    pairs.each{|pair| total_successful_attempts_for_this_quiz +=1 if  pair[0] == pair[1]  }
-
-    total_successful_attempts_for_this_quiz
+  def number_correct_for_current_quiz ( user_answers_arr)
+    total_correct = 0
+    user_answers_arr.each do |ans|
+      total_correct += 1 if ans.user_decision == ans.question.right_answer
+    end
+    total_correct
   end
 
   def artist_score(artist)
