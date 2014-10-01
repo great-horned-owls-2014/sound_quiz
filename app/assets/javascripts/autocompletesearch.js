@@ -1,5 +1,3 @@
-$(document).ready(function(){
-
   //prevent pressing of enter and making a manual call to iTunes API
   $(window).keydown(function(event){
      if(event.keyCode == 13) {
@@ -64,6 +62,11 @@ $(document).ready(function(){
     }
     return quiz;
   }
+
+
+
+$(document).ready(function(){
+
 
 
   $('#artistsearchterm').autocomplete({

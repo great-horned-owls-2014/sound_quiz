@@ -40,12 +40,14 @@ function checkGameStatus(){
 
 function endGame(){
   $('#stats').show();
+  console.log(formatValues());
   $.ajax({
     url: '/quiz/stats',
     type: 'POST',
     data: formatValues(),
     success: function(response){
       $('#loadingscreen').slideUp(1000);
+      console.log('Success!');
 
       setTimeout(function (){
         $('.container').append(response);
@@ -56,13 +58,13 @@ function endGame(){
     failure: function(response){
       $('#loadingscreen').slideUp(1000);
       console.log(response);
-      console.log("failure");
+      console.log("Failure!!!");
     }
   });
 }
 
 function formatValues(){
-  var formattedValues = {'returnVals':{ }};
+  var formattedValues = {'returnVals':{ }, 'artistId': artistId};
   for(var i=0; i < answerArray.length; i++){
     formattedValues['returnVals'][i] = { track_id: answerArray[i].choiceid, question: answerArray[i].questionid, response_time: (timeArray[i+1] - timeArray[i]) };
   }
