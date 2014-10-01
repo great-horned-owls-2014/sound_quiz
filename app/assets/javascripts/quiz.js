@@ -47,13 +47,10 @@ function endGame(){
     data: formatValues(),
     success: function(response){
       $('#loadingscreen').slideUp(1000);
-      console.log('Success!');
-
       setTimeout(function (){
         $('.container').append(response);
-        // $('#score').show()
+        updateItunesLinks();
       },1000);
-
     },
     failure: function(response){
       $('#loadingscreen').slideUp(1000);
@@ -94,13 +91,15 @@ function recordUserAnswer(){
 function initializeGame(){
   document.querySelector('#artist-search').style.display = 'none';
   document.querySelector('#game-section').style.display = 'inherit';
+  timeArray = [];
+  answerArray = [];
   for(var i=1; i <= (Object.keys(quiz).length - numOfNonQuestions); i++){
     $('#game-section').append(generateQuestionDiv(quiz['question_'+i]));
   }
 }
 
 function generateQuestionDiv(question){
-  divString = '<div  style="display: none;" data-questionId="'+ question['db_id']  +'">';
+  divString = '<div  style="display: none;" class="gamequestions" data-questionId="'+ question['db_id']  +'">';
   for(var i=0; i< question.choices.length; i++){
     divString += '<button style="display:block;" data-questionId="' + question['db_id'] + '" data-choiceId="'+ question.choices[i].id +'" class="answer-button" type="button">'+question.choices[i].name+'</button>';
   }

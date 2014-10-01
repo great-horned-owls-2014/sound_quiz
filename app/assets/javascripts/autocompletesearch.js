@@ -74,8 +74,6 @@
 
 $(document).ready(function(){
 
-
-
   $('#artistsearchterm').autocomplete({
     // minLength: 3,
     delay: 500,
@@ -132,9 +130,5 @@ $(document).ready(function(){
     },
   });
 })
-
-
-
-
 
 

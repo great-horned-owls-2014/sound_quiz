@@ -1,24 +1,25 @@
 <div class="returnedstats">
 
+	<h2>your quiz results</h2>
 
-
-	<h3>leaderboard</h3>
-	<a href = "/artists/<%=@quiz_stats[:artist_id]%>"><%=Artist.find(@quiz_stats[:artist_id]).name%></a>
-	<h3>stats</h3>
 	<ul>
 		<li>score: <%= @quiz_stats[:score]%></li>
-		<li>took you: <%= @quiz_stats[:time]/1000%></li>
-		<li>right: <%= @quiz_stats[:num_of_correct] %></li>
+		<li>time taken: <%= @quiz_stats[:time]/1000%> seconds</li>
+		<li>correct choices: <%= @quiz_stats[:num_of_correct].round %></li>
 	</ul>
-
+	<p>Check out the <a href = "/artists/<%=@quiz_stats[:artist_id]%>"><%=Artist.find(@quiz_stats[:artist_id]).name%> leaderboard</a></p>
+	<br><br>
 	<h3>tracks played</h3>
 	<ul>
 		<% @quiz_stats[:itunes_track_ids].each do |id| %>
 			<li data-track-id="<%=id%>"><%=id%></li>
 		<% end %>
 	</ul>
+	<br><br>
 
-		<h2><a href= "/">play again?</a><h2>
+	<h2><a href="#" id="playartistagain" data-itunesId="<%=Artist.find(@quiz_stats[:artist_id]).itunes_id%>">play <%=Artist.find(@quiz_stats[:artist_id]).name%> again?</a></h2>
+	<h2><a href= "/">play a new artist?</a><h2>
+
 	<% if !session[:user_id] %>
 
 		<div id='login-reminder'>

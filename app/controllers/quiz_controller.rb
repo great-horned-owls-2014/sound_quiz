@@ -1,7 +1,5 @@
 class QuizController < ApplicationController
 
-
-
   def create
     # artist & tracks, knows nothing of quiz
     artist_itunes_id = params[:id]
@@ -104,7 +102,6 @@ class QuizController < ApplicationController
       dummy_user = User.new(username: 'dummy', email: 'dummy@dummy')
 
       params[:returnVals].values.each do |x|
-
         new_answer = UserAnswer.new(
           question_id: x[:question].to_i,
           track_id: x[:track_id].to_i,
@@ -130,12 +127,9 @@ class QuizController < ApplicationController
         score: new_record.score,
         num_of_correct: dummy_user.number_correct_for_current_quiz(quiz_id, answers),
         time: times.reduce(:+),
-        itunes_track_ids: itunes_ids
+        itunes_track_ids: itunes_ids.shuffle
       }
     end
-
-    render "/_stats"
-
+    render partial: "/stats"
   end
-
 end
