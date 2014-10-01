@@ -2,6 +2,13 @@ class Quiz < ActiveRecord::Base
   belongs_to :artist
   has_many :questions
 
+  QUIZ_TYPES = {
+    0 => {difficulty: 0, source: 5, choices:  10},
+    1 => {difficulty: 1, source: 5, choices:  15 },
+    2 => {difficulty: 2, source: 10, choices: 20 },
+    3 => {difficulty: 3, source: 20, choices: 20 }
+  }
+
   def self.create_quiz(artist, difficulty)
     new_quiz = Quiz.new(difficulty_level: difficulty)
     if difficulty >= 3
@@ -9,7 +16,7 @@ class Quiz < ActiveRecord::Base
     else
       quiz_key_difficulty = difficulty
     end
-    answer_tracks = artist.tracks.first(QUIZKEY[quiz_key_difficulty][:source])
+    answer_tracks = artist.tracks.first(QUIZ_TYPES[quiz_key_difficulty][:source])
     answer_tracks.shuffle!
 
     while new_quiz.questions.length < 5
@@ -17,7 +24,7 @@ class Quiz < ActiveRecord::Base
     end
 
     new_quiz.questions.each do |question|
-      choices = artist.tracks.first(QUIZKEY[quiz_key_difficulty][:choices])
+      choices = artist.tracks.first(QUIZ_TYPES[quiz_key_difficulty][:choices])
       choices.shuffle!
       while question.wrong_choices.length < 3
         potential_wrong_answer = choices.pop
