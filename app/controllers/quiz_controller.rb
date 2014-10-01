@@ -3,9 +3,9 @@ class QuizController < ApplicationController
   def create
     # artist & tracks, knows nothing of quiz
     artist_itunes_id = params[:id]
-    if artist_created?(artist_itunes_id)
-      artist = Artist.find_by(itunes_id: artist_itunes_id)
-    else
+    artist = Artist.find_by(itunes_id: artist_itunes_id)
+
+    if !artist
       artist = Artist.new(artist_attribs_from_params(params))
       initialize_new_artist_tracks(artist, params[:list])
     end

@@ -11,10 +11,6 @@ module ApplicationHelper
     session[:user_id] ? true : false
   end
 
-  def artist_created?(artist_itunes_id)
-    Artist.find_by(itunes_id: artist_itunes_id) ? true : false
-  end
-
   def initialize_new_artist_tracks(artist, songlist)
     new_artist_tracks = []
     songlist.length.times.map do |i|
