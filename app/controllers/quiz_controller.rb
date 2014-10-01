@@ -47,8 +47,8 @@ class QuizController < ApplicationController
       initialize_new_artist_tracks(artist, params[:list])
     end
 
-    if signed_in?
-      user = User.find(session[:user_id])
+    if current_user
+      user = current_user
 
       if artist
 
@@ -92,8 +92,8 @@ class QuizController < ApplicationController
   end
 
   def stats
-    if signed_in?
-      user = User.find(session[:user_id])
+    if current_user
+      user = current_user
       # quiz_id is set to questions.quiz.id
       quiz_id = Question.find(params[:returnVals]['0'][:question].to_i).quiz_id
       answers = []
