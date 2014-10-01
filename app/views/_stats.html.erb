@@ -1,4 +1,7 @@
 <div class="returnedstats">
+
+
+
 	<h3>leaderboard</h3>
 	<a href = "/artists/<%=@quiz_stats[:artist_id]%>"><%=Artist.find(@quiz_stats[:artist_id]).name%></a>
 	<h3>stats</h3>
@@ -16,4 +19,13 @@
 	</ul>
 
 		<h2><a href= "/">play again?</a><h2>
+	<% if !session[:user_id] %>
+
+		<div id='login-reminder'>
+			<p> Looks like you weren't signed in.</p>
+			<p>Make Sure You Sign In To Have Your Future Scores Recorded On Artists' Leaderboards</p>
+			<a href="/login">Login</a> or <a href="/signup">Signup</a>
+		</div>
+	<% end %>
 </div>
+
