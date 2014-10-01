@@ -86,6 +86,7 @@ $(document).ready(function(){
         $.ajax({
             url: artistSearchUrl + artistSearchTerms,
             dataType: "jsonp",
+            timeout: 3000,
             data: {term: request.term},
             success: function( artistObject ) {
               artistObjectResults = artistObject.results
@@ -101,9 +102,19 @@ $(document).ready(function(){
               }));
               document.querySelector("#ui-id-1").removeAttribute("style");
             },
-            failure: function( data ) {
-              console.log ('Ajax fail');
-              response ( data );
+            error: function(request, status, err) {
+                    debugger
+                   if(status==="timeout") {
+                      $('.container').hide();
+                      $('.errors').append('<p>iTunes seems to be unresponsive.</p><br>')
+                      $('.errors').append('<p><a href="/">Please try again.</a></p>')
+                      $('.errors').show();
+                   } else {
+                     $('.container').hide();
+                     $('.errors').append('<p>Error: '+ status + err + '</p><br>')
+                     $('.errors').append('<p><a href="/">Please try again.</a></p>')
+                     $('.errors').show();
+                   }
             }
         });
       },
