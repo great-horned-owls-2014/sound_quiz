@@ -1,0 +1,14 @@
+#choices-screen{
+  border: 2px solid white;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  display: none;
+}
+
+#timer {
+  text-align: center;
+  color: white;
+  display: none;
+  padding-top: 20px;
+}
