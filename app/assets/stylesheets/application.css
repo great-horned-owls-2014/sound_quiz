@@ -13,20 +13,19 @@
  *= require_tree .
  *= require_self
  */
- *{
+*{
   margin:0;
   padding:0;
  }
- html{
+html{
   font-family: 'Fira Sans', sans-serif;
   font-family: 'Press Start 2P', cursive;
   background-color: #000;
- }
+}
 html::after {
   content: "";
   background: url("/tiling_bg.jpg");
   background-repeat: repeat;
-  box-shadow:inset 0 0 600px 75px rgba(0,0,0,1);
   opacity: 0.2;
   top: 0;
   left: 0;
@@ -38,6 +37,7 @@ html::after {
 .container{
   width: 70%;
   margin: 0 auto;
+  padding-bottom: 40px;
 }
 input[type=text], input[type=password]{
     box-sizing: border-box;
@@ -65,7 +65,7 @@ input[type=text], input[type=password]{
     width: 500px;
     margin: auto;
     display: block;
-    padding 0 20px;
+    padding: 0 20px;
     text-transform: uppercase;
 }
 #artist-search{
@@ -175,28 +175,29 @@ input[type=text], input[type=password]{
   text-shadow: 1px 1px 3px black;
 }
 .highlight:hover{
-  background-color: #777;
-  color: white;
+  background-color: #fff;
+  color: #000;
 }
 .highlight:hover a{
-  color: white;
+  color: #000;
 }
 .left-align{
-  text-align: left;
-  padding-left: 15px;
+  text-align: center;
+  padding: 10px 0;
 }
-.score{
+/*.score{
   text-align: right;
-}
+}*/
 .marquee{
   color: #Fa0;
   font-size: 1.9em;
 }
 .table-headings{
   font-weight: bold;
-  background-color: #fa0;
-  font-size: 1.2em;
+  /*background-color: #fa0;*/
+  font-size: 1em;
   text-align: center;
+  color: #f90;
 }
 #artist_name input{
   border: 5px dashed black;
@@ -268,6 +269,72 @@ input[type=text], input[type=password]{
   }
 }
 
+.info-area {
+  border: 0;
+  background: rgba(0,0,0,0.7);
+  margin-top: 40px;
+  border-radius: 3px;
+  padding: 20px;
+  color: #fff;
+}
 
+.info-area h2 {
+  color: #f90;
+  margin-bottom: 40px;
+}
 
+#artist_name {
+  border: 0;
+  background: #fff;
+  border-radius: 3px;
+  padding: 0 20px;
+  text-transform: uppercase;
+  outline: 0;
+  font-size: 1em;
+}
 
+.highlight:hover {
+  cursor: pointer;
+}
+
+.artist-list {
+  margin-top: 0;
+}
+
+.left-align a {
+  text-shadow: 0;
+  color: #fff;
+}
+
+.highlight, .table-row a {
+  color: #fff;
+  font-size: 1em;
+}
+
+tr.table-headings {
+  height: 60px;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+td {
+  text-align: center;
+}
+
+.highlight td {
+  font-size: 16px;
+}
+
+.marquee {
+  display: block;
+  float: left;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.small-link {
+  display: block;
+  float: right;
+  font-size: 0.6em;
+}
