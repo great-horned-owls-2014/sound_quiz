@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     else
        notice_string = "Edit succesful!"
     end
-    redirect_to root_url, notice: notice_string
+    redirect_to user_path, notice: notice_string
   end
 
   def show
