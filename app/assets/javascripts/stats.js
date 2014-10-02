@@ -7,7 +7,6 @@ $(document).ready(function(){
  		event.preventDefault();
  		$('#artist-section').hide();
  		$('.practice-quizzes').hide();
- 		$('#loadingscreen').slideDown(1000);
  		$('.returnedstats').hide();
  		$('.gamequestions').remove();
  		$.ajax({
@@ -15,7 +14,6 @@ $(document).ready(function(){
  		  type: 'POST',
  		  data: {id: $(this).data().itunesid},
  		  success: function(response){
- 		    $('#loadingscreen').slideUp(1000);
  		    quiz = scrubQuestionChoices(response);
  		    $('.ui-autocomplete').remove();
  		    $('.ui-helper-hidden-accessible').remove();
@@ -23,7 +21,6 @@ $(document).ready(function(){
  		    $('#start-game').show();
  		  },
  		   failure: function(response){
- 		   $('#loadingscreen').slideUp(1000);
  		    console.log('Fail');
  		  }
  		});
