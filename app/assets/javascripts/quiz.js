@@ -96,7 +96,7 @@ function recordUserAnswer(){
 function initializeGame(){
   $('button#loading').hide();
   $('button#start').show();
-  $('#play-start-message').text("Turn up your sound and click play to start "+quiz.artist +"'s quiz!")
+  $('#play-start-message').text("Turn up your sound and click play to start the "+quiz.artist +" quiz!");
   $('#play-start-message').show();
   timeArray = [];
   answerArray = [];
