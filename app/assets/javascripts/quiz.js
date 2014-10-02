@@ -14,6 +14,7 @@ $(document).ready(function(){
 
   //start and play the game
   $('button#start').on('click', function(event){
+    $('#play-start-message').hide();
     $('#choices-screen').show();
     recordTimeTaken();
     hideSelf.call(this);
@@ -97,6 +98,8 @@ function recordUserAnswer(){
 function initializeGame(){
   document.querySelector('#artist-search').style.display = 'none';
   document.querySelector('#game-section').style.display = 'inherit';
+  $('#play-start-message').append("Click play to start "+quiz.artist +"'s quiz!")
+  $('#play-start-message').show();
   timeArray = [];
   answerArray = [];
   for(var i=1; i <= (Object.keys(quiz).length - numOfNonQuestions); i++){
