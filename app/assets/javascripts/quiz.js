@@ -14,6 +14,7 @@ $(document).ready(function(){
 
   //start and play the game
   $('button#start').on('click', function(event){
+    $('button#start').hide();
     $('#play-start-message').hide();
     $('#choices-screen').show();
     recordTimeTaken();
@@ -46,16 +47,16 @@ function checkGameStatus(){
 }
 
 function endGame(){
-  $('#stats').show();
+  $('#start-game').show();
+  $('button#loading').show();
   $.ajax({
     url: '/quiz/stats',
     type: 'POST',
     data: formatValues(),
     success: function(response){
-      setTimeout(function (){
-        $('.container').append(response);
-        updateItunesLinks();
-      },1000);
+      $('button#loading').hide();
+      $('.container').append(response);
+      updateItunesLinks();
     },
     failure: function(response){
       console.log(response);
@@ -93,9 +94,9 @@ function recordUserAnswer(){
 }
 
 function initializeGame(){
-  document.querySelector('#artist-search').style.display = 'none';
-  document.querySelector('#game-section').style.display = 'inherit';
-  $('#play-start-message').append("Turn up your sound and click play to start "+quiz.artist +"'s quiz!")
+  $('button#loading').hide();
+  $('button#start').show();
+  $('#play-start-message').text("Turn up your sound and click play to start "+quiz.artist +"'s quiz!")
   $('#play-start-message').show();
   timeArray = [];
   answerArray = [];
