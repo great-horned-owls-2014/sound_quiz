@@ -44,6 +44,7 @@
   }
   .answer-button{
     width:100%;
+    max-height: 75px;
     margin: 0 0 10px 0;
     display: block;
   }
