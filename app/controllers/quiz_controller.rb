@@ -86,6 +86,8 @@ class QuizController < ApplicationController
   end
 
   def stats
+    itunes_ids = []
+
     if current_user
       user = current_user
       # quiz_id is set to questions.quiz.id
@@ -106,11 +108,7 @@ class QuizController < ApplicationController
 
         times << x[:response_time].to_f
       end
-    end
 
-    itunes_ids = []
-
-    unless quiz_id.nil?
       quiz_artist_id = Quiz.find(quiz_id).artist.id
       @artist = Artist.find(quiz_artist_id)
       new_record = TakenQuiz.create(quiz_id: quiz_id, time: times.reduce(:+), score: user.quiz_score(quiz_id, answers, times), artist_id: quiz_artist_id)
