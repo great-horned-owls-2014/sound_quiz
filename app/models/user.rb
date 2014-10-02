@@ -21,11 +21,36 @@ class User < ActiveRecord::Base
       multiplier = 2.5
     end
 
-    time_elapsed_for_quiz = time_arr.reduce(:+)
-    inverse_time_elapsed = 1.0 / time_elapsed_for_quiz
-    raw_score = number_correct_for_current_quiz(user_answers_arr) * inverse_time_elapsed
+    num_correct = number_correct_for_current_quiz( user_answers_arr)
 
-    meaningful_score = (raw_score * 1000000000 * multiplier).to_i
+    if num_correct > 0
+
+      quiz = Quiz.find(quiz_id)
+      quiz_questions = quiz.questions
+      quiz_answers = quiz_questions.map{|x| x.track_id}
+
+      user_answers_arr.sort_by{|x| x.question_id}
+      user_choices = user_answers_arr.map{|x| x.track_id}
+
+      pairs = user_choices.zip(quiz_answers)
+
+      i = 0
+      question_scores = []
+
+      pairs.each do |pair|
+        if  pair[0] == pair[1]
+          question_score = 100000
+          time_bonus = (  ( 1 - time_arr[i]  / 30000 ) * 100000)
+          total_question_score = question_score + time_bonus
+          question_scores << total_question_score
+        end
+        i += 1
+      end
+      grand_total_for_quiz = question_scores.reduce(:+)
+    else
+      grand_total_for_quiz = 0
+    end
+    grand_total_for_quiz
   end
 
   def all_time_percentage_correct # returns percentage correct vs all questions ever taken
