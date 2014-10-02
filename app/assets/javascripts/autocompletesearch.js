@@ -46,8 +46,9 @@
         initializeGame();
       },
        error: function(response){
-       $('.errors').append("<p>iTunes does not have enough songs to generate quiz.</p><br>")
-       $('.errors').append('<p><a href="/">Please pick another artist</a></p>')
+       $('button#loading').hide();
+       $('.errors').append("<p>iTunes does not have enough songs to generate quiz.</p><br>");
+       $('.errors').append('<p><a href="/">Please pick another artist</a></p>');
        $('.errors').show();
       }
     });
@@ -127,8 +128,12 @@ $(document).ready(function(){
           selectedArtistSongList = createSongList(songObject);
           dbSend(artistName, artistId, selectedArtistSongList);
         },
-        failure: function(failResponse){
+        error: function(failResponse){
+          $('button#loading').hide();
           console.log("Ajax failed. Here was the response from the server: " + failResponse);
+          $('.errors').append('<p>Error: '+ failResponse + '</p><br>');
+          $('.errors').append('<p><a href="/">Please try again.</a></p>');
+          $('.errors').show();
         }
       })
     },

@@ -60,6 +60,7 @@ function endGame(){
     },
     failure: function(response){
       console.log(response);
+      $('button#loading').hide();
       console.log("Failure!!!");
     }
   });
