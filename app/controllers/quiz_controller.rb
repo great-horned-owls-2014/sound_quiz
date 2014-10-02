@@ -112,6 +112,7 @@ class QuizController < ApplicationController
 
     unless quiz_id.nil?
       quiz_artist_id = Quiz.find(quiz_id).artist.id
+      @artist = Artist.find(quiz_artist_id)
       new_record = TakenQuiz.create(quiz_id: quiz_id, time: times.reduce(:+), score: user.quiz_score(quiz_id, answers, times), artist_id: quiz_artist_id)
       user.taken_quizzes << new_record
 

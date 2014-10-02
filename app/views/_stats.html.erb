@@ -21,13 +21,12 @@
 
 	<div class="returnedstats info-area">
 
-			<p class="leaderboard-blurb">Check out the <a href = "/artists/<%=@quiz_stats[:artist_id]%>"><%=Artist.find(@quiz_stats[:artist_id]).name%> leaderboard</a></p>
+			<p class="leaderboard-blurb">Check out the <a href = "/artists/<%=@quiz_stats[:artist_id]%>"><%= @artist.name %> leaderboard</a></p>
 		<br><br>
 
-		<h2><a href="#" id="playartistagain" data-itunesId="<%=Artist.find(@quiz_stats[:artist_id]).itunes_id%>">play <%=Artist.find(@quiz_stats[:artist_id]).name%> again?</a></h2>
+		<h2><a href="#" id="playartistagain" data-itunesId="<%= @artist.itunes_id %>">play <%= @artist.name %> again?</a></h2>
 		<h2><a href= "/">play a new artist?</a><h2>
 	</div>
-
 <% else %>
 
 	<div class="returnedstats info-area">
