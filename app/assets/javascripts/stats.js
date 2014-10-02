@@ -2,7 +2,6 @@ var idLookupUrl = 'https://itunes.apple.com/lookup?id=';
 
 $(document).ready(function(){
 
-	// this part is really really freaking buggy, maybe take out
  	$('body').delegate('#playartistagain', 'click', function(event){
  		event.preventDefault();
  		$('#artist-section').hide();
@@ -18,6 +17,8 @@ $(document).ready(function(){
  		    $('.ui-autocomplete').remove();
  		    $('.ui-helper-hidden-accessible').remove();
  		    initializeGame();
+ 		    $('.load-icon').hide();
+        $('.play-icon').show();
  		    $('#start-game').show();
  		  },
  		   failure: function(response){

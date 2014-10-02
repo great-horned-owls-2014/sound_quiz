@@ -95,7 +95,7 @@ function recordUserAnswer(){
 function initializeGame(){
   document.querySelector('#artist-search').style.display = 'none';
   document.querySelector('#game-section').style.display = 'inherit';
-  $('#play-start-message').append("Click play to start "+quiz.artist +"'s quiz!")
+  $('#play-start-message').append("Turn up your sound and click play to start "+quiz.artist +"'s quiz!")
   $('#play-start-message').show();
   timeArray = [];
   answerArray = [];
