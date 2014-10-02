@@ -6,8 +6,10 @@ $(document).ready(function(){
  		event.preventDefault();
  		$('#artist-section').hide();
  		$('.practice-quizzes').hide();
- 		$('.returnedstats').hide();
+ 		$('#game-section').show();
+ 		$('.quiz-results-area').remove();
  		$('.gamequestions').remove();
+ 		$('button#loading').show();
  		$.ajax({
  		  url: '/quiz/create',
  		  type: 'POST',
@@ -17,8 +19,8 @@ $(document).ready(function(){
  		    $('.ui-autocomplete').remove();
  		    $('.ui-helper-hidden-accessible').remove();
  		    initializeGame();
- 		    $('.load-icon').hide();
-        $('.play-icon').show();
+ 		    $('button#loading').hide();
+       		$('button#start').show();
  		    $('#start-game').show();
  		  },
  		   failure: function(response){
