@@ -24,7 +24,7 @@ html{
 }
 html::after {
   content: "";
-  background: url("/tiling_bg.jpg");
+  background: url("/tiling_bg.png");
   background-repeat: repeat;
   opacity: 0.2;
   top: 0;

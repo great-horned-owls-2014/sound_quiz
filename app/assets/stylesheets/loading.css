@@ -22,3 +22,6 @@ html, body {
 #loadingscreen img{
 	margin-top: 15%;
 }
+.play-icon, .load-icon{
+	display: none;
+}
