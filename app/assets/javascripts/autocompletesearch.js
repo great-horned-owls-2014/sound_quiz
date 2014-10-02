@@ -40,12 +40,12 @@
       type: 'POST',
       data: {name: artistName, id: artistId, list: songArray},
       success: function(response){
-        $('#loadingscreen').slideUp(1000);
+        $('.load-icon').hide();
+        $('.play-icon').show();
         quiz = scrubQuestionChoices(response);
         initializeGame();
       },
        error: function(response){
-       $('#loadingscreen').slideUp(1000);
        $('.errors').append("<p>iTunes does not have enough songs to generate quiz.</p><br>")
        $('.errors').append('<p><a href="/">Please pick another artist</a></p>')
        $('.errors').show();
@@ -116,7 +116,7 @@ $(document).ready(function(){
       artistName = ui.item.artistName;
       $('#artist-section').hide();
       $('.practice-quizzes').hide();
-      $('#loadingscreen').slideDown(1000);
+      $('.load-icon').show();
 
       $.ajax({
         url: songSearchUrl + artistName,
@@ -127,7 +127,6 @@ $(document).ready(function(){
           dbSend(artistName, artistId, selectedArtistSongList);
         },
         failure: function(failResponse){
-          $('#loadingscreen').slideUp();
           console.log("Ajax failed. Here was the response from the server: " + failResponse);
         }
       })

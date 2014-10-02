@@ -1,4 +1,4 @@
-var idLookupUrl = 'https://itunes.apple.com/lookup?id='
+var idLookupUrl = 'https://itunes.apple.com/lookup?id=';
 
 $(document).ready(function(){
 

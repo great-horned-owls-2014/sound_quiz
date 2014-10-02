@@ -36,7 +36,6 @@ $(document).ready(function(){
 
 function checkGameStatus(){
   if(timeArray.length === 6){
-      $('#loadingscreen').slideDown(1000);
       $('#timer').hide();
       $('#choices-screen').hide();
       endGame();
@@ -53,14 +52,12 @@ function endGame(){
     type: 'POST',
     data: formatValues(),
     success: function(response){
-      $('#loadingscreen').slideUp(1000);
       setTimeout(function (){
         $('.container').append(response);
         updateItunesLinks();
       },1000);
     },
     failure: function(response){
-      $('#loadingscreen').slideUp(1000);
       console.log(response);
       console.log("Failure!!!");
     }
