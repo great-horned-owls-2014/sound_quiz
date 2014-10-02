@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
       multiplier = 2.5
     end
 
-    num_correct = number_correct_for_current_quiz(quiz_id, user_answers_arr)
+    num_correct = number_correct_for_current_quiz( user_answers_arr)
 
     if num_correct > 0
 
@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
     total_successful_attempts_ever / total_attempts_ever
   end
 
-  def number_correct_for_current_quiz (quiz_id, user_answers_arr)
+  def number_correct_for_current_quiz ( user_answers_arr)
     total_correct = 0
     user_answers_arr.each do |ans|
       total_correct += 1 if ans.user_decision == ans.question.right_answer
