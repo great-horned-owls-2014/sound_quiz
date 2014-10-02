@@ -1,46 +1,48 @@
-<div class="quiz-results-stats info-area">
-		<h2>your quiz results</h2>
+<div class="quiz-results-area">
+	<div class="quiz-results-stats info-area">
+			<h2>your quiz results</h2>
 
-		<ul class="quiz-results-list left-align">
-			<li><span>score</span> <%= @quiz_stats[:score]%></li>
-			<li><span>time(secs)</span> <%= @quiz_stats[:time]/1000%></li>
-			<li><span>correct choices</span> <%= @quiz_stats[:num_of_correct].round %></li>
-		</ul>
-</div>
-
-<div class="info-area">
-		<h2>tracks played</h2>
-		<ul class="left-align">
-			<% @quiz_stats[:itunes_track_ids].each do |id| %>
-				<li data-track-id="<%=id%>"><%=id%></li>
-			<% end %>
-		</ul>
-</div>
-
-<%  if session[:user_id] %>
-
-	<div class="returnedstats info-area">
-
-			<p class="leaderboard-blurb">Check out the <a href = "/artists/<%=@quiz_stats[:artist_id]%>"><%=Artist.find(@quiz_stats[:artist_id]).name%> leaderboard</a></p>
-		<br><br>
-
-		<h2><a href="#" id="playartistagain" data-itunesId="<%=Artist.find(@quiz_stats[:artist_id]).itunes_id%>">play <%=Artist.find(@quiz_stats[:artist_id]).name%> again?</a></h2>
-		<h2><a href= "/">play a new artist?</a><h2>
+			<ul class="quiz-results-list left-align">
+				<li><span>score</span> <%= @quiz_stats[:score]%></li>
+				<li><span>time(secs)</span> <%= @quiz_stats[:time]/1000%></li>
+				<li><span>correct choices</span> <%= @quiz_stats[:num_of_correct].round %></li>
+			</ul>
 	</div>
 
-<% else %>
-
-	<div class="returnedstats info-area">
-		<h2><a href= "/">play a new artist?</a><h2>
+	<div class="info-area">
+			<h2>tracks played</h2>
+			<ul class="left-align">
+				<% @quiz_stats[:itunes_track_ids].each do |id| %>
+					<li data-track-id="<%=id%>"><%=id%></li>
+				<% end %>
+			</ul>
 	</div>
 
-<% end %>
+	<%  if session[:user_id] %>
 
+		<div class="returnedstats info-area">
 
-	<% if !session[:user_id] %>
-		<div id='login-reminder' class="info-area">
-			<p>Sign Up To Get on the Leaderboard!</p>
-			<a href="/login">Login</a> or <a href="/signup">Signup</a>
+				<p class="leaderboard-blurb">Check out the <a href = "/artists/<%=@quiz_stats[:artist_id]%>"><%=Artist.find(@quiz_stats[:artist_id]).name%> leaderboard</a></p>
+			<br><br>
+
+			<h2><a href="#" id="playartistagain" data-itunesId="<%=Artist.find(@quiz_stats[:artist_id]).itunes_id%>">play <%=Artist.find(@quiz_stats[:artist_id]).name%> again?</a></h2>
+			<h2><a href= "/">play a new artist?</a></h2>
 		</div>
+
+	<% else %>
+
+		<div class="returnedstats info-area">
+			<h2><a href= "/">play a new artist?</a></h2>
+		</div>
+
 	<% end %>
+
+
+		<% if !session[:user_id] %>
+			<div id='login-reminder' class="info-area">
+				<p>Sign Up To Get on the Leaderboard!</p>
+				<a href="/login">Login</a> or <a href="/signup">Signup</a>
+			</div>
+		<% end %>
+</div>
 
