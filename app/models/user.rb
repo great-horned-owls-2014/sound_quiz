@@ -26,65 +26,31 @@ class User < ActiveRecord::Base
     if num_correct > 0
 
       quiz = Quiz.find(quiz_id)
-      quiz_questions = quiz.questions.order(id: :asc)
-      user_answers_arr.sort_by{|x| x.question_id}
-
+      quiz_questions = quiz.questions
       quiz_answers = quiz_questions.map{|x| x.track_id}
+
+      user_answers_arr.sort_by{|x| x.question_id}
       user_choices = user_answers_arr.map{|x| x.track_id}
+
       pairs = user_choices.zip(quiz_answers)
 
       i = 0
-      total_correct = 0
       question_scores = []
-
-      puts "=" * 50
-      puts "Time Array contains: #{time_arr}"
-      puts "=" * 50
-
-      puts "=" * 50
-      puts "User picked these choices: #{user_choices}"
-      puts "=" * 50
-
-      puts "=" * 50
-      puts "Answers are: #{quiz_answers}"
-      puts "=" * 50
-
-
-      puts "=" * 50
-      puts "Pairs are: #{pairs}"
-      puts "=" * 50
 
       pairs.each do |pair|
         if  pair[0] == pair[1]
-          question_score = (1 * 100000)
-          time_bonus = ( (1 / time_arr[i]) * 100000000)
+          question_score = 100000
+          time_bonus = (  ( 1 - time_arr[i]  / 30000 ) * 100000)
           total_question_score = question_score + time_bonus
           question_scores << total_question_score
-          total_correct += 1
-
-          puts "=" * 50
-          puts "Question ##{i+1}"
-          puts "Question Score: #{question_score}"
-          puts "Time Bonus: #{time_bonus}"
-          puts "Time Delta: #{time_arr[i]}"
-          puts "=" * 50
-
         end
-
         i += 1
-
       end
-
       grand_total_for_quiz = question_scores.reduce(:+)
-
     else
-
       grand_total_for_quiz = 0
-
     end
-
     grand_total_for_quiz
-
   end
 
   def all_time_percentage_correct # returns percentage correct vs all questions ever taken
@@ -93,7 +59,7 @@ class User < ActiveRecord::Base
     total_successful_attempts_ever / total_attempts_ever
   end
 
-  def number_correct_for_current_quiz ( user_answers_arr)
+  def number_correct_for_current_quiz (quiz_id, user_answers_arr)
     total_correct = 0
     user_answers_arr.each do |ans|
       total_correct += 1 if ans.user_decision == ans.question.right_answer
