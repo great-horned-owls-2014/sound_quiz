@@ -39,19 +39,20 @@ button:hover{
   text-align: center;
   margin: 0 auto 20px auto;
 }
+#start-game{
+  text-align: center;
+}
 #search-button{
   height: 30px;
   line-height: 30px;
 }
 #start{
   text-align: center;
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
-  margin: auto;
+  margin: 80px auto 0 auto;
   color: black;
   font-weight: 400;
   font-size: 3.5em;
-  left:0;
+
   background-color: #ff9900;
   opacity: 0.95;
   width: 200px;
