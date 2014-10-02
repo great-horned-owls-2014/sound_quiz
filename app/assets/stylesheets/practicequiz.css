@@ -22,9 +22,11 @@
   margin-top: 20px;
   margin-bottom: 10px;
 }
-@media (max-width: 500px) {
+
+
+@media (max-width: 1200px) {
   .practice-quizzes{
-    width:300px;
+    width:500px;
     margin: 0 auto;
   }
   .practice-quizzes h3 {
@@ -32,9 +34,22 @@
     margin-bottom: 15px;
   }
   .practice-quizzes a {
-    float: left;
+    margin: 0 auto;
     line-height: 0;
+  }
 }
-
+@media (max-width: 500px) {
+  .practice-quizzes{
+    width:350px;
+    margin: 0 auto;
+  }
+  .practice-quizzes h3 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .practice-quizzes a {
+    line-height: 0;
+    margin: 0 auto;
+  }
 }
 

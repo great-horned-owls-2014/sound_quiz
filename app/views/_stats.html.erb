@@ -3,7 +3,7 @@
 
 		<ul class="quiz-results-list left-align">
 			<li><span>score</span> <%= @quiz_stats[:score]%></li>
-			<li><span>time taken</span> <%= @quiz_stats[:time]/1000%> seconds</li>
+			<li><span>time(secs)</span> <%= @quiz_stats[:time]/1000%></li>
 			<li><span>correct choices</span> <%= @quiz_stats[:num_of_correct].round %></li>
 		</ul>
 </div>
