@@ -1,8 +1,9 @@
 button{
+  font-family: 'Press Start 2P' , sans-serif;
   padding: 0 10px;
-  background-color: rgb(150,15,15);
-  border: 2px solid rgb(150,15,15);
-  color: white;
+  background-color: #f90;
+  border: 0;
+  color: black;
   text-decoration: none;
   font-size: 1em;
   border-radius: 5px;
@@ -12,8 +13,8 @@ button{
   width: 100%;
 }
 button:hover{
-  background-color: #A00;
-  border: 2px solid #A00;
+  background-color: #f90;
+  color: white;
 }
 .answer-button{
   border: 0;
@@ -21,9 +22,10 @@ button:hover{
   color: #DDD;
   width:360px;
   min-height: 100px;
+  white-space: nowrap;
   margin: 10px;
   display: inline-block;
-  padding: 20px
+  padding: 10px;
 }
 .answer-button:hover{
   opacity: 1;
@@ -35,7 +37,6 @@ button:hover{
   text-align: center;
   margin: 0 auto 20px auto;
 }
-
 #search-button{
   height: 30px;
   line-height: 30px;
@@ -46,11 +47,8 @@ button:hover{
   top: 0; left: 0; bottom: 0; right: 0;
   margin: auto;
   color: black;
-  /*font-family: 'Lato', sans-serif;*/
   font-weight: 400;
   font-size: 3.5em;
-/*  position:fixed;
-  bottom: 25%;*/
   left:0;
   background-color: #ff9900;
   opacity: 0.95;

@@ -41,6 +41,7 @@ html::after {
 }
 input[type=text], input[type=password]{
     box-sizing: border-box;
+    outline: 0;
     font-family: 'Press Start 2P', sans-serif;
     background-color: #eee;
     padding-left: 10px;
