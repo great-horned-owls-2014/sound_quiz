@@ -40,8 +40,8 @@
       type: 'POST',
       data: {name: artistName, id: artistId, list: songArray},
       success: function(response){
-        $('.load-icon').hide();
-        $('.play-icon').show();
+        $('button#loading').hide();
+        $('button#play').show();
         quiz = scrubQuestionChoices(response);
         initializeGame();
       },
@@ -116,7 +116,8 @@ $(document).ready(function(){
       artistName = ui.item.artistName;
       $('#artist-section').hide();
       $('.practice-quizzes').hide();
-      $('.load-icon').show();
+      $('#game-section').show();
+      $('button#loading').show();
 
       $.ajax({
         url: songSearchUrl + artistName,
