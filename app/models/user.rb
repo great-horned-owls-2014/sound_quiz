@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
     difficulty = Quiz.find(quiz_id).difficulty_level
 
-    if difficulty == 1
+    if difficulty == 1 || difficulty == 0
       multiplier = 1
     elsif difficulty == 2
       multiplier = 1.5
