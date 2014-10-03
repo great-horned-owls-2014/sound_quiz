@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
           question_score = 100000
           time_bonus = (  ( 1 - time_arr[i]  / 30000 ) * 100000)
           total_question_score = question_score + time_bonus
-          question_scores << total_question_score
+          question_scores << total_question_score * multiplier
         end
         i += 1
       end
