@@ -78,13 +78,12 @@ button:hover{
   left:0;
   background-color: #ff9900;
   opacity: 0.95;
-  width: 200px;
-  height: 200px;
+  width: 125px;
+  height: 125px;
   border-radius: 50%;
   border: 0;
   box-shadow: 0px 0px 10px 0px #000;
   display: none;
-  /*margin-top: 0;*/
 }
 .fa-play:before {
   content: "\f04b";

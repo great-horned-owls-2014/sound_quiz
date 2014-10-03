@@ -25,3 +25,10 @@ html, body {
 .play-icon, .load-icon{
 	display: none;
 }
+.load-icon{
+	margin-top: -20px;
+	margin-left: -22px;
+}
+.play-icon{
+	margin-top: 6px;
+}
