@@ -22,7 +22,7 @@ html{
   font-family: 'Press Start 2P', cursive;
   background-color: #000;
 }
-html::after {
+html::before {
   content: "";
   background: url("/tiling_bg.png");
   background-repeat: repeat;
@@ -64,6 +64,7 @@ input[type=text], input[type=password]{
     color: #111;
     height: 50px;
     width: 500px;
+    max-width: 100%; 
     margin: auto;
     display: block;
     padding: 0 20px;
