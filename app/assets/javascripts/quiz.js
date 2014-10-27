@@ -58,10 +58,9 @@ function endGame(){
       $('.container').append(response);
       updateItunesLinks();
     },
-    failure: function(response){
-      console.log(response);
+    error: function(request, status, err){
       $('button#loading').hide();
-      console.log("Failure!!!");
+      errorHandling(status);
     }
   });
 }
