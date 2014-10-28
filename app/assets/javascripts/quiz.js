@@ -17,23 +17,23 @@ $(document).ready(function(){
     $('button#start').hide();
     $('#play-start-message').hide();
     $('#choices-screen').show();
-    recordTimeTaken();
-    hideSelf.call(this);
-    showNext.call(this);
-    playNextTrack.call(this);
     $('#timer').show();
-    timer(questionTime, this);
+    nextQuestion.call(this);
   });
   $('body').on('click', ".answer-button", function(event){
-    recordTimeTaken();
     recordUserAnswer.call(this);
     $(this).parent().children('audio')[0].pause();
-    hideSelf.call(this);
-    showNext.call(this);
-    checkGameStatus.call(this);
-    timer(questionTime, this);
+    nextQuestion.call(this);  
   });
 });
+
+function nextQuestion(){
+  recordTimeTaken();
+  hideSelf.call(this);
+  showNext.call(this);
+  checkGameStatus.call(this);
+  timer(questionTime, this);
+}
 
 function checkGameStatus(){
   if(timeArray.length === 6){
