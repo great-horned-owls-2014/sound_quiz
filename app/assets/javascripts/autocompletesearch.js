@@ -46,10 +46,7 @@ function dbSend(artistName, artistId, songArray){
       initializeGame();
     },
      error: function(response){
-     $('button#loading').hide();
-     $('.errors').append("<p>iTunes does not have enough songs to generate quiz.</p><br>");
-     $('.errors').append('<p><a href="/">Please pick another artist</a></p>');
-     $('.errors').show();
+     errorHandling('iTunes does not have enough songs to generate quiz.')
     }
   });
 }
