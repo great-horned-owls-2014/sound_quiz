@@ -70,6 +70,7 @@ function errorHandling(message){
 }
 
 function clearNonPlayArea(){
+  $('.artist-profile').remove();
   $('#artist-section').hide();
   $('.practice-quizzes').hide();
   $('.quiz-results-area').remove();
