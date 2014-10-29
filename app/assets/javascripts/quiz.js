@@ -32,24 +32,14 @@ $(document).ready(function(){
   //for repeat and non search plays
   $('body').on('click', '#playartist', function(event){
     event.preventDefault();
-    $('#artist-section').hide();
-    $('.practice-quizzes').hide();
-    $('#game-section').show();
-    $('.quiz-results-area').remove();
-    $('.gamequestions').remove();
-    $('button#loading').show();
+    clearNonPlayArea()
     $.ajax({
       url: '/quiz/create',
       type: 'POST',
       data: {id: $(this).data().itunesid},
       success: function(response){
         quiz = scrubQuestionChoices(response);
-        $('.ui-autocomplete').remove();
-        $('.ui-helper-hidden-accessible').remove();
         initializeGame();
-        $('button#loading').hide();
-        $('button#start').show();
-        $('#start-game').show();
       },
        error: function(request, status, err){
          errorHandling(status);
