@@ -1,6 +1,6 @@
+
 function placeAutocomplete(){
     var inputWidth = $('#artistsearchterm').width();
-    console.log(inputWidth)
    $('#ui-id-1').css("margin-left",  (-1 * inputWidth / 2 - 6) +"px" );
 }
 
@@ -69,6 +69,15 @@ function errorHandling(message){
   $('.errors').show();
 }
 
+function clearNonPlayArea(){
+  $('#artist-section').hide();
+  $('.practice-quizzes').hide();
+  $('.quiz-results-area').remove();
+  $('.gamequestions').remove();
+  $('#game-section').show();
+  $('button#loading').show();
+}
+
 $(document).ready(function(){
 
   $('#artistsearchterm').autocomplete({
@@ -98,11 +107,11 @@ $(document).ready(function(){
               document.querySelector("#ui-id-1").removeAttribute("style");
             },
             error: function(request, status, err) {
-                   if(status==="timeout") {
-                      errorHandling('iTunes seems to be unresponsive');
-                   } else {
-                      errorHandling(status);
-                   }
+               if(status==="timeout") {
+                  errorHandling('iTunes seems to be unresponsive');
+               } else {
+                  errorHandling(status);
+               }
             }
         });
       },
@@ -111,10 +120,8 @@ $(document).ready(function(){
       event.preventDefault();
       artistId = ui.item.artistId;
       artistName = ui.item.artistName;
-      $('#artist-section').hide();
-      $('.practice-quizzes').hide();
-      $('#game-section').show();
-      $('button#loading').show();
+      
+      clearNonPlayArea();
 
       $.ajax({
         url: songSearchUrl + artistName,
