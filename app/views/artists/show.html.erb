@@ -1,28 +1,31 @@
 <div class="artist-profile info-area display-board">
   <h2><%= @artist.name.upcase %> LEADERBOARD</h2>
+  <a href="#" id="playartist" data-itunesId="<%= @artist.itunes_id %>">Play this Artist!</a>
 
-<% if @artist.taken_quizzes.count > 0 %>
-  <table style="width:100%" cellspacing="0">
-    <tr class="table-headings">
-      <td> <h3>Trackmaster</h3> </td>
-      <td> <h3>Top Score</h3> </td>
-      <td> <h3>Quiz Attempts</h3> </td>
-    </tr>
-  <% @sorted_avg_scores.each do |user_info, avg_score| %>
-    <tr class="highlight">
-      <td class="left-align"> <a href="/users/<%= user_info[0] %>"><%= user_info[1].upcase %></a> </td>
-      <td class="left-align"> <%= avg_score.round %> </td>
-      <td class="left-align"> <%= TakenQuiz.where(["artist_id = ? and user_id = ?", @artist.id, user_info[0] ]).count %></td>
-    </tr>
+
+  <% if @artist.taken_quizzes.count > 0 %>
+    <table style="width:100%" cellspacing="0">
+      <tr class="table-headings">
+        <td> <h3>Trackmaster</h3> </td>
+        <td> <h3>Top Score</h3> </td>
+        <td> <h3>Quiz Attempts</h3> </td>
+      </tr>
+    <% @sorted_avg_scores.each do |user_info, avg_score| %>
+      <tr class="highlight">
+        <td class="left-align"> <a href="/users/<%= user_info[0] %>"><%= user_info[1].upcase %></a> </td>
+        <td class="left-align"> <%= avg_score.round %> </td>
+        <td class="left-align"> <%= TakenQuiz.where(["artist_id = ? and user_id = ?", @artist.id, user_info[0] ]).count %></td>
+      </tr>
+    <% end %>
+  </table>
+  <% else %>
+    <center>
+      <h3> NO SCORES YET! </h3>
+      <br>
+      <h3>Sign In and Take A <br> <%= @artist.name.upcase %> Quiz <br> To Get On the Leaderboard.</h3>
+    </center>
+
+    <center><h3> NO SCORES YET! </h3></center>
   <% end %>
-</table>
-<% else %>
-  <center>
-    <h3> NO SCORES YET! </h3>
-    <br>
-    <h3>Sign In and Take A <br> <%= @artist.name.upcase %> Quiz <br> To Get On the Leaderboard.</h3>
-  </center>
-
-  <center><h3> NO SCORES YET! </h3></center>
-<% end %>
 </div>
+<%= render "/gamesection" %>
