@@ -9,6 +9,7 @@ var quiz;
 var answerArray = [];
 var numOfNonQuestions = 3;
 var questionTime = 30000;
+var idLookupUrl = 'https://itunes.apple.com/lookup?id=';
 
 $(document).ready(function(){
 
@@ -20,11 +21,41 @@ $(document).ready(function(){
     $('#timer').show();
     nextQuestion.call(this);
   });
+
+  //choice selection
   $('body').on('click', ".answer-button", function(event){
     recordUserAnswer.call(this);
     $(this).parent().children('audio')[0].pause();
-    nextQuestion.call(this);  
+    nextQuestion.call(this);
   });
+
+  //for repeat and non search plays
+  $('body').on('click', '#playartist', function(event){
+    event.preventDefault();
+    $('#artist-section').hide();
+    $('.practice-quizzes').hide();
+    $('#game-section').show();
+    $('.quiz-results-area').remove();
+    $('.gamequestions').remove();
+    $('button#loading').show();
+    $.ajax({
+      url: '/quiz/create',
+      type: 'POST',
+      data: {id: $(this).data().itunesid},
+      success: function(response){
+        quiz = scrubQuestionChoices(response);
+        $('.ui-autocomplete').remove();
+        $('.ui-helper-hidden-accessible').remove();
+        initializeGame();
+        $('button#loading').hide();
+        $('button#start').show();
+        $('#start-game').show();
+      },
+       error: function(request, status, err){
+         errorHandling(status);
+       }
+    });
+  })
 });
 
 function nextQuestion(){
@@ -62,6 +93,24 @@ function endGame(){
       $('button#loading').hide();
       errorHandling(status);
     }
+  });
+}
+
+function updateItunesLinks(){
+  $('[data-track-id]').each(function(index, element) {
+    itunesId = element.getAttribute('data-track-id')
+     $.ajax({
+       url: idLookupUrl+itunesId,
+       type: 'GET',
+       dataType: 'jsonp',
+       success: function(response){
+        itunesObject=response['results'][0]
+        element.innerHTML = '<a target = "_blank" href="'+itunesObject.trackViewUrl+'">'+itunesObject.trackName+'</a> ';
+       },
+       error: function(request, status, err){
+         errorHandling(status);
+       }
+     });
   });
 }
 
