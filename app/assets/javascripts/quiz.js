@@ -32,7 +32,10 @@ $(document).ready(function(){
   //for repeat and non search plays
   $('body').on('click', '#playartist', function(event){
     event.preventDefault();
+
     clearNonPlayArea()
+    clearErrors();
+    
     $.ajax({
       url: '/quiz/create',
       type: 'POST',

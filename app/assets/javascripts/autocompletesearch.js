@@ -79,6 +79,10 @@ function clearNonPlayArea(){
   $('button#loading').show();
 }
 
+function clearErrors(){
+  $('.errors').empty();
+}
+
 $(document).ready(function(){
 
   $('#artistsearchterm').autocomplete({
@@ -122,6 +126,7 @@ $(document).ready(function(){
       artistId = ui.item.artistId;
       artistName = ui.item.artistName;
       
+      clearErrors();
       clearNonPlayArea();
 
       $.ajax({
