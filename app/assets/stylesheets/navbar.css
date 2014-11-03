@@ -19,6 +19,14 @@ h1 a {
 .navbar i{
   display: none;
 }
+
+.navbar #faq{
+  display: inline;
+  font-size: 16px;
+  margin: none;
+  vertical-align: text-top;
+}
+
 .navbar ul{
   float: right;
   margin-right: 30px;
@@ -38,4 +46,35 @@ h1 a {
 }
 .navbar li a:hover{
   color: white;
+}
+
+#faqmessage{
+  display: none;
+}
+
+.ui-dialog {
+  min-width: 600px;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  border-color: white;
+  border-style: solid;
+  padding: 1em;
+}
+
+.ui-dialog a{
+  text-decoration: none;
+  color: #f90;
+}
+
+.ui-dialog a:hover{
+  color: white;
+}
+
+.ui-dialog-titlebar-close{
+  float: right;
+  height: 1em;
+  width: 2em;
+  margin-top: 0;
+  border-radius: 1px;
 }

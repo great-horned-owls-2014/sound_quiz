@@ -85,6 +85,12 @@ function clearErrors(){
 
 $(document).ready(function(){
 
+  $('#faq').on('click', function(event){
+    event.preventDefault();
+    $('#faqmessage').dialog({});
+    $('.ui-dialog-titlebar-close').text('x');
+  })
+
   $('#artistsearchterm').autocomplete({
     // minLength: 3,
     delay: 500,
