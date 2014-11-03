@@ -1,71 +1,83 @@
-  function placeAutocomplete(){
-      var inputWidth = $('#artistsearchterm').width();
-      console.log(inputWidth)
-     $('#ui-id-1').css("margin-left",  (-1 * inputWidth / 2 - 6) +"px" );
-  }
 
-  //invariants
-  var songSearchUrl = 'https://itunes.apple.com/search?attribute=allArtistTerm&entity=song&limit=100&term=';
-  var artistSearchUrl= 'https://itunes.apple.com/search?entity=musicArtist&limit=5&term=';
-  var menuUL = $('.ui-menu');
+function placeAutocomplete(){
+    var inputWidth = $('#artistsearchterm').width();
+   $('#ui-id-1').css("margin-left",  (-1 * inputWidth / 2 - 6) +"px" );
+}
 
-  //results from iTunes APIs
-  var artistName = '';
-  var artistId;
-  var artistObjectResults = null;
+//invariants
+var songSearchUrl = 'https://itunes.apple.com/search?attribute=allArtistTerm&entity=song&limit=100&term=';
+var artistSearchUrl= 'https://itunes.apple.com/search?entity=musicArtist&limit=5&term=';
+var menuUL = $('.ui-menu');
 
-  function createSongList(artistObjectResults){
-    songArray = [];
-    for(var i =0; i< artistObjectResults['results'].length; i++){
-      if (artistId === artistObjectResults['results'][i].artistId) {
-        songArray.push(createSongObject( artistObjectResults['results'][i] ));
-      }
+//results from iTunes APIs
+var artistName = '';
+var artistId;
+var artistObjectResults = null;
+
+function createSongList(artistObjectResults){
+  songArray = [];
+  for(var i =0; i< artistObjectResults['results'].length; i++){
+    if (artistId === artistObjectResults['results'][i].artistId) {
+      songArray.push(createSongObject( artistObjectResults['results'][i] ));
     }
-    return songArray;
   }
+  return songArray;
+}
 
-  function createSongObject(itunesObject){
-    filteredObject = { 'artworkUrl100': itunesObject.artworkUrl100,
-                        'previewUrl': itunesObject.previewUrl,
-                        'trackName': itunesObject.trackName,
-                        'trackId': itunesObject.trackId
-                      };
+function createSongObject(itunesObject){
+  filteredObject = { 'artworkUrl100': itunesObject.artworkUrl100,
+                      'previewUrl': itunesObject.previewUrl,
+                      'trackName': itunesObject.trackName,
+                      'trackId': itunesObject.trackId
+                    };
 
-    return filteredObject;
-  }
+  return filteredObject;
+}
 
-  function dbSend(artistName, artistId, songArray){
-    $.ajax({
-      url: '/quiz/create',
-      type: 'POST',
-      data: {name: artistName, id: artistId, list: songArray},
-      success: function(response){
-        $('button#loading').hide();
-        $('button#play').show();
-        quiz = scrubQuestionChoices(response);
-        initializeGame();
-      },
-       error: function(response){
-       $('button#loading').hide();
-       $('.errors').append("<p>iTunes does not have enough songs to generate quiz.</p><br>");
-       $('.errors').append('<p><a href="/">Please pick another artist</a></p>');
-       $('.errors').show();
-      }
-    });
-  }
-
-  function scrubQuestionChoices(quiz){
-    for(var i=1; i <= (Object.keys(quiz).length - numOfNonQuestions); i++){
-      for ( var j=0; j < quiz['question_'+i]['choices'].length; j++){
-        delete (quiz['question_'+i]['choices'][j].preview_url);
-        delete (quiz['question_'+i]['choices'][j].created_at);
-        delete (quiz['question_'+i]['choices'][j].updated_at);
-      }
+function dbSend(artistName, artistId, songArray){
+  $.ajax({
+    url: '/quiz/create',
+    type: 'POST',
+    data: {name: artistName, id: artistId, list: songArray},
+    success: function(response){
+      $('button#loading').hide();
+      $('button#play').show();
+      quiz = scrubQuestionChoices(response);
+      initializeGame();
+    },
+     error: function(response){
+     errorHandling('iTunes does not have enough songs to generate quiz.')
     }
-    return quiz;
+  });
+}
+
+function scrubQuestionChoices(quiz){
+  for(var i=1; i <= (Object.keys(quiz).length - numOfNonQuestions); i++){
+    for ( var j=0; j < quiz['question_'+i]['choices'].length; j++){
+      delete (quiz['question_'+i]['choices'][j].preview_url);
+      delete (quiz['question_'+i]['choices'][j].created_at);
+      delete (quiz['question_'+i]['choices'][j].updated_at);
+    }
   }
+  return quiz;
+}
 
+function errorHandling(message){
+  $('.container').hide();
+  $('.errors').append('<p>Error: '+message+'</p><br>')
+  $('.errors').append('<p><a href="/">Please try again.</a></p>')
+  $('.errors').show();
+}
 
+function clearNonPlayArea(){
+  $('.artist-profile').remove();
+  $('#artist-section').hide();
+  $('.practice-quizzes').hide();
+  $('.quiz-results-area').remove();
+  $('.gamequestions').remove();
+  $('#game-section').show();
+  $('button#loading').show();
+}
 
 $(document).ready(function(){
 
@@ -86,7 +98,7 @@ $(document).ready(function(){
               response($.map( artistObjectResults, function( item ) {
 
               artistLabel = item.artistName + "     / GENRE: " + item.primaryGenreName;
-              //var artistLabel = item.artistName + "     / GENRE: " + item.primaryGenreName;
+
               return {
                 label: artistLabel,
                 artistId: item.artistId,
@@ -96,17 +108,11 @@ $(document).ready(function(){
               document.querySelector("#ui-id-1").removeAttribute("style");
             },
             error: function(request, status, err) {
-                   if(status==="timeout") {
-                      $('.container').hide();
-                      $('.errors').append('<p>iTunes seems to be unresponsive.</p><br>')
-                      $('.errors').append('<p><a href="/">Please try again.</a></p>')
-                      $('.errors').show();
-                   } else {
-                     $('.container').hide();
-                     $('.errors').append('<p>Error: '+ status + err + '</p><br>')
-                     $('.errors').append('<p><a href="/">Please try again.</a></p>')
-                     $('.errors').show();
-                   }
+               if(status==="timeout") {
+                  errorHandling('iTunes seems to be unresponsive');
+               } else {
+                  errorHandling(status);
+               }
             }
         });
       },
@@ -115,10 +121,8 @@ $(document).ready(function(){
       event.preventDefault();
       artistId = ui.item.artistId;
       artistName = ui.item.artistName;
-      $('#artist-section').hide();
-      $('.practice-quizzes').hide();
-      $('#game-section').show();
-      $('button#loading').show();
+      
+      clearNonPlayArea();
 
       $.ajax({
         url: songSearchUrl + artistName,
@@ -128,12 +132,9 @@ $(document).ready(function(){
           selectedArtistSongList = createSongList(songObject);
           dbSend(artistName, artistId, selectedArtistSongList);
         },
-        error: function(failResponse){
+        error: function(request, status, err){
           $('button#loading').hide();
-          console.log("Ajax failed. Here was the response from the server: " + failResponse);
-          $('.errors').append('<p>Error: '+ failResponse + '</p><br>');
-          $('.errors').append('<p><a href="/">Please try again.</a></p>');
-          $('.errors').show();
+          errorHandling(status);
         }
       })
     },

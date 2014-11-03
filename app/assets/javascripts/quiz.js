@@ -9,6 +9,7 @@ var quiz;
 var answerArray = [];
 var numOfNonQuestions = 3;
 var questionTime = 30000;
+var idLookupUrl = 'https://itunes.apple.com/lookup?id=';
 
 $(document).ready(function(){
 
@@ -17,23 +18,43 @@ $(document).ready(function(){
     $('button#start').hide();
     $('#play-start-message').hide();
     $('#choices-screen').show();
-    recordTimeTaken();
-    hideSelf.call(this);
-    showNext.call(this);
-    playNextTrack.call(this);
     $('#timer').show();
-    timer(questionTime, this);
+    nextQuestion.call(this);
   });
+
+  //choice selection
   $('body').on('click', ".answer-button", function(event){
-    recordTimeTaken();
     recordUserAnswer.call(this);
     $(this).parent().children('audio')[0].pause();
-    hideSelf.call(this);
-    showNext.call(this);
-    checkGameStatus.call(this);
-    timer(questionTime, this);
+    nextQuestion.call(this);
   });
+
+  //for repeat and non search plays
+  $('body').on('click', '#playartist', function(event){
+    event.preventDefault();
+    clearNonPlayArea()
+    $.ajax({
+      url: '/quiz/create',
+      type: 'POST',
+      data: {id: $(this).data().itunesid},
+      success: function(response){
+        quiz = scrubQuestionChoices(response);
+        initializeGame();
+      },
+       error: function(request, status, err){
+         errorHandling(status);
+       }
+    });
+  })
 });
+
+function nextQuestion(){
+  recordTimeTaken();
+  hideSelf.call(this);
+  showNext.call(this);
+  checkGameStatus.call(this);
+  timer(questionTime, this);
+}
 
 function checkGameStatus(){
   if(timeArray.length === 6){
@@ -58,11 +79,28 @@ function endGame(){
       $('.container').append(response);
       updateItunesLinks();
     },
-    failure: function(response){
-      console.log(response);
+    error: function(request, status, err){
       $('button#loading').hide();
-      console.log("Failure!!!");
+      errorHandling(status);
     }
+  });
+}
+
+function updateItunesLinks(){
+  $('[data-track-id]').each(function(index, element) {
+    itunesId = element.getAttribute('data-track-id')
+     $.ajax({
+       url: idLookupUrl+itunesId,
+       type: 'GET',
+       dataType: 'jsonp',
+       success: function(response){
+        itunesObject=response['results'][0]
+        element.innerHTML = '<a target = "_blank" href="'+itunesObject.trackViewUrl+'">'+itunesObject.trackName+'</a> ';
+       },
+       error: function(request, status, err){
+         errorHandling(status);
+       }
+     });
   });
 }
 
