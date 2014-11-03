@@ -1,8 +1,7 @@
 .errors {
-  margin-top: 20%;
-  display: none;
   text-align: center;
   color: white;
+  margin-bottom: 5%;
 }
 
 .errors a{
