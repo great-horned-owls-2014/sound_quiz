@@ -7,7 +7,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    if params[:id].to_i == session[:user_id]
+      @user = User.find(params[:id])
+    else
+      redirect_to root_url, notice: "Wrong page!"
+    end
   end
 
   def create
