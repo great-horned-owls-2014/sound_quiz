@@ -1,5 +1,11 @@
 <div class="navbar">
-  <h1><a href="/">TRACKMASTERTEST</a></h1>
+  <h1>
+    <a href="/">TRACKMASTERTEST</a>
+    <% if current_page?(root_path) %>
+      <a href="#" id="faq"><i class="fa fa-question-circle" id="faq"></i></a>
+    <% end %>
+  </h1>
+
   <ul><i class="fa fa-bars-lg"></i>
   	<% if session[:user_id] %>
       <li><a href="/users/<%=session[:user_id]%>"><i class="fa fa-user"></i><span class="nav-caption"> mystats</span></a></li>
