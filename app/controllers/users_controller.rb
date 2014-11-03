@@ -7,7 +7,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    if params[:id].to_i == session[:user_id]
+      @user = User.find(params[:id])
+    else
+      redirect_to root_url, notice: "Wrong page!"
+    end
   end
 
   def create
@@ -22,7 +26,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(username: params[:user][:username], email: params[:user][:email])
+    @user.update(username: params[:user][:username])
     if params[:user][:oldpassword] != ""
       old_password = BCrypt::Password.new(@user.password_digest)
       if old_password == params[:user][:oldpassword] && params[:user][:newpassword] == params[:user][:confirmpassword]

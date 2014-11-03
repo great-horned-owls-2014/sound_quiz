@@ -140,20 +140,24 @@ input[type=text], input[type=password]{
   padding: 15px;
 }
 .useredit a{
-  position: relative;
   text-decoration: none;
+  color: black;
   display: inline-block;
   border-radius: 5px;
   line-height: 40px;
-  color: white;
   font-size: 1.3em;
   width: 40%;
   height: 40px;
   padding: 0;
-  background-color: rgb(150,15,15);
+  background-color: #f90;
   top: -2px;
   max-width: 200px;
 }
+
+.useredit a:hover{
+  color: white;
+}
+
 .signup-form button, .login-form button{
   font-size: 1.3em;
   width: 40%;
