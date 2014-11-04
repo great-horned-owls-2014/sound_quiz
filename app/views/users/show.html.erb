@@ -14,8 +14,14 @@
     </tr>
     <% @artist_taken.each do |artist_id, count| %>
     	<tr class="table-row highlight">
-  	  	<% artist = Artist.find(artist_id) %>
-  		    <td><a href="/artists/<%=artist_id%>"><%= artist.name %></a></td>
+  	  	  <% artist = Artist.find(artist_id) %>
+          <% high_scorer = TakenQuiz.where(artist_id: artist_id).joins(:user).group('users.id').group('users.id').average(:score).sort_by {|user_info, avg_score| avg_score}.reverse.first[0][1]%>
+  		    <td>
+            <a href="/artists/<%=artist_id%>"><%= artist.name %></a>
+            <% if high_scorer == @user.id %>
+              HI SCORE!
+            <% end%>
+          </td>
   		    <td class="score"><%= @user.artist_score(artist).round %></td>
   		    <td class="taken-count"><%= count %></td>
     	</tr>
