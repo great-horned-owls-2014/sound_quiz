@@ -15,7 +15,7 @@
      <% if artist.taken_quizzes.count > 0 %>
         <tr class="highlight">
           <td class="left-align"> <a href="/artists/<%= artist.id %>"><%= artist.name %></a> </td>
-          <% avg_scores = TakenQuiz.where(artist_id: artist.id).joins(:user).group('users.id').group('users.username').average(:score)%>
+          <% avg_scores = TakenQuiz.where(artist_id: artist.id).joins(:user).group('users.id').group('users.id').average(:score)%>
 
           <td>
           <% users = [] %>
@@ -24,7 +24,8 @@
           <% end %>
           <%= users.uniq.count %>
           </td>
-          <td class="left-align"><%= sorted_avg_scores = avg_scores.sort_by {|user_info, avg_score| avg_score}.reverse.first[0][1] %> </td>
+          <% high_scorer = User.find(avg_scores.sort_by {|user_info, avg_score| avg_score}.reverse.first[0][1]) %>
+          <td class="left-align"><a href="/users/<%= high_scorer.id %>"><%= high_scorer.username%></a></td>
         </tr>
       <% end %>
     <% end %>
