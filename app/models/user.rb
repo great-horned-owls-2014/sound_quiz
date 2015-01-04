@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   def quiz_score (quiz_id, user_answers_arr, time_arr)
 
     difficulty = Quiz.find(quiz_id).difficulty_level
+    # Add some refactoring here
 
     if difficulty == 1 || difficulty == 0
       multiplier = 1
